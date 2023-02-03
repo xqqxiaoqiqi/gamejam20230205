@@ -10,8 +10,10 @@ public class AddResourceModifierFromBuildingConfig : BuildingBehaviourOptions
     [Serializable]
     public class AddResourceModifierFromBuildingData : BehaviourData
     {
-        public GameManager.ResourceType type;
-        public int value;
+        public GameManager.ResourceType sourceType;
+        public int sourceValue;
+        public GameManager.ResourceType targetType;
+        public int targetValue;
     }
 
     public override BehaviourData[] GetData()

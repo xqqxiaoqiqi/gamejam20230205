@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class AddResourceModifierFromBuilding : BasicBuilding.Behaviour
 {
-    public GameManager.ResourceType type;
-    public int value;
+    public GameManager.ResourceType sourceType;
+    public int sourceValue;
+    public GameManager.ResourceType targetType;
+    public int targetValue;
+    public Modifier myModifier;
 
     public override void DoSetData(BuildingBehaviourOptions.BehaviourData data)
     {
@@ -14,8 +17,10 @@ public class AddResourceModifierFromBuilding : BasicBuilding.Behaviour
         if (mydata != null)
         {
             onEvent = mydata.onEvent;
-            type = mydata.type;
-            value = mydata.value;
+            sourceType = mydata.sourceType;
+            sourceValue = mydata.sourceValue;
+            targetType = mydata.targetType;
+            targetValue = mydata.targetValue;
         }
     }
     
@@ -24,7 +29,10 @@ public class AddResourceModifierFromBuilding : BasicBuilding.Behaviour
         base.OnEvent(ev);
         if (ev == onEvent)
         {
-            Debug.Log("do something here");
+            if (myModifier == null)
+            {
+                myModifier = new Modifier(owner.playerSide, sourceType, sourceValue, targetType, targetValue);
+            }
         }
     }
 }

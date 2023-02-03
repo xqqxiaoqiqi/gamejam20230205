@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa813f2d22d60ed4aba31168e0ecbe42, type: 3}
+  m_Name: Entity Enter Building Config
+  m_EditorClassIdentifier: 
+  behaviourType: 1
+  datas:
+  - onEvent: 0
+    tileType: 1
+    checkCapability: 0
+    maxCapabilityCount: 1
+  - onEvent: 0
+    tileType: 0
+    checkCapability: 0
+    maxCapabilityCount: 1
+  - onEvent: 0
+    tileType: 2
+    checkCapability: 0
+    maxCapabilityCount: 1

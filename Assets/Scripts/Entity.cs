@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 public class Entity : MonoBehaviour
 {
-    
+    public int capability;
     public float movespeed;
     public GameManager.PlayerSide playerSide;
     public BasicTile currentTile;

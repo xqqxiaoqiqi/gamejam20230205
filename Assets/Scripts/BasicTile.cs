@@ -3,32 +3,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicTile : MonoBehaviour
+public class BasicTile
 {
     public bool isPassable = false;
 
     public int passableWeight = 0;
     
-    public Behaviour[] behaviours;
+    public List<Behaviour> behaviours;
 
     public HashSet<Entity> entities = new HashSet<Entity>();
 
     public BasicBuilding building;
+
+    public TileType tileType;
+
+    public BasicTile(TileType type)
+    {
+        tileType = type;
+        behaviours = GameManager.instance.TileBehaviourDB.GetBehaviours(tileType);
+        for (int i = 0; i < behaviours.Count; i++)
+        {
+            behaviours[i].OnTileInit(this);
+        }
+    }
     
+    [Serializable]
+    public enum TileType
+    {
+        TILE_MARSH,
+        TILE_ICE
+    }
+    
+    [Serializable]
     public enum TileEvent
     {
         ON_ENTITY_ENTER,
         ON_ENTITY_LEAVE
     }
 
-    public class Behaviour :MonoBehaviour
+    [Serializable]
+    public class Behaviour
     {
         public BasicTile owner;
+        public TileEvent onEvent;
         public virtual void OnTileInit(BasicTile tile)
         {
             owner = tile;
         }
-        public virtual void OnEvent(TileEvent ev)
+
+        public virtual void DoSetData(TileBehaviourOptions.BehaviourData data)
+        {
+            
+        }
+        public virtual void OnEvent(TileEvent ev, System.Object args = null)
         {
             
         }
@@ -39,9 +66,9 @@ public class BasicTile : MonoBehaviour
         if (!entities.Contains(entity))
         {
             entities.Add(entity);
-            for (int i = 0; i < behaviours.Length; i++)
+            for (int i = 0; i < behaviours.Count; i++)
             {
-                behaviours[i].OnEvent(TileEvent.ON_ENTITY_ENTER);
+                behaviours[i].OnEvent(TileEvent.ON_ENTITY_ENTER, entity);
             }
             building.OnEntityEnter(entity);
         }
@@ -52,19 +79,11 @@ public class BasicTile : MonoBehaviour
         if (entities.Contains(entity))
         {
             entities.Remove(entity);
-            for (int i = 0; i < behaviours.Length; i++)
+            for (int i = 0; i < behaviours.Count; i++)
             {
-                behaviours[i].OnEvent(TileEvent.ON_ENTITY_LEAVE);
+                behaviours[i].OnEvent(TileEvent.ON_ENTITY_LEAVE,entity);
             }
         }
     }
-
-    private void Awake()
-    {
-        behaviours = GetComponentsInChildren<Behaviour>();
-        for (int i = 0; i < behaviours.Length; i++)
-        {
-            behaviours[i].OnTileInit(this);
-        }
-    }
+    
 }

@@ -42,7 +42,9 @@ public class TileBehaviourDB : ScriptableObject
             case BehaviourType.ADD_RESOURCE_MODIFIER_FROM_TILE:
                 return new AddResourceModifierFromTile();
             case BehaviourType.MODIFY_ENTITY_CAPABILITY:
-                return new ModifyEnitityCapability();
+                return new ModifyEntityCapability();
+            case BehaviourType.MODIFY_ENTITY_MOVE_SPEED:
+                return new ModifyEntityMoveSpeed();
             default:
                 break;
         }

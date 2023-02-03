@@ -12,6 +12,7 @@ public class BasicBuilding
     public GameManager.PlayerSide playerSide = GameManager.PlayerSide.ENUM;
     public bool isDestroyed = false;
     public BuildingType buildType;
+    public Vector3Int pos;
     [Serializable]
     public enum BuildingType
     {
@@ -99,7 +100,7 @@ public class BasicBuilding
         }
     }
 
-    public BasicBuilding(GameManager.PlayerSide playerSide,BuildingType type)
+    public BasicBuilding(GameManager.PlayerSide playerSide,BuildingType type,Vector3Int position)
     {
         buildType = type;
         behaviours = GameManager.instance.BuildingBehaviourDB.GetBehaviours(type);
@@ -107,6 +108,7 @@ public class BasicBuilding
         {
             behaviours[i].OnBuildingInit(this);
         }
+        pos = position;
     }
     
 }

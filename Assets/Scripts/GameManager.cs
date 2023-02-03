@@ -111,7 +111,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         allPlayerSideDatas.Add(PlayerSide.SIDE_B,new PlayerSideData());
         testTile.Add(new BasicTile(BasicTile.TileType.TILE_ICE));
         testTile.Add(new BasicTile(BasicTile.TileType.TILE_MARSH));
-        testBuilding.Add(new BasicBuilding(PlayerSide.ENUM,BasicBuilding.BuildingType.BUILDING_POWER));
+        testBuilding.Add(new BasicBuilding(PlayerSide.ENUM,BasicBuilding.BuildingType.BUILDING_POWER,new Vector3Int(0,0,0)));
         var test_1=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, 0, ResourceType.POWER, 20);
         var test_2=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, -20, ResourceType.FOOD, 7);
         var test_3=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, -20, ResourceType.METAL, 7);

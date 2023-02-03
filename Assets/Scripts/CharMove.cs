@@ -7,6 +7,8 @@ using Aoiti.Pathfinding;
 
 public class CharMove : MonoBehaviour
 {
+    Vector3Int targetPos;
+
     Vector3Int[] directions = new Vector3Int[4] { Vector3Int.left, Vector3Int.right, Vector3Int.up, Vector3Int.down };
 
     Pathfinder<Vector3Int> pathfinder;
@@ -18,6 +20,7 @@ public class CharMove : MonoBehaviour
     {
         var currentCellPos = TileManager.Instance.terrainMap.WorldToCell(transform.position);
         target.z = 0;
+        targetPos = target;
         pathfinder.GenerateAstarPath(currentCellPos, target, out path);
         StopAllCoroutines();
         StartCoroutine(Move());
@@ -42,7 +45,7 @@ public class CharMove : MonoBehaviour
             var terrainTile = TileManager.Instance.terrainMap.GetTile(a + dir) as Tile;
             var buildingTile = TileManager.Instance.buildingMap.GetTile(a + dir) as Tile;
             if (terrainTile != null && terrainTile.colliderType != Tile.ColliderType.Grid &&
-                (buildingTile == null || buildingTile.colliderType != Tile.ColliderType.Grid))
+                (buildingTile == null || buildingTile.colliderType != Tile.ColliderType.Grid)||(a+dir)==targetPos)
             {
                 if (terrainTile.colliderType == Tile.ColliderType.None)
                     result.Add(a + dir, 10);
@@ -62,11 +65,11 @@ public class CharMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetMouseButtonDown(1))
-        //{
-        //    var target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //    MoveTo(target);
-        //}
+        if (Input.GetMouseButtonDown(1))
+        {
+            var target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            MoveTo(target);
+        }
     }
 
     IEnumerator Move()

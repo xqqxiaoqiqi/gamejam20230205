@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicTile : MonoBehaviour
+public class BasicTile
 {
     public bool isPassable = false;
 
@@ -15,18 +15,32 @@ public class BasicTile : MonoBehaviour
 
     public BasicBuilding building;
     
+    [Serializable]
+    public enum TileType
+    {
+        TILE_FARM,
+    }
+    
+    [Serializable]
     public enum TileEvent
     {
         ON_ENTITY_ENTER,
         ON_ENTITY_LEAVE
     }
 
-    public class Behaviour :MonoBehaviour
+    [Serializable]
+    public class Behaviour
     {
         public BasicTile owner;
+        public TileEvent onEvent;
         public virtual void OnTileInit(BasicTile tile)
         {
             owner = tile;
+        }
+
+        public virtual void DoSetData(TileBehaviourOptions.BehaviourData data)
+        {
+            
         }
         public virtual void OnEvent(TileEvent ev)
         {
@@ -61,7 +75,7 @@ public class BasicTile : MonoBehaviour
 
     private void Awake()
     {
-        behaviours = GetComponentsInChildren<Behaviour>();
+        //behaviours = GetComponentsInChildren<Behaviour>();
         for (int i = 0; i < behaviours.Length; i++)
         {
             behaviours[i].OnTileInit(this);

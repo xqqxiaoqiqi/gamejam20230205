@@ -11,6 +11,7 @@ public class TileBehaviourDB : ScriptableObject
     public enum BehaviourType
     {
         ADD_RESOURCE_MODIFIER_FROM_TILE,
+        MODIFY_ENTITY_CAPABILITY,
         MODIFY_ENTITY_MOVE_SPEED
     }
 
@@ -40,6 +41,8 @@ public class TileBehaviourDB : ScriptableObject
         {
             case BehaviourType.ADD_RESOURCE_MODIFIER_FROM_TILE:
                 return new AddResourceModifierFromTile();
+            case BehaviourType.MODIFY_ENTITY_CAPABILITY:
+                return new ModifyEnitityCapability();
             default:
                 break;
         }

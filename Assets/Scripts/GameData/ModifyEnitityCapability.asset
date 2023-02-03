@@ -9,9 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e8f9de5e4b8dc04da070bd9cd0d9c0c, type: 3}
-  m_Name: TileBehaviourDB
+  m_Script: {fileID: 11500000, guid: 2807bcefe16964e48a7be2b54425a350, type: 3}
+  m_Name: ModifyEnitityCapability
   m_EditorClassIdentifier: 
-  behaviourOptions:
-  - {fileID: 11400000, guid: 509a8cc4f3cbaa3448b3857ff9a3fb2d, type: 2}
-  - {fileID: 11400000, guid: 072ed15a7d3810746acc68c027bc305d, type: 2}
+  behaviourType: 1
+  datas:
+  - onEvent: 0
+    tileType: 0
+    value: 3
+  - onEvent: 1
+    tileType: 0
+    value: -3

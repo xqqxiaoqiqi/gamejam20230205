@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Torappu/Options/AddResourceModifierFromBuildingConfig")]
+[CreateAssetMenu(menuName = "Options/BuildingBehaviours/AddResourceModifierFromBuilding")]
 public class AddResourceModifierFromBuildingConfig : BuildingBehaviourOptions
 {
     public AddResourceModifierFromBuildingData[] datas;

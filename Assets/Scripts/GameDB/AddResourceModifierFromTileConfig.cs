@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Torappu/Options/AddResourceModifierFromTileConfig")]
+[CreateAssetMenu(menuName = "Options/TileBehaviours/AddResourceModifierFromTile")]
 public class AddResourceModifierFromTileConfig : TileBehaviourOptions
 {
     public AddResourceModifierFromTileData[] datas;

@@ -24,9 +24,9 @@ public class AddResourceModifierFromTile : BasicTile.Behaviour
         }
     }
 
-    public override void OnEvent(BasicTile.TileEvent ev)
+    public override void OnEvent(BasicTile.TileEvent ev,object args = null)
     {
-        base.OnEvent(ev);
+        base.OnEvent(ev,args);
         if (ev == onEvent)
         {
             if (myModifier == null&&owner.building!=null)

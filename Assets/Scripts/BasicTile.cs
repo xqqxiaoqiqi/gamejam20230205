@@ -42,7 +42,7 @@ public class BasicTile
         {
             
         }
-        public virtual void OnEvent(TileEvent ev)
+        public virtual void OnEvent(TileEvent ev, System.Object args = null)
         {
             
         }
@@ -55,7 +55,7 @@ public class BasicTile
             entities.Add(entity);
             for (int i = 0; i < behaviours.Length; i++)
             {
-                behaviours[i].OnEvent(TileEvent.ON_ENTITY_ENTER);
+                behaviours[i].OnEvent(TileEvent.ON_ENTITY_ENTER, entity);
             }
             building.OnEntityEnter(entity);
         }
@@ -68,7 +68,7 @@ public class BasicTile
             entities.Remove(entity);
             for (int i = 0; i < behaviours.Length; i++)
             {
-                behaviours[i].OnEvent(TileEvent.ON_ENTITY_LEAVE);
+                behaviours[i].OnEvent(TileEvent.ON_ENTITY_LEAVE,entity);
             }
         }
     }

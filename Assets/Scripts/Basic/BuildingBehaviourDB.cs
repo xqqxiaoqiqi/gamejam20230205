@@ -12,7 +12,8 @@ public class BuildingBehaviourDB : ScriptableObject
     {
         ADD_RESOURCE_MODIFIER_FROM_BUILDING,
         ENTITY_ENTER_BUILDING,
-        ADD_RESOURCE_IMMEDATELY
+        ADD_RESOURCE_IMMEDATELY,
+        MARK_BUILDING_DESTROYED
     }
 
     public  List<BasicBuilding.Behaviour> GetBehaviours(BasicBuilding.BuildingType type)
@@ -23,7 +24,7 @@ public class BuildingBehaviourDB : ScriptableObject
             var data = behaviourOptions[i].GetData();
             for (int j = 0; j < data.Length; j++)
             {
-                if (data[j].tileType == type)
+                if (data[j].buildType == type)
                 {
                     var behaviour = GetBehaviour(behaviourOptions[i].behaviourType);
                     behaviour.DoSetData(data[j]);
@@ -44,7 +45,9 @@ public class BuildingBehaviourDB : ScriptableObject
             case BehaviourType.ENTITY_ENTER_BUILDING:
                 return new EntityEnterBuilding();
             case BehaviourType.ADD_RESOURCE_IMMEDATELY:
-                
+                return new AddResourceImmedately();
+            case BehaviourType.MARK_BUILDING_DESTROYED:
+                return new MarkBuildingDestroyed();
             default:
                 break;
         }

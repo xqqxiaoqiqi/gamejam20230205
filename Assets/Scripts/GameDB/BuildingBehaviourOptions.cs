@@ -10,7 +10,7 @@ public class BuildingBehaviourOptions : ScriptableObject
     public class BehaviourData
     {
         public BasicBuilding.BuildingEvent onEvent;
-        public BasicBuilding.BuildingType tileType;
+        public BasicBuilding.BuildingType buildType;
     }
 
     public virtual BehaviourData[] GetData()

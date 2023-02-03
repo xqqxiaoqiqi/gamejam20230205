@@ -26,7 +26,7 @@ public class Modifier
     }
     public bool OnApplyingModifier()
     {
-        if (GameManager.instance.allPlayerSideDatas[playerSide].resourcesData[(int) sourceType] < sourceValue)
+        if (GameManager.instance.allPlayerSideDatas[playerSide].resourcesData[(int) sourceType] + sourceValue < 0)
         {
             isEnabled = false;
             return false;

@@ -4,11 +4,11 @@ using UnityEngine;
 using System;
 
 [CreateAssetMenu(menuName = "Options/TileBehaviours/ModifyCapabilityWhenEntityStay")]
-public class ModifyEnitityCapabilityConfig  : TileBehaviourOptions
+public class ModifyEntityCapabilityConfig  : TileBehaviourOptions
 {
-    public ModifyEnitityCapabilityConfigData[] datas;
+    public ModifyEntityCapabilityConfigData[] datas;
     [Serializable]
-    public class ModifyEnitityCapabilityConfigData: BehaviourData
+    public class ModifyEntityCapabilityConfigData: BehaviourData
     { 
         public int value;
     }

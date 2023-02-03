@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ModifyEnitityCapability :  BasicTile.Behaviour
+public class ModifyEntityCapability :  BasicTile.Behaviour
 {
     
     public int value;
     public override void DoSetData(TileBehaviourOptions.BehaviourData data)
     {
         base.DoSetData(data);
-        var mydata = data as ModifyEnitityCapabilityConfig.ModifyEnitityCapabilityConfigData;
+        var mydata = data as ModifyEntityCapabilityConfig.ModifyEntityCapabilityConfigData;
         if (mydata != null)
         {
             onEvent = mydata.onEvent;

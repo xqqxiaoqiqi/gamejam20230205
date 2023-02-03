@@ -53,6 +53,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public Dictionary<PlayerSide, List<BasicBuilding>> allBuildings = new Dictionary<PlayerSide, List<BasicBuilding>>();
     public Dictionary<PlayerSide,PlayerSideData> allPlayerSideDatas = new Dictionary<PlayerSide, PlayerSideData>();
     public List<BasicTile> testTile = new List<BasicTile>();
+    public List<BasicBuilding> testBuilding = new List<BasicBuilding>();
     public TileBehaviourDB TileBehaviourDB;
     public BuildingBehaviourDB BuildingBehaviourDB;
     int test = 0;
@@ -110,11 +111,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         allPlayerSideDatas.Add(PlayerSide.SIDE_B,new PlayerSideData());
         testTile.Add(new BasicTile(BasicTile.TileType.TILE_ICE));
         testTile.Add(new BasicTile(BasicTile.TileType.TILE_MARSH));
+        testBuilding.Add(new BasicBuilding(PlayerSide.ENUM,BasicBuilding.BuildingType.BUILDING_POWER));
         var test_1=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, 0, ResourceType.POWER, 20);
         var test_2=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, -20, ResourceType.FOOD, 7);
         var test_3=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, -20, ResourceType.METAL, 7);
-
-
+        
 
     }
 }

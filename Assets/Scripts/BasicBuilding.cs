@@ -8,13 +8,17 @@ using UnityEngine;
 /// </summary>
 public class BasicBuilding
 {
-    public Behaviour[] behaviours;
+    public List<Behaviour> behaviours;
     public GameManager.PlayerSide playerSide = GameManager.PlayerSide.ENUM;
     public bool isDestroyed = false;
+    public BuildingType buildType;
     [Serializable]
     public enum BuildingType
     {
         BUILDING_FARM,
+        BUILDING_POWER,
+        BUILDING_MINE
+        
     }
     [Serializable]
     public enum BuildingEvent
@@ -38,7 +42,7 @@ public class BasicBuilding
         {
             
         }
-        public virtual void OnEvent(BuildingEvent ev)
+        public virtual void OnEvent(BuildingEvent ev,object args = null)
         {
             
         }
@@ -56,7 +60,7 @@ public class BasicBuilding
             //防止同一次tick里两个单位同时enter的问题，当这个建筑被第一次enter（占领/破坏）以后，以目前的设计后续所有单位enter都不会做出任何相应
             return;
         }
-        for (int i = 0; i < behaviours.Length; i++)
+        for (int i = 0; i < behaviours.Count; i++)
         {
             behaviours[i].OnEvent(BuildingEvent.ON_ENTITY_ENTER);
         }
@@ -65,7 +69,7 @@ public class BasicBuilding
     public void OnSwitchPlayerSide(GameManager.PlayerSide newside)
     {
         GameManager.instance.allBuildings[playerSide].Remove(this);
-        for (int i = 0; i < behaviours.Length; i++)
+        for (int i = 0; i < behaviours.Count; i++)
         {
             behaviours[i].OnEvent(BuildingEvent.ON_SWITCH_PLAYER_SIDE);
         }
@@ -77,7 +81,7 @@ public class BasicBuilding
     {
         //todo: 每次tick结束destroy
         GameManager.instance.allBuildings[playerSide].Remove(this);
-        for (int i = 0; i < behaviours.Length; i++)
+        for (int i = 0; i < behaviours.Count; i++)
         {
             behaviours[i].OnEvent(BuildingEvent.ON_BUILD_DESTROY);
         }
@@ -89,19 +93,20 @@ public class BasicBuilding
     }
     public void OnTick()
     {
-        for (int i = 0; i < behaviours.Length; i++)
+        for (int i = 0; i < behaviours.Count; i++)
         {
             behaviours[i].OnTick();
         }
     }
-    
 
-    private void Awake()
+    public BasicBuilding(GameManager.PlayerSide playerSide,BuildingType type)
     {
-        //behaviours = GetComponentsInChildren<Behaviour>();
-        for (int i = 0; i < behaviours.Length; i++)
+        buildType = type;
+        behaviours = GameManager.instance.BuildingBehaviourDB.GetBehaviours(type);
+        for (int i = 0; i < behaviours.Count; i++)
         {
             behaviours[i].OnBuildingInit(this);
         }
     }
+    
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = System.Object;
 
 public class AddResourceModifierFromBuilding : BasicBuilding.Behaviour
 {
@@ -24,9 +25,9 @@ public class AddResourceModifierFromBuilding : BasicBuilding.Behaviour
         }
     }
     
-    public override void OnEvent(BasicBuilding.BuildingEvent ev)
+    public override void OnEvent(BasicBuilding.BuildingEvent ev,Object args = null)
     {
-        base.OnEvent(ev);
+        base.OnEvent(ev,args);
         if (ev == onEvent)
         {
             if (myModifier == null)

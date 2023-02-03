@@ -11,7 +11,7 @@ public class BuildingBehaviourDB : ScriptableObject
     public enum BehaviourType
     {
         ADD_RESOURCE_MODIFIER_FROM_BUILDING,
-        DISABLE_ENTITY,
+        ENTITY_ENTER_BUILDING,
         ADD_RESOURCE_IMMEDATELY
     }
 
@@ -39,8 +39,12 @@ public class BuildingBehaviourDB : ScriptableObject
     {
         switch (type)
         {
-            case BuildingBehaviourDB.BehaviourType.ADD_RESOURCE_MODIFIER_FROM_BUILDING:
+            case BehaviourType.ADD_RESOURCE_MODIFIER_FROM_BUILDING:
                 return new AddResourceModifierFromBuilding();
+            case BehaviourType.ENTITY_ENTER_BUILDING:
+                return new EntityEnterBuilding();
+            case BehaviourType.ADD_RESOURCE_IMMEDATELY:
+                
             default:
                 break;
         }

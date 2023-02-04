@@ -24,15 +24,19 @@ public class AddResourceModifierFromBuilding : BasicBuilding.Behaviour
             targetValue = mydata.targetValue;
         }
     }
-    
-    public override void OnEvent(BasicBuilding.BuildingEvent ev,Object args = null)
+
+    public override void OnEvent(BasicBuilding.BuildingEvent ev, Object args = null)
     {
-        base.OnEvent(ev,args);
+        base.OnEvent(ev, args);
         if (ev == onEvent)
         {
-            if (myModifier == null)
+            var entity = args as Entity;
+            if (entity != null)
             {
-                myModifier = new Modifier(owner.playerSide, sourceType, sourceValue, targetType, targetValue);
+                if (myModifier == null)
+                {
+                    myModifier = new Modifier(entity.playerSide, sourceType, sourceValue, targetType, targetValue);
+                }
             }
         }
     }

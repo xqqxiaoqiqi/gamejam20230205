@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d6b66d4081624478df38d58cb75c27, type: 3}
   m_Name: Procedural Tile Terrain Map Asset
   m_EditorClassIdentifier: 
-  m_mountTile: {fileID: 0}
-  m_hillTile: {fileID: 0}
-  m_normalTile: {fileID: 0}
-  m_waterTile: {fileID: 0}
-  m_sandTile: {fileID: 0}
-  m_iceTile: {fileID: 0}
-  m_forestTile: {fileID: 0}
-  m_marshTile: {fileID: 0}
+  m_mountTile: {fileID: 11400000, guid: e2d4b6b489f5e194aa1867ee946e8436, type: 2}
+  m_hillTile: {fileID: 11400000, guid: e2d4b6b489f5e194aa1867ee946e8436, type: 2}
+  m_normalTile: {fileID: 11400000, guid: 711ec40c02d06d145a1a0a164a92d09a, type: 2}
+  m_waterTile: {fileID: 11400000, guid: 7cb85eafcffe460488518d4c6dc99b2c, type: 2}
+  m_sandTile: {fileID: 11400000, guid: 711ec40c02d06d145a1a0a164a92d09a, type: 2}
+  m_iceTile: {fileID: 11400000, guid: 7cb85eafcffe460488518d4c6dc99b2c, type: 2}
+  m_forestTile: {fileID: 11400000, guid: e6a10316ea18a3144a6468e7e2d80f21, type: 2}
+  m_marshTile: {fileID: 11400000, guid: 7cb85eafcffe460488518d4c6dc99b2c, type: 2}

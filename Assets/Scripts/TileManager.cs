@@ -33,7 +33,7 @@ public class TileManager
 
     public bool Reachable(Vector3Int pos)
     {
-        if (pos.x < 0 || pos.y < 0 || pos.x >= GameManager.instance.mapWidth || pos.y >= GameManager.instance.mapHeight)
+        if (!GameManager.instance.PosValid(pos))
             return false;
         var terrainTile = TileManager.Instance.terrainMap.GetTile(pos) as Tile;
         var buildingTile = TileManager.Instance.buildingMap.GetTile(pos) as Tile;

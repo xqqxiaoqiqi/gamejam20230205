@@ -27,25 +27,30 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public class PlayerSideData
     {
         public int[] resourcesData = new int[(int)ResourceType.ENUM];
-        public List<List<int>> modifiersValue = new List<List<int>>();
         public List<Modifier> modifierSources = new List<Modifier>();
-
-        public void OnApplyingModifier(ResourceType resourceType, int count)
-        {
-            modifiersValue[(int)resourceType].Add(count);
-        }
-
         public void DoApplyAllModifier()
         {
             resourcesData[(int) ResourceType.ENTITY_CAPABILITY] = 0;
             for (int i = 0; i < modifierSources.Count; i++)
             {
                 int value = 0;
-                if (modifierSources[i].OnApplyingModifier())
+                if (modifierSources[i].targetType==ResourceType.POWER)
                 {
                     modifierSources[i].DoApplyModifier();
-                } 
+                }
             }
+            for (int i = 0; i < modifierSources.Count; i++)
+            {
+                int value = 0;
+                if (modifierSources[i].targetType!=ResourceType.POWER)
+                {
+                    if (modifierSources[i].OnApplyingModifier())
+                    {
+                        modifierSources[i].DoApplyModifier();
+                    }
+                }
+            }
+            resourcesData[(int)ResourceType.POWER] = 0;
         }
     }
     public List<Tile> buildingSource;
@@ -60,10 +65,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public List<BasicBuilding> testBuilding = new List<BasicBuilding>();
     public TileBehaviourDB TileBehaviourDB;
     public BuildingBehaviourDB BuildingBehaviourDB;
-    int test = 0;
-    private int total = 30;
+    public CoolDownTimer gameTickTimer = new CoolDownTimer(30);
     public void FixedUpdate()
     {
+        gameTickTimer.OnTick();
         for (int i = 0; i < Entities.Count; i++)
         {
             Entities[i].OnTick();
@@ -74,11 +79,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             building.OnTick();
         }
 
-        if (test < total)
-        {
-            test++;
-        }
-        else
+        if (gameTickTimer.isReady)
         {
             foreach (var playerSideData in allPlayerSideDatas.Values)
             {
@@ -95,8 +96,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     Debug.Log(side.ToString() + resourceType + ":"+resources[i]);
                 }
             }
-
-            test = 0;
+            gameTickTimer.Reset();
         }
 
         var destroyList = new List<Vector3Int>();
@@ -112,6 +112,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             TileManager.Instance.buildingMap.SetTile(key, null);
             buildings.Remove(key);
         }
+        UIManager.instance.OnTick();
     }
 
     public void InitMap()

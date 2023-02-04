@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11312b48090388a46b89d687a5127037, type: 3}
-  m_Name: Mark Building Destroyed
+  m_Script: {fileID: 11500000, guid: b5bbde35e7d86fb45b35e1ccaac57238, type: 3}
+  m_Name: Add Resource Immedately
   m_EditorClassIdentifier: 
-  behaviourType: 0
+  behaviourType: 2
   datas:
   - onEvent: 0
     buildType: 0
+    resourceType: 0
+    Count: 0

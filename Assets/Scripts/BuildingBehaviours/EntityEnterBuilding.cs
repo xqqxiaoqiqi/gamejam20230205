@@ -32,7 +32,7 @@ public override void DoSetData(BuildingBehaviourOptions.BehaviourData data)
             {
                 if (checkCapability)
                 {
-                    currCapabilityCount -= entity.capability;
+                    //currCapabilityCount -= entity.capability;
                     if (currCapabilityCount <= 0)
                     {
                         owner.OnSwitchPlayerSide(entity.playerSide);

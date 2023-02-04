@@ -38,14 +38,14 @@ public class InitNewEntity : BasicBuilding.Behaviour
         {
             if (immediately)
             {
-                if (owner.playerSide!=GameManager.PlayerSide.ENUM)
+                if (owner.playerSide!=GameManager.PlayerSide.NATURE)
                 {
                     GameManager.instance.InitEntity(owner.playerSide,owner.pos);
                 }
             }
             if (triggerTimer.isReady)
             {
-                if (owner.playerSide!=GameManager.PlayerSide.ENUM)
+                if (owner.playerSide!=GameManager.PlayerSide.NATURE)
                 {
                     GameManager.instance.InitEntity(owner.playerSide,owner.pos);
                 }

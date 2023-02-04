@@ -32,3 +32,9 @@ MonoBehaviour:
     sourceValue: 0
     targetType: 1
     targetValue: 5
+  - onEvent: 0
+    buildType: 8
+    sourceType: 2
+    sourceValue: 50
+    targetType: 3
+    targetValue: 2

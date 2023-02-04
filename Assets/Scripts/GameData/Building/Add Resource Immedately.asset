@@ -15,6 +15,20 @@ MonoBehaviour:
   behaviourType: 2
   datas:
   - onEvent: 0
-    buildType: 0
+    buildType: 4
     resourceType: 0
-    Count: 0
+    Count: 50
+    needCompareCapability: 0
+    capabilityCount: 0
+  - onEvent: 0
+    buildType: 5
+    resourceType: 1
+    Count: 20
+    needCompareCapability: 0
+    capabilityCount: 0
+  - onEvent: 0
+    buildType: 7
+    resourceType: 1
+    Count: 100
+    needCompareCapability: 1
+    capabilityCount: 10

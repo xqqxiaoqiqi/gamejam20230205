@@ -9,7 +9,7 @@ using UnityEngine;
 public class BasicBuilding
 {
     public List<Behaviour> behaviours;
-    public GameManager.PlayerSide playerSide = GameManager.PlayerSide.ENUM;
+    public GameManager.PlayerSide playerSide = GameManager.PlayerSide.NATURE;
     public bool isDestroyed = false;
     public BuildingType buildType;
     public Vector3Int pos;
@@ -19,7 +19,13 @@ public class BasicBuilding
         BUILDING_FARM,
         BUILDING_POWER,
         BUILDING_MINE,
-        BUILDING_HOME
+        BUILDING_HOME,
+        TREASURE_FOOD,
+        TREASURE_METAL,
+        TREASURE_ENTITY,
+        BUILDING_CAMP,
+        BUILDING_WEAPON_FACTORY
+
 
     }
     [Serializable]
@@ -58,7 +64,7 @@ public class BasicBuilding
 
     public void OnEntityEnter(Entity entity)
     {
-        if (playerSide != GameManager.PlayerSide.ENUM||isDestroyed)
+        if (playerSide != GameManager.PlayerSide.NATURE||isDestroyed)
         {
             //防止同一次tick里两个单位同时enter的问题，当这个建筑被第一次enter（占领/破坏）以后，以目前的设计后续所有单位enter都不会做出任何相应
             return;

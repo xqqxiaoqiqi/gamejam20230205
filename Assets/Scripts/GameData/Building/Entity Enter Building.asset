@@ -10,19 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa813f2d22d60ed4aba31168e0ecbe42, type: 3}
-  m_Name: Entity Enter Building Config
+  m_Name: Entity Enter Building
   m_EditorClassIdentifier: 
   behaviourType: 1
   datas:
   - onEvent: 0
-    tileType: 1
+    buildType: 0
     checkCapability: 0
     maxCapabilityCount: 1
   - onEvent: 0
-    tileType: 0
+    buildType: 1
     checkCapability: 0
     maxCapabilityCount: 1
   - onEvent: 0
-    tileType: 2
+    buildType: 2
+    checkCapability: 0
+    maxCapabilityCount: 1
+  - onEvent: 0
+    buildType: 8
     checkCapability: 0
     maxCapabilityCount: 1

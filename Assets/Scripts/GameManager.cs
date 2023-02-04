@@ -9,8 +9,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     public enum PlayerSide
     { 
+        NATURE,
         SIDE_A,
         SIDE_B,
+        SIDE_C,
         ENUM//
     }
     public enum ResourceType
@@ -18,7 +20,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         FOOD = 0,
         METAL = 1,
         POWER =2,
-        ENUM = 3
+        ENTITY_CAPABILITY =3,
+        ENUM = 4
     }
 
     public class PlayerSideData
@@ -34,6 +37,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         public void DoApplyAllModifier()
         {
+            resourcesData[(int) ResourceType.ENTITY_CAPABILITY] = 0;
             for (int i = 0; i < modifierSources.Count; i++)
             {
                 int value = 0;
@@ -116,7 +120,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         allPlayerSideDatas.Add(PlayerSide.SIDE_B,new PlayerSideData());
         testTile.Add(new BasicTile(BasicTile.TileType.TILE_ICE));
         testTile.Add(new BasicTile(BasicTile.TileType.TILE_MARSH));
-        testBuilding.Add(new BasicBuilding(PlayerSide.ENUM,BasicBuilding.BuildingType.BUILDING_POWER,new Vector3Int(0,0,0)));
+        testBuilding.Add(new BasicBuilding(PlayerSide.NATURE,BasicBuilding.BuildingType.BUILDING_POWER,new Vector3Int(0,0,0)));
         var test_1=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, 0, ResourceType.POWER, 20);
         var test_2=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, -20, ResourceType.FOOD, 7);
         var test_3=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, -20, ResourceType.METAL, 7);

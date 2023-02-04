@@ -2562,7 +2562,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035, y: 484.3158}
+  m_AnchoredPosition: {x: 0.000061035156, y: 484.3158}
   m_SizeDelta: {x: 0, y: -968.6315}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &410364708
@@ -2983,6 +2983,7 @@ GameObject:
   - component: {fileID: 499839630}
   - component: {fileID: 499839632}
   - component: {fileID: 499839631}
+  - component: {fileID: 499839633}
   m_Layer: 5
   m_Name: currdetailsPanel
   m_TagString: Untagged
@@ -3053,6 +3054,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499839629}
   m_CullTransparentMesh: 1
+--- !u!114 &499839633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499839629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13882031f8e222549b45ad3dfb7ab9a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modifyStartResourcesPanel:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentPlayerSide: 0
 --- !u!1 &505365248
 GameObject:
   m_ObjectHideFlags: 0
@@ -4376,6 +4394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 929560338}
+  - component: {fileID: 929560339}
   m_Layer: 5
   m_Name: gameStartPanel
   m_TagString: Untagged
@@ -4405,6 +4424,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &929560339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929560337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3b11f72ecf9b054bb5ec9ae8a35c5fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDetailPanel: {fileID: 0}
 --- !u!1 &939068114
 GameObject:
   m_ObjectHideFlags: 0
@@ -4502,6 +4534,7 @@ GameObject:
   - component: {fileID: 939239419}
   - component: {fileID: 939239421}
   - component: {fileID: 939239420}
+  - component: {fileID: 939239422}
   m_Layer: 5
   m_Name: modifyStartResouresPanel
   m_TagString: Untagged
@@ -4570,6 +4603,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939239418}
   m_CullTransparentMesh: 1
+--- !u!114 &939239422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939239418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d38bdc041a9d894db4900f592d41e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceType: 0
+  currentDetailPanel: {fileID: 499839633}
+  addButton: {fileID: 47893554}
+  minusButton: {fileID: 274994407}
 --- !u!1 &944594345
 GameObject:
   m_ObjectHideFlags: 0
@@ -6933,6 +6982,7 @@ GameObject:
   - component: {fileID: 1439582828}
   - component: {fileID: 1439582830}
   - component: {fileID: 1439582829}
+  - component: {fileID: 1439582831}
   m_Layer: 5
   m_Name: modifyStartResouresPanel (1)
   m_TagString: Untagged
@@ -7001,6 +7051,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1439582827}
   m_CullTransparentMesh: 1
+--- !u!114 &1439582831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439582827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d38bdc041a9d894db4900f592d41e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceType: 0
+  currentDetailPanel: {fileID: 499839633}
+  addButton: {fileID: 1000367531}
+  minusButton: {fileID: 1657083998}
 --- !u!1 &1449564128
 GameObject:
   m_ObjectHideFlags: 0
@@ -7237,6 +7303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550d83c585df78647949258b2c6221cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStartPanel: {fileID: 0}
 --- !u!1 &1483688631
 GameObject:
   m_ObjectHideFlags: 0
@@ -7328,6 +7395,7 @@ GameObject:
   - component: {fileID: 1509984885}
   - component: {fileID: 1509984887}
   - component: {fileID: 1509984886}
+  - component: {fileID: 1509984888}
   m_Layer: 5
   m_Name: modifyStartResouresPanel (2)
   m_TagString: Untagged
@@ -7396,6 +7464,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509984884}
   m_CullTransparentMesh: 1
+--- !u!114 &1509984888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509984884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d38bdc041a9d894db4900f592d41e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceType: 0
+  currentDetailPanel: {fileID: 499839633}
+  addButton: {fileID: 681861366}
+  minusButton: {fileID: 906630689}
 --- !u!1 &1510957723
 GameObject:
   m_ObjectHideFlags: 0

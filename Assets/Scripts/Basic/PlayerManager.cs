@@ -5,6 +5,19 @@ using Object = System.Object;
 
 public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 {
+    public int initResourcesTotalCount;
+
+    public Dictionary<GameManager.PlayerSide, int[]> initReSourcesData = new Dictionary<GameManager.PlayerSide, int[]>();
+
+    protected override void OnInit()
+    {
+        base.OnInit();
+        initReSourcesData.Add(GameManager.PlayerSide.SIDE_A,new int[(int)GameManager.ResourceType.ENUM]);
+        initReSourcesData.Add(GameManager.PlayerSide.SIDE_B,new int[(int)GameManager.ResourceType.ENUM]);
+        initReSourcesData.Add(GameManager.PlayerSide.SIDE_C,new int[(int)GameManager.ResourceType.ENUM]);
+
+    }
+
     public enum PlayerEvent
     {
         INIT_NEW_ENTITY,

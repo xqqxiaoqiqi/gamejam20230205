@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0591b0914691e489d748813083414f, type: 3}
   m_Name: Procedural Tile Resources Map Asset
   m_EditorClassIdentifier: 
-  m_farmTile: {fileID: 11400000, guid: 150f7343645de8c44b0b3830349f6b89, type: 2}
-  m_mineTile: {fileID: 11400000, guid: 58456d45238036547a0e5c5140875067, type: 2}
-  m_hotTile: {fileID: 11400000, guid: 7c7c5b9d49f49ef4d904f39a030f902a, type: 2}
+  m_farmTile: {fileID: 11400000, guid: 387ac43de3f14b44aa9a0f15922912ee, type: 2}
+  m_mineTile: {fileID: 11400000, guid: 7d99e9cc8fe63734e982c847cbfd30fb, type: 2}
+  m_hotTile: {fileID: 11400000, guid: 284ae180e41c10e43ae2ed4660d91306, type: 2}
   m_foodChestTile: {fileID: 11400000, guid: 37500b98fec3f414b992c857edd9ad80, type: 2}
   m_metalChestTile: {fileID: 11400000, guid: e86cbdfaa4c244f4eaa7e4572701fbfd, type: 2}
   m_peopleChestTile: {fileID: 11400000, guid: 72e5dbd4ef644a54b994c7bb6c93e1bf, type: 2}
-  m_campTile: {fileID: 11400000, guid: 9d2e0d9f247f1e14c8cadd1562f7cef4, type: 2}
-  m_relicTile: {fileID: 11400000, guid: 78dcc3d013f8fc44a900dd01779b2847, type: 2}
-  m_gateTile: {fileID: 11400000, guid: 150f7343645de8c44b0b3830349f6b89, type: 2}
+  m_campTile: {fileID: 11400000, guid: f505cc94803625342a3d2c0636a19e9f, type: 2}
+  m_relicTile: {fileID: 11400000, guid: f700c67647ea93c45b2cab13ec9ed1e0, type: 2}
+  m_gateTile: {fileID: 11400000, guid: 0caccf8c8af349f42b12ae23f395f755, type: 2}

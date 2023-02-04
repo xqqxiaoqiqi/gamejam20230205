@@ -28,9 +28,18 @@ public class Entity : MonoBehaviour
         this.playerSide = playerSide;
     }
 
+    private void Start()
+    {
+        pathfinder = new Pathfinder<Vector3Int>(DistanceFunc, connectionsAndCosts);
+        GameManager.instance.Entities.Add(this);
+    }
+
     public void OnTick()
     {
-
+        if (targetBuilding == null)
+        {
+            SearchTargetBuilding();
+        }
     }
 
     public void SearchTarget()
@@ -79,11 +88,6 @@ public class Entity : MonoBehaviour
         return result;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        pathfinder = new Pathfinder<Vector3Int>(DistanceFunc, connectionsAndCosts);
-    }
 
     IEnumerator Move()
     {
@@ -104,5 +108,65 @@ public class Entity : MonoBehaviour
     public void MarkFinish()
     {
         isFinished = true;
+    }
+
+    private void SearchTargetBuilding()
+    {
+        var currentPos = TileManager.Instance.terrainMap.WorldToCell(transform.position);
+        for (int circle = 1; circle < 20; circle++)
+        {
+            for (int i = -circle; i < circle; i++)
+            {
+                var pos = new Vector3Int(currentPos.x + i, currentPos.y - circle, 0);
+                if (CheckBuildingCennect(currentPos, pos))
+                {
+                    targetBuilding = GameManager.instance.buildings[pos];
+                    MoveTo(pos);
+                    return;
+                }
+            }
+            for (int i = -circle; i < circle; i++)
+            {
+                var pos = new Vector3Int(currentPos.x + circle, currentPos.y + i, 0);
+                if (CheckBuildingCennect(currentPos,pos))
+                {
+                    targetBuilding = GameManager.instance.buildings[pos];
+                    MoveTo(pos);
+                    return;
+                }
+            }
+            for (int i = circle; i > -circle; i--)
+            {
+                var pos = new Vector3Int(currentPos.x + i, currentPos.y + circle, 0);
+                if (CheckBuildingCennect(currentPos, pos))
+                {
+                    targetBuilding = GameManager.instance.buildings[pos];
+                    MoveTo(pos);
+                    return;
+                }
+            }
+            for (int i = circle; i > -circle; i--)
+            {
+                var pos = new Vector3Int(currentPos.x - circle, currentPos.y + i, 0);
+                if (CheckBuildingCennect(currentPos, pos))
+                {
+                    targetBuilding = GameManager.instance.buildings[pos];
+                    MoveTo(pos);
+                    return;
+                }
+            }
+        }
+    }
+
+    private bool CheckBuildingCennect(Vector3Int currentPos, Vector3Int pos)
+    {
+        if (!GameManager.instance.PosValid(pos))
+            return false;
+        targetPos = pos;
+        if (GameManager.instance.buildings.ContainsKey(pos) && pathfinder.GenerateAstarPath(currentPos, pos, out path))
+        {
+            return true;
+        }
+        return false;
     }
 }

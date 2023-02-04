@@ -141,6 +141,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             }
         }
     }
+
+    public bool PosValid(Vector3Int pos)
+    {
+        if (pos[0] >= 0 && pos[0] < mapWidth && pos[1] >= 0 && pos[1] < mapHeight && pos[2] == 0)
+        {
+            return true;
+        }
+        return false;
+    }
 }
 
 public class CoolDownTimer
@@ -168,4 +177,5 @@ public class CoolDownTimer
     {
         current = 0;
     }
+
 }

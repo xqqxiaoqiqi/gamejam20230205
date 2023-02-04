@@ -75,9 +75,7 @@ public class Entity : MonoBehaviour
         foreach (Vector3Int dir in directions)
         {
             var terrainTile = TileManager.Instance.terrainMap.GetTile(a + dir) as Tile;
-            var buildingTile = TileManager.Instance.buildingMap.GetTile(a + dir) as Tile;
-            if (terrainTile != null && terrainTile.colliderType != Tile.ColliderType.Grid &&
-                (buildingTile == null || buildingTile.colliderType != Tile.ColliderType.Grid) || (a + dir) == targetPos)
+            if (TileManager.Instance.Reachable(a+dir) || (a + dir) == targetPos)
             {
                 if (terrainTile.colliderType == Tile.ColliderType.None)
                     result.Add(a + dir, 10);
@@ -171,7 +169,7 @@ public class Entity : MonoBehaviour
         if (!GameManager.instance.PosValid(pos))
             return false;
         targetPos = pos;
-        if (GameManager.instance.buildings.ContainsKey(pos) && !GameManager.instance.buildings[pos].targeted && pathfinder.GenerateAstarPath(currentPos, pos, out path))
+        if (GameManager.instance.buildings.ContainsKey(pos) && GameManager.instance.buildings[pos].playerSide == GameManager.PlayerSide.NATURE && !GameManager.instance.buildings[pos].targeted && pathfinder.GenerateAstarPath(currentPos, pos, out path))
         {
 
             return true;

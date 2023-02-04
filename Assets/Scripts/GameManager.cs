@@ -54,6 +54,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
     }
     public List<Tile> buildingSource;
+    public Tile selectTile;
+    public Tile selectFailTile;
+
+    public GameObject entitySource;
     public Transform tileRoot;
     public int mapHeight;
     public int mapWidth;
@@ -98,7 +102,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             }
             gameTickTimer.Reset();
         }
-
+        selectPos= Controller.ShowSelection();
         var destroyList = new List<Vector3Int>();
         foreach(var building in buildings)
         {
@@ -112,6 +116,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             TileManager.Instance.buildingMap.SetTile(key, null);
             buildings.Remove(key);
         }
+
+        for(int i=Entities.Count-1;i>=0;i--)
+        {
+            if (Entities[i].isFinished)
+            {
+                Destroy(Entities[i].gameObject);
+                Entities.RemoveAt(i);
+            }
+        }
         UIManager.instance.OnTick();
     }
 
@@ -122,18 +135,22 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void InitEntity(PlayerSide playerSide, Vector3Int position)
     {
-        //todo: 
+        var obj=GameObject.Instantiate(entitySource);
+        var newEntity = obj.GetComponent<Entity>();
+        newEntity.playerSide = playerSide;
+        obj.transform.position = TileManager.Instance.terrainMap.CellToWorld(position);
     }
 
     private void Start()
     {
         allPlayerSideDatas.Add(PlayerSide.SIDE_A,new PlayerSideData());
         allPlayerSideDatas.Add(PlayerSide.SIDE_B,new PlayerSideData());
+        allPlayerSideDatas.Add(PlayerSide.SIDE_C, new PlayerSideData());
         testBuilding.Add(new BasicBuilding(PlayerSide.ENUM,BasicBuilding.BuildingType.BUILDING_POWER,new Vector3Int(0,0,0)));
         var test_1=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, 0, ResourceType.POWER, 20);
         var test_2=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, -20, ResourceType.FOOD, 7);
         var test_3=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, -20, ResourceType.METAL, 7);
-
+        
 
         TileManager.Instance.Init();
         InitBuildings();
@@ -149,6 +166,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 for (int k = 0; k < buildingSource.Count; k++)
                     if (TileManager.Instance.buildingMap.GetTile(pos) == buildingSource[k])
                     {
+                        if(k== (int)BasicBuilding.BuildingType.BUILDING_BASE)
+                            buildings.Add(pos, new BasicBuilding(PlayerSide.SIDE_A, (BasicBuilding.BuildingType)k, pos));
+                        else 
                         buildings.Add(pos, new BasicBuilding(PlayerSide.NATURE, (BasicBuilding.BuildingType)k, pos));
                     }
             }

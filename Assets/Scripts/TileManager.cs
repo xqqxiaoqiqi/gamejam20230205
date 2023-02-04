@@ -23,11 +23,25 @@ public class TileManager
     {
         terrainMap = GameObject.Find("TerrainMap").GetComponent<Tilemap>();
         buildingMap = GameObject.Find("BuildingMap").GetComponent<Tilemap>();
+        selectionMap = GameObject.Find("SelectionMap").GetComponent<Tilemap>();
+
     }
 
     public Tilemap terrainMap;
     public Tilemap buildingMap;
+    public Tilemap selectionMap;
 
-
-
+    public bool Reachable(Vector3Int pos)
+    {
+        if (pos.x < 0 || pos.y < 0 || pos.x >= GameManager.instance.mapWidth || pos.y >= GameManager.instance.mapHeight)
+            return false;
+        var terrainTile = TileManager.Instance.terrainMap.GetTile(pos) as Tile;
+        var buildingTile = TileManager.Instance.buildingMap.GetTile(pos) as Tile;
+        if (terrainTile != null && terrainTile.colliderType != Tile.ColliderType.Grid &&
+            (buildingTile == null || buildingTile.colliderType != Tile.ColliderType.Grid))
+        {
+            return true;
+        }
+        else return false;
+    }
 }

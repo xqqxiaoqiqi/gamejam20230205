@@ -72,7 +72,7 @@ public class BasicBuilding
         }
         for (int i = 0; i < behaviours.Count; i++)
         {
-            behaviours[i].OnEvent(BuildingEvent.ON_ENTITY_ENTER);
+            behaviours[i].OnEvent(BuildingEvent.ON_ENTITY_ENTER,entity);
         }
     }
 
@@ -115,6 +115,7 @@ public class BasicBuilding
         {
             behaviours[i].OnBuildingInit(this);
         }
+        this.playerSide = playerSide;
         //接一下on entity enter
         //build init &destroyed on tile map
         //entity init &destroyed on tile map

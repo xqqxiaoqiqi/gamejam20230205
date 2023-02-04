@@ -48,9 +48,14 @@ public class InitNewEntity : BasicBuilding.Behaviour
         {
             if (immediately)
             {
-                if (owner.playerSide!=GameManager.PlayerSide.NATURE)
+                var entity = args as Entity;
+                if (entity != null)
                 {
-                    GameManager.instance.InitEntity(owner.playerSide,owner.pos);
+                    if (entity.playerSide != GameManager.PlayerSide.NATURE)
+                    {
+
+                        GameManager.instance.InitEntity(entity.playerSide, owner.pos);
+                    }
                 }
             }
         }

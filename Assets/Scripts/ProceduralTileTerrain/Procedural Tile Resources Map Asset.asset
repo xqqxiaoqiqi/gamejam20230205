@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a0591b0914691e489d748813083414f, type: 3}
+  m_Name: Procedural Tile Resources Map Asset
+  m_EditorClassIdentifier: 
+  m_farmTile: {fileID: 11400000, guid: 150f7343645de8c44b0b3830349f6b89, type: 2}
+  m_mineTile: {fileID: 11400000, guid: 58456d45238036547a0e5c5140875067, type: 2}
+  m_hotTile: {fileID: 11400000, guid: 7c7c5b9d49f49ef4d904f39a030f902a, type: 2}
+  m_foodChestTile: {fileID: 11400000, guid: 37500b98fec3f414b992c857edd9ad80, type: 2}
+  m_metalChestTile: {fileID: 11400000, guid: e86cbdfaa4c244f4eaa7e4572701fbfd, type: 2}
+  m_peopleChestTile: {fileID: 11400000, guid: 72e5dbd4ef644a54b994c7bb6c93e1bf, type: 2}
+  m_campTile: {fileID: 11400000, guid: 9d2e0d9f247f1e14c8cadd1562f7cef4, type: 2}
+  m_relicTile: {fileID: 11400000, guid: 78dcc3d013f8fc44a900dd01779b2847, type: 2}
+  m_gateTile: {fileID: 11400000, guid: 150f7343645de8c44b0b3830349f6b89, type: 2}

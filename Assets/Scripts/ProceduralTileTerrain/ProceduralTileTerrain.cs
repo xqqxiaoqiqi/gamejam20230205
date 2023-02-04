@@ -4,15 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 namespace PCGTerrain
 {
     public class ProceduralTileTerrain : MonoBehaviour
     {
         public Tilemap m_tileMap;
+        public Tilemap m_rscTileMap;
         public Material m_proceduralMat;
 
         public ProceduralTileTerrainMapAsset m_mapAsset;
+
+        public ProceduralTileResourcesMapAsset m_rscMapAsset;
         //Procedural Params
         //consts
         const float m_noisePersist = 0.5f;
@@ -21,6 +25,7 @@ namespace PCGTerrain
 
         private const float m_spNoiseScale = 6.03f;
         //vars
+        [Header("基本地形")]
         public Vector2 m_offset = Vector2.zero;
         [Range(5,15)]public float m_noiseFreq = 11f;
         [Range(1,3)]public int m_noiseSteps = 2;
@@ -63,6 +68,13 @@ namespace PCGTerrain
         public Color m_color_Marsh = Color.magenta;
         public Color m_color_Forest = Color.green;
         public Vector4 m_marshForestRange = new Vector4(0,0.13f,0.27f,0.39f);
+
+        [Header("资源")] 
+        [Range(0, 50)] public float m_normalRscCount = 10;
+
+        [Range(0, 50)] public float m_chestRscCount = 10;
+        [Range(0, 50)] public float m_enemyCount = 10;
+        [Range(0, 50)] public float m_relicCount = 10;
      
         [HideInInspector]
         public Texture2D m_PCGTex = null;
@@ -146,6 +158,7 @@ namespace PCGTerrain
                     return;
                 }
 
+                m_tileMap.ClearAllTiles();
 
                 Color[] cols = m_PCGTex.GetPixels();
                 for (int i = 0; i < m_hundredTileCount_x*100;i++)
@@ -158,6 +171,203 @@ namespace PCGTerrain
                     }
                 }
             }
+        }
+
+        public void SetRscMap()
+        {
+            if (m_rscTileMap && m_tileMap)
+            {
+                if (!m_rscMapAsset || !m_rscMapAsset.m_isAssetValid())
+                {
+                    return;
+                }
+
+                HashSet<Vector3Int> rscCache = new HashSet<Vector3Int>();
+                m_rscTileMap.ClearAllTiles();
+
+                Vector3Int gateP = GetRandomTilePoint();
+                int safeTimes = 0;
+                while (!isGateValid(gateP))
+                {
+                    gateP = GetRandomTilePoint();
+                    safeTimes++;
+                    if (safeTimes > 10000)
+                    {
+                        safeTimes = 0;
+                        Debug.Log("NoGate");
+                        break;
+                    }
+                }
+
+                for (int i = -1; i < 2; i++)
+                {
+                    for (int j = -1; j < 2; j++)
+                    {
+                        var gatePart = gateP + new Vector3Int(i, j, 0);
+                        rscCache.Add(gatePart);
+                        m_rscTileMap.SetTile(gatePart,m_rscMapAsset.m_gateTile);
+                        //m_rscTileMap.SetColor(gatePart,Color.black);
+                    }
+                }
+
+                for (int i = 0; i < m_normalRscCount; i++)
+                {
+                    Vector3Int farmP = GetRandomTilePoint();
+                    Vector3Int mineP = GetRandomTilePoint();
+                    Vector3Int hotP = GetRandomTilePoint();
+                    //Farm
+                    while (m_tileMap.GetTile(farmP) != m_mapAsset.m_normalTile && rscCache.Contains(farmP))
+                    {
+                        farmP = GetRandomTilePoint();
+                        safeTimes++;
+                        if (safeTimes > 10000)
+                        {
+                            safeTimes = 0;
+                            break;
+                        }
+                    }
+
+                    rscCache.Add(farmP);
+                    m_rscTileMap.SetTile(farmP,m_rscMapAsset.m_farmTile);
+
+                    //mine
+                    while (m_tileMap.GetTile(mineP) != m_mapAsset.m_hillTile && rscCache.Contains(mineP))
+                    {
+                        mineP = GetRandomTilePoint();
+                        safeTimes++;
+                        if (safeTimes > 10000)
+                        {
+                            safeTimes = 0;
+                            break;
+                        }
+                    }
+
+                    rscCache.Add(mineP);
+                    m_rscTileMap.SetTile(mineP,m_rscMapAsset.m_mineTile);
+
+                    //hot
+                    while ((m_tileMap.GetTile(hotP) != m_mapAsset.m_normalTile &&
+                           m_tileMap.GetTile(hotP) != m_mapAsset.m_hillTile) && rscCache.Contains(hotP))
+                    {
+                        hotP = GetRandomTilePoint();
+                        safeTimes++;
+                        if (safeTimes > 10000)
+                        {
+                            safeTimes = 0;
+                            break;
+                        }
+                    }
+                    
+                    rscCache.Add(hotP);
+                    m_rscTileMap.SetTile(hotP,m_rscMapAsset.m_hotTile);
+                }
+                //CHests
+                for (int i = 0; i < m_chestRscCount; i++)
+                {
+                    Vector3Int foodP = GetRandomTilePoint();
+                    Vector3Int metalP = GetRandomTilePoint();
+                    Vector3Int peopleP = GetRandomTilePoint();
+                    //food
+                    while ((m_tileMap.GetTile(foodP) == m_mapAsset.m_mountTile ||
+                           m_tileMap.GetTile(foodP) == m_mapAsset.m_waterTile)
+                        && rscCache.Contains(foodP))
+                    {
+                        foodP = GetRandomTilePoint();
+                        safeTimes++;
+                        if (safeTimes > 10000)
+                        {
+                            safeTimes = 0;
+                            break;
+                        }
+                    }
+
+                    rscCache.Add(foodP);
+                    m_rscTileMap.SetTile(foodP,m_rscMapAsset.m_foodChestTile);
+
+                    //metal
+                    while ((m_tileMap.GetTile(metalP) == m_mapAsset.m_mountTile ||
+                           m_tileMap.GetTile(metalP) == m_mapAsset.m_waterTile)
+                           && rscCache.Contains(metalP))
+                    {
+                        metalP = GetRandomTilePoint();
+                        safeTimes++;
+                        if (safeTimes > 10000)
+                        {
+                            safeTimes = 0;
+                            break;
+                        }
+                    }
+
+                    rscCache.Add(metalP);
+                    m_rscTileMap.SetTile(metalP,m_rscMapAsset.m_metalChestTile);
+
+                    //people
+                    while ((m_tileMap.GetTile(peopleP) == m_mapAsset.m_mountTile ||
+                           m_tileMap.GetTile(peopleP) == m_mapAsset.m_waterTile)
+                           && rscCache.Contains(peopleP))
+                    {
+                        peopleP = GetRandomTilePoint();
+                        safeTimes++;
+                        if (safeTimes > 10000)
+                        {
+                            safeTimes = 0;
+                            break;
+                        }
+                    }
+                    
+                    rscCache.Add(peopleP);
+                    m_rscTileMap.SetTile(peopleP,m_rscMapAsset.m_peopleChestTile);
+                }
+                
+                //Enemies
+                for (int i = 0; i < m_enemyCount; i++)
+                {
+                    Vector3Int enemyP = GetRandomTilePoint();
+                    while ((m_tileMap.GetTile(enemyP) == m_mapAsset.m_mountTile ||
+                           m_tileMap.GetTile(enemyP) == m_mapAsset.m_waterTile)
+                           && rscCache.Contains(enemyP))
+                    {
+                        enemyP = GetRandomTilePoint();
+                        safeTimes++;
+                        if (safeTimes > 10000)
+                        {
+                            safeTimes = 0;
+                            break;
+                        }
+                    }
+
+                    rscCache.Add(enemyP);
+                    m_rscTileMap.SetTile(enemyP,m_rscMapAsset.m_campTile);
+                }
+            }
+        }
+
+        bool isGateValid(Vector3Int p)
+        {
+            Vector3Int doorP = p - new Vector3Int(1, 0, 0);
+            for (int i = -3; i < 4; i++)
+            {
+                for (int j = -3; j < 4; j++)
+                {
+                    if (doorP.x+i < 0 || doorP.x+i >= m_hundredTileCount_x*100 || doorP.y+j < 0 || doorP.y+j > m_hundredTileCount_y*100)
+                    {
+                        return false;
+                    }
+
+                    var tile = m_tileMap.GetTile(new Vector3Int(doorP.x+i, doorP.y+j, 0));
+                    if (tile == m_mapAsset.m_mountTile || tile == m_mapAsset.m_waterTile)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        Vector3Int GetRandomTilePoint()
+        {
+            return new Vector3Int(Random.Range(0, m_hundredTileCount_x*100), Random.Range(0, m_hundredTileCount_y*100), 0);
         }
 
         /// <summary>

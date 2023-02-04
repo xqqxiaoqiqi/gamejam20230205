@@ -29,6 +29,11 @@ namespace PCGTerrain
             {
                 terrain.SetTilleMap();
             }
+
+            if (GUILayout.Button("设置资源"))
+            {
+                terrain.SetRscMap();
+            }
         }
     }
 }

@@ -36,7 +36,7 @@ public class Entity : MonoBehaviour
 
     public void OnTick()
     {
-        if (targetBuilding == null)
+        if (targetBuilding == null|| targetBuilding.isDestroyed==true)
         {
             SearchTargetBuilding();
         }
@@ -100,7 +100,11 @@ public class Entity : MonoBehaviour
             else
                 transform.position = Vector3.MoveTowards(transform.position, targetPos, Time.fixedDeltaTime * movespeed);
             if (Vector3.SqrMagnitude(transform.position - targetPos) < 0.01f)
+            {
                 path.RemoveAt(0);
+                if (path.Count == 0 && targetBuilding != null)
+                    targetBuilding.OnEntityEnter(this);
+            }
             yield return null;
         }
     }
@@ -113,7 +117,7 @@ public class Entity : MonoBehaviour
     private void SearchTargetBuilding()
     {
         var currentPos = TileManager.Instance.terrainMap.WorldToCell(transform.position);
-        for (int circle = 1; circle < 20; circle++)
+        for (int circle = 1; circle < 50; circle++)
         {
             for (int i = -circle; i < circle; i++)
             {
@@ -121,6 +125,7 @@ public class Entity : MonoBehaviour
                 if (CheckBuildingCennect(currentPos, pos))
                 {
                     targetBuilding = GameManager.instance.buildings[pos];
+                    targetBuilding.targeted = true;
                     MoveTo(pos);
                     return;
                 }
@@ -131,6 +136,7 @@ public class Entity : MonoBehaviour
                 if (CheckBuildingCennect(currentPos,pos))
                 {
                     targetBuilding = GameManager.instance.buildings[pos];
+                    targetBuilding.targeted = true;
                     MoveTo(pos);
                     return;
                 }
@@ -141,6 +147,7 @@ public class Entity : MonoBehaviour
                 if (CheckBuildingCennect(currentPos, pos))
                 {
                     targetBuilding = GameManager.instance.buildings[pos];
+                    targetBuilding.targeted = true;
                     MoveTo(pos);
                     return;
                 }
@@ -151,6 +158,7 @@ public class Entity : MonoBehaviour
                 if (CheckBuildingCennect(currentPos, pos))
                 {
                     targetBuilding = GameManager.instance.buildings[pos];
+                    targetBuilding.targeted = true;
                     MoveTo(pos);
                     return;
                 }
@@ -163,8 +171,9 @@ public class Entity : MonoBehaviour
         if (!GameManager.instance.PosValid(pos))
             return false;
         targetPos = pos;
-        if (GameManager.instance.buildings.ContainsKey(pos) && pathfinder.GenerateAstarPath(currentPos, pos, out path))
+        if (GameManager.instance.buildings.ContainsKey(pos) && !GameManager.instance.buildings[pos].targeted && pathfinder.GenerateAstarPath(currentPos, pos, out path))
         {
+
             return true;
         }
         return false;

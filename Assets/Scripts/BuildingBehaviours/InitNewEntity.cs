@@ -28,12 +28,14 @@ public class InitNewEntity : BasicBuilding.Behaviour
     public override void OnTick()
     {
         base.OnTick();
+        if (triggerTimer == null)
+            return;
         triggerTimer.OnTick();
         if (triggerTimer.isReady)
         {
-            if (owner.playerSide!=GameManager.PlayerSide.NATURE)
+            if (owner.playerSide != GameManager.PlayerSide.NATURE)
             {
-                GameManager.instance.InitEntity(owner.playerSide,owner.pos);
+                GameManager.instance.InitEntity(owner.playerSide, owner.pos);
             }
             triggerTimer.Reset();
         }

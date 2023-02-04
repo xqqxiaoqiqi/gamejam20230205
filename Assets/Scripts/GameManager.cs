@@ -99,7 +99,20 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
             test = 0;
         }
-        
+
+        var destroyList = new List<Vector3Int>();
+        foreach(var building in buildings)
+        {
+            if (building.Value.isDestroyed)
+            {
+                destroyList.Add(building.Key);
+            }
+        }
+        foreach(var key in destroyList)
+        {
+            TileManager.Instance.buildingMap.SetTile(key, null);
+            buildings.Remove(key);
+        }
     }
 
     public void InitMap()
@@ -140,6 +153,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     }
             }
         }
+
     }
 
     public bool PosValid(Vector3Int pos)

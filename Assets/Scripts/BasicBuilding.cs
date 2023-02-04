@@ -106,6 +106,7 @@ public class BasicBuilding
         }
     }
 
+   
     public BasicBuilding(GameManager.PlayerSide playerSide,BuildingType type,Vector3Int position)
     {
         buildType = type;
@@ -114,6 +115,9 @@ public class BasicBuilding
         {
             behaviours[i].OnBuildingInit(this);
         }
+        //接一下on entity enter
+        //build init &destroyed on tile map
+        //entity init &destroyed on tile map
         pos = position;
     }
     

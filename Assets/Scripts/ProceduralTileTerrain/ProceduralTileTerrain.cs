@@ -199,9 +199,9 @@ namespace PCGTerrain
                     }
                 }
 
-                for (int i = -1; i < 2; i++)
+                for (int i = 0; i < 3; i++)
                 {
-                    for (int j = -1; j < 2; j++)
+                    for (int j = 0; j < 3; j++)
                     {
                         var gatePart = gateP + new Vector3Int(i, j, 0);
                         rscCache.Add(gatePart);
@@ -349,7 +349,7 @@ namespace PCGTerrain
 
         bool isGateValid(Vector3Int p)
         {
-            Vector3Int doorP = p - new Vector3Int(1, 0, 0);
+            Vector3Int doorP = p - new Vector3Int(0, 1, 0);
             for (int i = -3; i < 4; i++)
             {
                 for (int j = -3; j < 4; j++)

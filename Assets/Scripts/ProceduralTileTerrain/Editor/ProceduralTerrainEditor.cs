@@ -34,6 +34,11 @@ namespace PCGTerrain
             {
                 terrain.SetRscMap();
             }
+
+            if (GUILayout.Button("刷新全图"))
+            {
+                terrain.RefreshAllMaps();
+            }
         }
     }
 }

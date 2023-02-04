@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
+using static Unity.Mathematics.math;
 
 namespace PCGTerrain
 {
@@ -29,7 +30,7 @@ namespace PCGTerrain
         public Vector2 m_offset = Vector2.zero;
         [Range(5,15)]public float m_noiseFreq = 11f;
         [Range(1,3)]public int m_noiseSteps = 2;
-        [Range(1, 5)] public int m_hundredTileCount_x = 2;
+        [Range(1, 5)] public int m_hundredTileCount_x = 1;
         [Range(1,5)]public int m_hundredTileCount_y = 1;
         /// <summary>
         /// 地形大形状噪声
@@ -67,23 +68,24 @@ namespace PCGTerrain
         
         public Color m_color_Marsh = Color.magenta;
         public Color m_color_Forest = Color.green;
-        public Vector4 m_marshForestRange = new Vector4(0,0.13f,0.27f,0.39f);
+        public Vector4 m_marshForestRange = new Vector4(0.34f,0.29f,0.24f,0.32f);
 
         [Header("资源")] 
-        [Range(0, 50)] public float m_normalRscCount = 10;
+        [Range(0, 50)] public float m_normalRscCount = 50;
 
-        [Range(0, 50)] public float m_chestRscCount = 10;
-        [Range(0, 50)] public float m_enemyCount = 10;
+        [Range(0, 50)] public float m_chestRscCount = 50;
+        [Range(0, 50)] public float m_enemyCount = 30;
         [Range(0, 50)] public float m_relicCount = 10;
      
         [HideInInspector]
         public Texture2D m_PCGTex = null;
 
-
+#if UNITY_EDITOR
         private void OnValidate()
         {
             ReadPCGTex();
         }
+#endif
 
         void SetMat(Material material)
         {
@@ -344,15 +346,52 @@ namespace PCGTerrain
                     m_rscTileMap.SetTile(enemyP,m_rscMapAsset.m_campTile);
                     m_tileMap.SetTile(enemyP,m_rscMapAsset.m_campTile);
                 }
+                
+                //relics
+                for (int i = 0; i < m_relicCount; i++)
+                {
+                    Vector3Int relicP = GetRandomTilePoint();
+                    while ((m_tileMap.GetTile(relicP) == m_mapAsset.m_mountTile ||
+                            m_tileMap.GetTile(relicP) == m_mapAsset.m_waterTile)
+                           || rscCache.Contains(relicP))
+                    {
+                        relicP = GetRandomTilePoint();
+                        safeTimes++;
+                        if (safeTimes > 10000)
+                        {
+                            safeTimes = 0;
+                            break;
+                        }
+                    }
+
+                    rscCache.Add(relicP);
+                    m_rscTileMap.SetTile(relicP,m_rscMapAsset.m_relicTile);
+                    m_tileMap.SetTile(relicP,m_rscMapAsset.m_relicTile);
+                }
             }
+        }
+
+        public void RefreshAllMaps(int seed = 0)
+        {
+            if (seed < 0)
+            {
+                m_offset = Vector2.zero;
+            }
+            else if (seed > 0)
+            {
+                m_offset = new Vector2(sin(frac(seed / 2023)), cos(frac(max(seed,2023*2023) / 2023.0205f)));
+            }
+
+            SetTilleMap();
+            SetRscMap();
         }
 
         bool isGateValid(Vector3Int p)
         {
             Vector3Int doorP = p - new Vector3Int(0, 1, 0);
-            for (int i = -3; i < 4; i++)
+            for (int i = -4; i < 5; i++)
             {
-                for (int j = -3; j < 4; j++)
+                for (int j = -4; j < 5; j++)
                 {
                     if (doorP.x+i < 0 || doorP.x+i >= m_hundredTileCount_x*100 || doorP.y+j < 0 || doorP.y+j > m_hundredTileCount_y*100)
                     {

@@ -27,7 +27,7 @@ MonoBehaviour:
     needCompareCapability: 0
     capabilityCount: 0
   - onEvent: 0
-    buildType: 7
+    buildType: 3
     resourceType: 1
     Count: 100
     needCompareCapability: 1

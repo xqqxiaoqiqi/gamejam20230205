@@ -29,6 +29,14 @@ public class InitNewEntity : BasicBuilding.Behaviour
     {
         base.OnTick();
         triggerTimer.OnTick();
+        if (triggerTimer.isReady)
+        {
+            if (owner.playerSide!=GameManager.PlayerSide.NATURE)
+            {
+                GameManager.instance.InitEntity(owner.playerSide,owner.pos);
+            }
+            triggerTimer.Reset();
+        }
     }
 
     public override void OnEvent(BasicBuilding.BuildingEvent ev, object args = null)
@@ -42,14 +50,6 @@ public class InitNewEntity : BasicBuilding.Behaviour
                 {
                     GameManager.instance.InitEntity(owner.playerSide,owner.pos);
                 }
-            }
-            if (triggerTimer.isReady)
-            {
-                if (owner.playerSide!=GameManager.PlayerSide.NATURE)
-                {
-                    GameManager.instance.InitEntity(owner.playerSide,owner.pos);
-                }
-                triggerTimer.Reset();
             }
         }
     }

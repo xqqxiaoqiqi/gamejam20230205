@@ -27,6 +27,6 @@ MonoBehaviour:
     checkCapability: 0
     maxCapabilityCount: 1
   - onEvent: 0
-    buildType: 8
+    buildType: 3
     checkCapability: 0
     maxCapabilityCount: 1

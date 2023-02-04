@@ -20,7 +20,7 @@ MonoBehaviour:
     coolDown: 0
     immediately: 1
   - onEvent: 0
-    buildType: 3
+    buildType: 8
     count: 1
     coolDown: 240
     immediately: 0

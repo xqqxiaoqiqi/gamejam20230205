@@ -105,6 +105,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         
     }
 
+    public void InitEntity(PlayerSide playerSide, Vector3Int position)
+    {
+        //todo: 
+    }
+
     private void Start()
     {
         allPlayerSideDatas.Add(PlayerSide.SIDE_A,new PlayerSideData());
@@ -117,5 +122,32 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         var test_3=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, -20, ResourceType.METAL, 7);
         
 
+    }
+}
+
+public class CoolDownTimer
+{
+    public int coolDown;
+    public int current;
+
+    public CoolDownTimer(int coolDown)
+    {
+        this.coolDown = coolDown;
+        current = 0;
+    }
+
+    public void OnTick()
+    {
+        current++;
+    }
+
+    public bool isReady
+    {
+        get { return current >= coolDown; }
+    }
+
+    public void Reset()
+    {
+        current = 0;
     }
 }

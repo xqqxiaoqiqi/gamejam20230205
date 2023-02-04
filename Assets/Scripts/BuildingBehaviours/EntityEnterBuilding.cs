@@ -6,6 +6,7 @@ public class EntityEnterBuilding : BasicBuilding.Behaviour
 {
 public bool checkCapability = false;
 public int maxCapabilityCount = 1;
+public int currCapabilityCount = 0;
 
 public override void DoSetData(BuildingBehaviourOptions.BehaviourData data)
 {
@@ -16,6 +17,7 @@ public override void DoSetData(BuildingBehaviourOptions.BehaviourData data)
         onEvent = mydata.onEvent;
         checkCapability = mydata.checkCapability;
         maxCapabilityCount = mydata.maxCapabilityCount;
+        currCapabilityCount = maxCapabilityCount;
     }
 }
 
@@ -30,12 +32,17 @@ public override void DoSetData(BuildingBehaviourOptions.BehaviourData data)
             {
                 if (checkCapability)
                 {
-                    //todo:战斗力计算
+                    currCapabilityCount -= entity.capability;
+                    if (currCapabilityCount <= 0)
+                    {
+                        owner.OnSwitchPlayerSide(entity.playerSide);
+                    }
                 }
                 else
                 {
-                    //todo:mark entity destroyed
+                    owner.OnSwitchPlayerSide(entity.playerSide);
                 }
+                entity.MarkFinish();
             }
         }
     }

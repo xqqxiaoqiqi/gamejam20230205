@@ -18,15 +18,17 @@ public class BasicBuilding
     {
         BUILDING_FARM,
         BUILDING_POWER,
-        BUILDING_MINE
-        
+        BUILDING_MINE,
+        BUILDING_HOME
+
     }
     [Serializable]
     public enum BuildingEvent
     {
         ON_ENTITY_ENTER,
         ON_SWITCH_PLAYER_SIDE,
-        ON_BUILD_DESTROY
+        ON_BUILD_DESTROY,
+        ON_CAPABILITY_ZERO
     }
     public class Behaviour
     {

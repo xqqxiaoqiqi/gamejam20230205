@@ -10,6 +10,7 @@ public class Entity : MonoBehaviour
     public GameManager.PlayerSide playerSide;
     public BasicTile currentTile;
     public Behaviour[] behaviours;
+    public bool isFinished = false;
     public void OnInit(GameManager.PlayerSide playerSide)
     {
         this.playerSide = playerSide;
@@ -28,5 +29,10 @@ public class Entity : MonoBehaviour
     public void UpdateCurrentTIle()
     {
         
+    }
+
+    public void MarkFinish()
+    {
+        isFinished = true;
     }
 }

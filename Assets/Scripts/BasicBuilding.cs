@@ -9,17 +9,25 @@ using UnityEngine;
 public class BasicBuilding
 {
     public List<Behaviour> behaviours;
-    public GameManager.PlayerSide playerSide = GameManager.PlayerSide.ENUM;
+    public GameManager.PlayerSide playerSide = GameManager.PlayerSide.NATURE;
     public bool isDestroyed = false;
     public BuildingType buildType;
     public Vector3Int pos;
+    //标记已经被一个士兵选中，不会再被下一个士兵当做目标。
+    public bool targeted = false;
     [Serializable]
     public enum BuildingType
     {
-        BUILDING_FARM,
+        BUILDING_FOOD,
+        BUILDING_METAL,
         BUILDING_POWER,
-        BUILDING_MINE
-        
+        BUILDING_FACTORY,
+        BUILDING_FOODCHEST,
+        BUILDING_METALCHEST,
+        BUILDING_ENTITYCHEST,
+        BUILDING_ENEMY,
+        BUILDING_BASE,
+        BUILDING_WONDER
     }
     [Serializable]
     public enum BuildingEvent
@@ -69,19 +77,16 @@ public class BasicBuilding
 
     public void OnSwitchPlayerSide(GameManager.PlayerSide newside)
     {
-        GameManager.instance.allBuildings[playerSide].Remove(this);
         for (int i = 0; i < behaviours.Count; i++)
         {
             behaviours[i].OnEvent(BuildingEvent.ON_SWITCH_PLAYER_SIDE);
         }
-        GameManager.instance.allBuildings[newside].Add(this);
         playerSide = newside;
     }
 
     public void OnBuildDestroy()
     {
         //todo: 每次tick结束destroy
-        GameManager.instance.allBuildings[playerSide].Remove(this);
         for (int i = 0; i < behaviours.Count; i++)
         {
             behaviours[i].OnEvent(BuildingEvent.ON_BUILD_DESTROY);

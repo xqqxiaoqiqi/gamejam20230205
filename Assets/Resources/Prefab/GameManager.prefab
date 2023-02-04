@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4492039644066286386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2537992560854603476}
+  - component: {fileID: 107881304159165695}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2537992560854603476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4492039644066286386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 10.72, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &107881304159165695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4492039644066286386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a7abccbe442244e9f257547c043691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingSource:
+  - {fileID: 11400000, guid: 150f7343645de8c44b0b3830349f6b89, type: 2}
+  - {fileID: 11400000, guid: 58456d45238036547a0e5c5140875067, type: 2}
+  - {fileID: 11400000, guid: 7c7c5b9d49f49ef4d904f39a030f902a, type: 2}
+  - {fileID: 11400000, guid: 78dcc3d013f8fc44a900dd01779b2847, type: 2}
+  - {fileID: 11400000, guid: 37500b98fec3f414b992c857edd9ad80, type: 2}
+  - {fileID: 11400000, guid: e86cbdfaa4c244f4eaa7e4572701fbfd, type: 2}
+  - {fileID: 11400000, guid: 72e5dbd4ef644a54b994c7bb6c93e1bf, type: 2}
+  - {fileID: 11400000, guid: 9d2e0d9f247f1e14c8cadd1562f7cef4, type: 2}
+  - {fileID: 11400000, guid: f07a277f0573177409c7f7fa61a99057, type: 2}
+  - {fileID: 11400000, guid: 13ae525668a385f44bcdbdda508da091, type: 2}
+  tileRoot: {fileID: 0}
+  mapHeight: 0
+  mapWidth: 0
+  Entities: []
+  TileBehaviourDB: {fileID: 0}
+  BuildingBehaviourDB: {fileID: 0}

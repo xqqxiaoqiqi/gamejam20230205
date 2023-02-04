@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class BasicTile
 {
-    public bool isPassable = false;
-
     public int passableWeight = 0;
     
     public List<Behaviour> behaviours;
@@ -17,10 +15,11 @@ public class BasicTile
 
     public TileType tileType;
 
+
     public BasicTile(TileType type)
     {
         tileType = type;
-        behaviours = GameManager.instance.TileBehaviourDB.GetBehaviours(tileType);
+        //behaviours = GameManager.instance.TileBehaviourDB.GetBehaviours(tileType);
         for (int i = 0; i < behaviours.Count; i++)
         {
             behaviours[i].OnTileInit(this);

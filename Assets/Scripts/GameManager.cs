@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.TextCore.Text;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     public enum PlayerSide
     { 
+        NATURE,
         SIDE_A,
         SIDE_B,
         ENUM//
@@ -44,13 +46,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             }
         }
     }
-
+    public List<Tile> buildingSource;
     public Transform tileRoot;
     public int mapHeight;
     public int mapWidth;
 
     public List<Entity> Entities = new List<Entity>();
-    public Dictionary<PlayerSide, List<BasicBuilding>> allBuildings = new Dictionary<PlayerSide, List<BasicBuilding>>();
+    public Dictionary<Vector3Int, BasicBuilding> buildings = new Dictionary<Vector3Int, BasicBuilding>();
     public Dictionary<PlayerSide,PlayerSideData> allPlayerSideDatas = new Dictionary<PlayerSide, PlayerSideData>();
     public List<BasicTile> testTile = new List<BasicTile>();
     public List<BasicBuilding> testBuilding = new List<BasicBuilding>();
@@ -65,12 +67,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             Entities[i].OnTick();
         }
 
-        foreach (var buildings in allBuildings.Values)
+        foreach (var building in buildings.Values)
         {
-            for (int i = 0; i < buildings.Count; i++)
-            {
-                buildings[i].OnTick();
-            }
+            building.OnTick();
         }
 
         if (test < total)
@@ -109,13 +108,29 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         allPlayerSideDatas.Add(PlayerSide.SIDE_A,new PlayerSideData());
         allPlayerSideDatas.Add(PlayerSide.SIDE_B,new PlayerSideData());
-        testTile.Add(new BasicTile(BasicTile.TileType.TILE_ICE));
-        testTile.Add(new BasicTile(BasicTile.TileType.TILE_MARSH));
         testBuilding.Add(new BasicBuilding(PlayerSide.ENUM,BasicBuilding.BuildingType.BUILDING_POWER,new Vector3Int(0,0,0)));
         var test_1=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, 0, ResourceType.POWER, 20);
         var test_2=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, -20, ResourceType.FOOD, 7);
         var test_3=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, -20, ResourceType.METAL, 7);
-        
 
+
+        TileManager.Instance.Init();
+        InitBuildings();
+    }
+
+    private void InitBuildings()
+    {
+        for (int i = 0; i < mapHeight; i++)
+        {
+            for (int j = 0; j < mapWidth; j++)
+            {
+                var pos = new Vector3Int(i, j, 0);
+                for (int k = 0; k < buildingSource.Count; k++)
+                    if (TileManager.Instance.buildingMap.GetTile(pos) == buildingSource[k])
+                    {
+                        buildings.Add(pos, new BasicBuilding(PlayerSide.NATURE, (BasicBuilding.BuildingType)k, pos));
+                    }
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@ using Aoiti.Pathfinding;
 public class CharMove : MonoBehaviour
 {
     Vector3Int targetPos;
+    BasicBuilding targetBuilding;
 
     Vector3Int[] directions = new Vector3Int[4] { Vector3Int.left, Vector3Int.right, Vector3Int.up, Vector3Int.down };
 
@@ -65,6 +66,15 @@ public class CharMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    //    if (targetBuilding == null)
+    //    {
+    //        BasicBuilding tar = null;
+    //        var currentCellPos = TileManager.Instance.terrainMap.WorldToCell(transform.position);
+    //        var buildings = GameManager.instance.allBuildings[GameManager.PlayerSide.Nature];
+    //        foreach(var building in buildings)
+    //        {
+    //        }
+    //    }
         if (Input.GetMouseButtonDown(1))
         {
             var target = Camera.main.ScreenToWorldPoint(Input.mousePosition);

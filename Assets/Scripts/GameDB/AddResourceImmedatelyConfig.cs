@@ -13,6 +13,8 @@ public class AddResourceImmedatelyConfig : BuildingBehaviourOptions
     {
         public GameManager.ResourceType resourceType;
         public int Count = 0;
+        public bool needCompareCapability = false;
+        public int capabilityCount = 0;
     }
 
     public override BehaviourData[] GetData()

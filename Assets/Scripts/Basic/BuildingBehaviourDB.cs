@@ -13,7 +13,8 @@ public class BuildingBehaviourDB : ScriptableObject
         ADD_RESOURCE_MODIFIER_FROM_BUILDING,
         ENTITY_ENTER_BUILDING,
         ADD_RESOURCE_IMMEDATELY,
-        MARK_BUILDING_DESTROYED
+        MARK_BUILDING_DESTROYED,
+        INIT_NEW_ENTITY
     }
 
     public  List<BasicBuilding.Behaviour> GetBehaviours(BasicBuilding.BuildingType type)
@@ -48,6 +49,8 @@ public class BuildingBehaviourDB : ScriptableObject
                 return new AddResourceImmedately();
             case BehaviourType.MARK_BUILDING_DESTROYED:
                 return new MarkBuildingDestroyed();
+            case BehaviourType.INIT_NEW_ENTITY:
+                return new InitNewEntity();
             default:
                 break;
         }

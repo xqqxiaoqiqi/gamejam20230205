@@ -34,7 +34,8 @@ public class BasicBuilding
     {
         ON_ENTITY_ENTER,
         ON_SWITCH_PLAYER_SIDE,
-        ON_BUILD_DESTROY
+        ON_BUILD_DESTROY,
+        ON_CAPABILITY_ZERO
     }
     public class Behaviour
     {
@@ -64,7 +65,7 @@ public class BasicBuilding
 
     public void OnEntityEnter(Entity entity)
     {
-        if (playerSide != GameManager.PlayerSide.ENUM||isDestroyed)
+        if (playerSide != GameManager.PlayerSide.NATURE||isDestroyed)
         {
             //防止同一次tick里两个单位同时enter的问题，当这个建筑被第一次enter（占领/破坏）以后，以目前的设计后续所有单位enter都不会做出任何相应
             return;

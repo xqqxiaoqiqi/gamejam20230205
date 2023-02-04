@@ -6,6 +6,8 @@ public class AddResourceImmedately : BasicBuilding.Behaviour
 {
     public GameManager.ResourceType resourceType;
     public int count = 0;
+    public bool needCompareCapability = false;
+    public int capabilityCount = 0;
 
     public override void DoSetData(BuildingBehaviourOptions.BehaviourData data)
     {
@@ -16,6 +18,8 @@ public class AddResourceImmedately : BasicBuilding.Behaviour
             onEvent = mydata.onEvent;
             resourceType = mydata.resourceType;
             count = mydata.Count;
+            needCompareCapability = mydata.needCompareCapability;
+            capabilityCount = mydata.capabilityCount;
         }
     }
 
@@ -28,8 +32,13 @@ public class AddResourceImmedately : BasicBuilding.Behaviour
         {
             if (ev == onEvent)
             {
+                if (needCompareCapability&&entity.capability<capabilityCount)
+                {
+                    return;
+                }
                 var resourcedata = GameManager.instance.allPlayerSideDatas[entity.playerSide].resourcesData;
                 resourcedata[(int) resourceType] += count;
+                
             }
         }
     }

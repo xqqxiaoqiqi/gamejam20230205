@@ -13,6 +13,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         NATURE,
         SIDE_A,
         SIDE_B,
+        SIDE_C,
         ENUM//
     }
     public enum ResourceType
@@ -20,7 +21,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         FOOD = 0,
         METAL = 1,
         POWER =2,
-        ENUM = 3
+        ENTITY_CAPABILITY =3,
+        ENUM = 4
     }
 
     public class PlayerSideData
@@ -36,6 +38,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         public void DoApplyAllModifier()
         {
+            resourcesData[(int) ResourceType.ENTITY_CAPABILITY] = 0;
             for (int i = 0; i < modifierSources.Count; i++)
             {
                 int value = 0;
@@ -104,6 +107,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         
     }
 
+    public void InitEntity(PlayerSide playerSide, Vector3Int position)
+    {
+        //todo: 
+    }
+
     private void Start()
     {
         allPlayerSideDatas.Add(PlayerSide.SIDE_A,new PlayerSideData());
@@ -132,5 +140,32 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     }
             }
         }
+    }
+}
+
+public class CoolDownTimer
+{
+    public int coolDown;
+    public int current;
+
+    public CoolDownTimer(int coolDown)
+    {
+        this.coolDown = coolDown;
+        current = 0;
+    }
+
+    public void OnTick()
+    {
+        current++;
+    }
+
+    public bool isReady
+    {
+        get { return current >= coolDown; }
+    }
+
+    public void Reset()
+    {
+        current = 0;
     }
 }

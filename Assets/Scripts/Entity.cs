@@ -21,6 +21,7 @@ public class Entity : MonoBehaviour
     Pathfinder<Vector3Int> pathfinder;
 
     public List<Vector3Int> path;
+    public bool isFinished;
 
     public void OnInit(GameManager.PlayerSide playerSide)
     {
@@ -98,5 +99,10 @@ public class Entity : MonoBehaviour
                 path.RemoveAt(0);
             yield return null;
         }
+    }
+
+    public void MarkFinish()
+    {
+        isFinished = true;
     }
 }

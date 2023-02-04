@@ -8,7 +8,8 @@ Shader "PCGTerrain/ProceduralTileTerrain"
             
             _NoiseStep("noiseStep",Range(0,10)) = 2
             _NoisePersistence("noisePersist",Range(0,5))=1
-            _TerrainTiles("TerrainTiles（百）",Range(0,10)) = 1
+            _TerrainTiles_x("TerrainTilesx（百）",Range(0,10)) = 1
+            _TerrainTiles_y("TerrainTilesy（百）",Range(0,10)) = 1
             _LargeScale("_LargeScale",Range(0,12)) = 0.1
             _LargeBlur("_LargeBlur",Range(0,1)) = 1
             _LargeFac("_LargeFac(Pow)",Range(0,10)) = 0.1
@@ -25,6 +26,10 @@ Shader "PCGTerrain/ProceduralTileTerrain"
             _Sand("sand",Range(0.6,1)) = 0.1
             _Color_Ice("Color_Ice",Color) = (1,1,1,1)
             _Ice("ice",Range(0,0.4)) = 0.1
+            
+            _Color_Marsh("Color_Marsh",Color) = (1,1,1,1)
+            _Color_Forest("Color_Forest",COlor)=(0,1,0,1)
+            _MarshForestRange("MarshForestRange",vector) = (0,0.4,0.6,0.7)
             _SpecialNoiseFac("_SpecialNoiseFac",Range(0,0.5)) = 0.1
             _SpecialNoiseScale("_SpecialNoisescale",Range(0,9))=1
             
@@ -59,7 +64,8 @@ Shader "PCGTerrain/ProceduralTileTerrain"
                 float _NoiseFreq;
                 int _NoiseStep;
                 float _NoisePersistence;
-                float _TerrainTiles;
+                float _TerrainTiles_x;
+                float _TerrainTiles_y;
                 float _Mount;
                 float _Hill;
                 float _NormalHeight;
@@ -72,8 +78,9 @@ Shader "PCGTerrain/ProceduralTileTerrain"
                 float _Ice;
                 float _SpecialNoiseFac;
                 float _SpecialNoiseScale;
+                float4 _MarshForestRange;
     
-                float4 _Color_Mount,_Color_Hill,_Color_NormalHeight,_Color_Water,_Color_Sand,_Color_Ice;
+                float4 _Color_Mount,_Color_Hill,_Color_NormalHeight,_Color_Water,_Color_Sand,_Color_Ice,_Color_Marsh,_Color_Forest;
     
                 float hash1( float n ) { return frac(sin(n)*43758.5453); }
                 float2  hash2( float2  p ) { p = float2( dot(p,float2(127.1,311.7)), dot(p,float2(269.5,183.3)) ); return frac(sin(p)*43758.5453); }
@@ -176,7 +183,8 @@ Shader "PCGTerrain/ProceduralTileTerrain"
                 {
                     // sample the texture
                     half4 col = 1;
-                    float2 uv = floor((i.uv+_NoiseOffset.xy)*_TerrainTiles*100)/(_TerrainTiles*100);
+                    float2 _TerrainTiles = float2(_TerrainTiles_x,_TerrainTiles_y);
+                    float2 uv = floor((i.uv+_NoiseOffset.xy)*_TerrainTiles.xy*100)/(_TerrainTiles.xy*100);
                     float detailNoise = pnoise((uv),_NoiseFreq,_NoiseStep,_NoisePersistence).rrr;
                     float largeNoise = 1 - voronoi((uv+_NoiseOffset.xy)*_LargeScale,0.3);
                     largeNoise = largeNoise-0.5f;
@@ -184,6 +192,8 @@ Shader "PCGTerrain/ProceduralTileTerrain"
                     //return half4(saturate(largeNoise.rrr),1);
                     col.rgb  = saturate((detailNoise*2-1)*_DetailFac + largeNoise);
                     float height = col.r;
+                    float mheight = height + (pnoise((uv.yx+_MarshForestRange.x),_NoiseFreq,_NoiseStep,_NoisePersistence).r*2-1)*0.1f;
+                    float fheight = (pnoise((uv.yx+_MarshForestRange.z),_NoiseFreq,_NoiseStep,_NoisePersistence).r);
                     if (height> _Mount)
                     {
                         col.rgb = _Color_Mount;
@@ -200,8 +210,16 @@ Shader "PCGTerrain/ProceduralTileTerrain"
                     {
                         col.rgb = _Color_Water;
                     }
-                    float2 absoluteUV = floor((i.uv)*_TerrainTiles*100)/(_TerrainTiles*100);
+                    float2 absoluteUV = floor((i.uv)*_TerrainTiles.xy*100)/(_TerrainTiles.xy*100);
                     float specialNoise = pnoise((absoluteUV),_SpecialNoiseScale,_NoiseStep,1).rrr;
+                    if (mheight<_MarshForestRange.y && length(col.rgb - _Color_NormalHeight)<0.01f)
+                    {
+                        col.rgb = _Color_Marsh;
+                    }
+                    if (fheight<_MarshForestRange.w && length(col.rgb-_Color_NormalHeight)<0.01f)
+                    {
+                        col.rgb = _Color_Forest;
+                    }
                     if (absoluteUV.y + (specialNoise*2-1)*_SpecialNoiseFac>_Sand)
                     {
                         col.rgb = _Color_Sand;

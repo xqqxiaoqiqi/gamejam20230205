@@ -16,20 +16,20 @@ MonoBehaviour:
   datas:
   - onEvent: 0
     buildType: 0
-    sourceType: 0
-    sourceValue: 0
+    sourceType: 2
+    sourceValue: 10
     targetType: 0
     targetValue: 10
   - onEvent: 0
-    buildType: 1
+    buildType: 2
     sourceType: 0
     sourceValue: 0
     targetType: 2
     targetValue: 20
   - onEvent: 0
-    buildType: 2
-    sourceType: 0
-    sourceValue: 0
+    buildType: 1
+    sourceType: 2
+    sourceValue: 20
     targetType: 1
     targetValue: 5
   - onEvent: 0

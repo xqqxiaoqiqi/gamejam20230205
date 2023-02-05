@@ -17,6 +17,8 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public GameStartPanel gameStartPanel;
     public PlayerContributeValuePanel PlayerContributeValuePanel;
     public PlayerSideDataRootPanel playerSideDataRootPanel;
+    public GameEventPanel gameEventPanel;
+    public PlayerContributeValuePanel playerCoutributePanel;
     public CoolDownTimer uiRefreshTimer = new CoolDownTimer(0);
     private bool preselect;
     private bool selecting = false;
@@ -52,6 +54,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public void OnTick()
     {
         playerSideDataRootPanel.UpdatePlayerSideResourceData();
+        gameEventPanel.UpdateProcess(PlayerManager.instance.gameEventTimer.coolDown,PlayerManager.instance.gameEventTimer.current);
     }
 
     private void Update()
@@ -144,6 +147,15 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
         {
             EndSelection();
         }
+    }
+
+    public void GameStart()
+    {
+        gameStartPanel.gameObject.SetActive(false);
+        playerSideDataRootPanel.gameObject.SetActive(true);
+        PlayerContributeValuePanel.gameObject.SetActive(true);
+        gameEventPanel.gameObject.SetActive(true);
+        GameManager.instance.isGameStarted = true;
     }
 
     public void OnInitBase(GameManager.PlayerSide playerSide)

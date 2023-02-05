@@ -1,14 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 public class PlayerEventButton : MonoBehaviour
 {
     public PlayerManager.PlayerEvent type;
-    public GameEventDetailPanel Panel;
+    public PlayerEventDetailPanel Panel;
     public Transform highlightImage;
+    private bool isHighlight;
 
     private void Update()
     {
@@ -20,6 +22,10 @@ public class PlayerEventButton : MonoBehaviour
         if (GameManager.instance.isGameStarted)
         {
             Panel.gameObject.SetActive(true);
+            if (PlayerManager.instance.playerEventDatas.ContainsKey(type))
+            {
+                Panel.myText.text = PlayerManager.instance.playerEventDatas[type].description;
+            }
         }
     }
     
@@ -36,10 +42,20 @@ public class PlayerEventButton : MonoBehaviour
         if (GameManager.instance.isGameStarted&& PlayerManager.instance.CheckPlayerEventValid(type))
         {
             highlightImage.gameObject.SetActive(true);
+            isHighlight = true;
         }
         else
         {
             highlightImage.gameObject.SetActive(false);
+            isHighlight = false;
+        }
+    }
+
+    public void OnPlayerEventClicked()
+    {
+        if (isHighlight)
+        {
+            PlayerManager.instance.OnSelectingTile(type);
         }
     }
 }

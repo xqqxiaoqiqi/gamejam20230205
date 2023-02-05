@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using Object = System.Object;
 
@@ -11,6 +13,10 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
     public int currContributeValue = 0;
 
     public Dictionary<GameManager.PlayerSide, int[]> initReSourcesData = new Dictionary<GameManager.PlayerSide, int[]>();
+    public Dictionary<PlayerEvent, PlayerEventData> playerEventDatas = new Dictionary<PlayerEvent, PlayerEventData>();
+    public List<GameEventData> gameEventDatas = new List<GameEventData>();
+    public CoolDownTimer gameEventTimer = new CoolDownTimer(0);
+    public int currEventIndex;
 
     protected override void OnInit()
     {
@@ -18,6 +24,9 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
         initReSourcesData.Add(GameManager.PlayerSide.SIDE_A,new int[(int)GameManager.ResourceType.ENUM]);
         initReSourcesData.Add(GameManager.PlayerSide.SIDE_B,new int[(int)GameManager.ResourceType.ENUM]);
         initReSourcesData.Add(GameManager.PlayerSide.SIDE_C,new int[(int)GameManager.ResourceType.ENUM]);
+        playerEventDatas.Add(PlayerEvent.INIT_BUILDING, new PlayerEventData(20,PlayerEvent.INIT_BUILDING,"创建一个新的什么玩意"));
+        gameEventDatas.Add(new GameEventData(GameEvent.DESTROYENTITYBYCAPABILITY,300,"摧毁所有战斗力低于xxx的单位"));
+        gameEventTimer.Reset(300);
 
     }
 
@@ -91,12 +100,57 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 
     public void CalculateContributeValue()
     {
-        //todo:计算公式
+        var value = 0;
+        foreach (var playerSideData in GameManager.instance.allPlayerSideDatas)
+        {
+            var resValue = playerSideData.Value.resourcesData;
+            for (int i = 0; i < resValue.Length; i++)
+            {
+                value += resValue[i];
+            }
+        }
+        currContributeValue = value;
     }
 
     public bool CheckPlayerEventValid(PlayerEvent playerEvent)
     {
-        return true;
-        //todo:
+        if (playerEventDatas.ContainsKey(playerEvent))
+        {
+            return playerEventDatas[playerEvent].cost<=currContributeValue;
+        }
+
+        return false;
+    }
+
+    public void OnSelectingTile(PlayerEvent playerEvent)
+    {
+        
+    }
+
+    public class PlayerEventData
+    {
+        public int cost;
+        public PlayerEvent type;
+        public string description;
+
+        public PlayerEventData(int cost,PlayerEvent type,string description)
+        {
+            this.cost = cost;
+            this.type = type;
+            this.description = description;
+        }
+    }
+
+    public class GameEventData
+    {
+        public GameEvent type;
+        public int CountDown;
+        public string description;
+        public GameEventData(GameEvent type,int CountDown,string description)
+        {
+            this.CountDown = CountDown;
+            this.type = type;
+            this.description = description;
+        }
     }
 }

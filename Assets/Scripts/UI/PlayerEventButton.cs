@@ -21,9 +21,9 @@ public class PlayerEventButton : MonoBehaviour
     {
         if (GameManager.instance.isGameStarted)
         {
-            Panel.gameObject.SetActive(true);
             if (PlayerManager.instance.playerEventDatas.ContainsKey(type))
             {
+                Panel.gameObject.SetActive(true);
                 Panel.myText.text = PlayerManager.instance.playerEventDatas[type].description;
             }
         }

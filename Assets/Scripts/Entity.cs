@@ -180,7 +180,17 @@ public class Entity : MonoBehaviour
         targetPos = pos;
         if (GameManager.instance.buildings.ContainsKey(pos) && GameManager.instance.buildings[pos].playerSide == GameManager.PlayerSide.NATURE && !GameManager.instance.buildings[pos].targeted && pathfinder.GenerateAstarPath(currentPos, pos, out path))
         {
-
+            if (GameManager.instance.buildings[pos].hasCapability)
+            {
+                if (GameManager.instance.buildings[pos].capabilityCount <= capability)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
             return true;
         }
         return false;

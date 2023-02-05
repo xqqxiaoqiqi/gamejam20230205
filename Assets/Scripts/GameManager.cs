@@ -98,17 +98,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             {
                 playerSideData.DoApplyAllModifier();
             }
-            //test
-            foreach(var playerdata in GameManager.instance.allPlayerSideDatas)
-            {
-                var side = playerdata.Key;
-                var resources = playerdata.Value.resourcesData;
-                for (int i = 0; i < resources.Length; i++)
-                {
-                    var resourceType = (GameManager.ResourceType)i;
-                    Debug.Log(side.ToString() + resourceType + ":"+resources[i]);
-                }
-            }
             gameTickTimer.Reset();
         }
         var destroyList = new List<Vector3Int>();
@@ -134,7 +123,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             }
         }
         UIManager.instance.OnTick();
-        PlayerManager.instance.CalculateContributeValue();
+        PlayerManager.instance.OnTick();
         UIManager.instance.UpdateContributeValue();
     }
 

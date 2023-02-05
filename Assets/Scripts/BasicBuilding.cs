@@ -18,6 +18,8 @@ public class BasicBuilding
     public bool targeted = false;
     public int buildingLevel = 1;
     public  BuildingPanel panel;
+    public bool hasCapability = false;
+    public int capabilityCount = 0;
 
     [Serializable]
     public enum BuildingType
@@ -199,11 +201,30 @@ public class BasicBuilding
         {
             behaviours[i].OnBuildingInit(this);
         }
+
+        for (int i = 0; i < behaviours.Count; i++)
+        {
+            var entityEnterBuilding = behaviours[i] as EntityEnterBuilding;
+            if (entityEnterBuilding != null)
+            {
+                if (!hasCapability)
+                {
+                    hasCapability = true;
+                    capabilityCount = entityEnterBuilding.maxCapabilityCount;
+                }
+                else
+                {
+                    Debug.LogError("ONLY ONE hasCapability behaviour should be added on a building !!");
+                }
+
+            }
+        }
         this.playerSide = playerSide;
-        //接一下on entity enter
-        //build init &destroyed on tile map
-        //entity init &destroyed on tile map
         pos = position;
+        if (buildType == BuildingType.BUILDING_BASE)
+        {
+            PlayerManager.instance.allBases.Add(this);
+        }
     }
     
 

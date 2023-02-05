@@ -7,9 +7,4 @@ using UnityEngine.UI;
 public class GameEventDetailPanel : MonoBehaviour
 {
     public Text myText;
-
-    public void UpdateDescription(string content)
-    {
-        myText.text = content;
-    }
 }

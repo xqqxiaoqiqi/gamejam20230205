@@ -40,8 +40,8 @@ Material:
     m_Floats:
     - _DetailFac: 0.2
     - _EnableExternalAlpha: 0
-    - _Hill: 0.644
-    - _Ice: 0.086
+    - _Hill: 0.623
+    - _Ice: 0.09
     - _LargeBlur: 1
     - _LargeFac: 1.11
     - _LargeScale: 3
@@ -49,7 +49,7 @@ Material:
     - _NoiseFreq: 11
     - _NoisePersistence: 0.5
     - _NoiseStep: 2
-    - _NormalHeight: 0.276
+    - _NormalHeight: 0.25
     - _Sand: 0.89
     - _SpecialNoiseFac: 0.086
     - _SpecialNoiseScale: 6.03
@@ -67,7 +67,7 @@ Material:
     - _Color_Sand: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
     - _Color_Water: {r: 0, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _MarshForestRange: {r: 0.34, g: 0.29, b: 0.24, a: 0.32}
+    - _MarshForestRange: {r: 0.34, g: 0.29, b: 1.03, a: 0.26}
     - _NoiseOffset: {r: 0, g: 0, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

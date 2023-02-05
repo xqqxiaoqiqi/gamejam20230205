@@ -9,7 +9,7 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 {
     public int initModifierTotalCount = 10;
     public int maxBuildingLevel = 3;
-    public int maxContributeValue = 2000;
+    public int maxContributeValue = 400000;
     public int currContributeValue = 0;
     public int basicCapability = 1;
 
@@ -33,11 +33,10 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
         playerEventDatas.Add(PlayerEvent.INIT_FOOD, new PlayerEventData(20,PlayerEvent.INIT_FOOD,"创建一个食物箱子"));
         playerEventDatas.Add(PlayerEvent.INIT_METAL, new PlayerEventData(20, PlayerEvent.INIT_METAL, "创建一个金属箱子"));
         playerEventDatas.Add(PlayerEvent.INIT_NEW_ENTITY, new PlayerEventData(50, PlayerEvent.INIT_NEW_ENTITY, "创建一个中立居民"));
-        gameEventDatas.Add(new GameEventData(GameEvent.DESTROYENTITYBYCAPABILITY,1200,"严酷环境下弱者难以生还,摧毁所有战斗力低于20的单位","军备竞赛"));
-        gameEventDatas.Add(new GameEventData(GameEvent.CHECKRESOURCES,1200,"巨大的寒潮将席卷世界,需要食物超过100","极度深寒"));
-        gameEventDatas.Add(new GameEventData(GameEvent.CHECKHOMELEVEL,1200,"文明的进步不容停滞,需要基地等级到达lv.2","发展迟滞"));
-        gameEventTimer.Reset(1200);
-
+        gameEventDatas.Add(new GameEventData(GameEvent.DESTROYENTITYBYCAPABILITY,3600,"严酷环境下弱者难以生还,摧毁所有战斗力低于20的单位","军备竞赛"));
+        gameEventDatas.Add(new GameEventData(GameEvent.CHECKRESOURCES,3600,"巨大的寒潮将席卷世界,需要食物超过100","极度深寒"));
+        gameEventDatas.Add(new GameEventData(GameEvent.CHECKHOMELEVEL,3600,"文明的进步不容停滞,需要基地等级到达lv.2","发展迟滞"));
+        gameEventTimer.Reset(3600);
     }
 
     public enum PlayerEvent
@@ -167,7 +166,7 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
                 currEventIndex++;
                 if (currEventIndex < gameEventDatas.Count)
                 {
-                    gameEventTimer.Reset(300);
+                    gameEventTimer.Reset(3600);
                 }
             }
         }

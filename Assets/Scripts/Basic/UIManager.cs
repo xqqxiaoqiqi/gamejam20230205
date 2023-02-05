@@ -35,7 +35,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public Sprite sideImage0;
     public Sprite sideImage1;
     public Sprite sideImage2;
-    public string[] sideTexts=new string[]{"????", "??????", "????" };
+    public string[] sideTexts=new string[]{"联盟", "安那其", "联邦" };
     public Sprite farmPanelSprite;
     public Sprite powerPanelSprite;
     public Sprite metalPanelSprite;

@@ -94,6 +94,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initModifierTotalCount: 10
   maxBuildingLevel: 3
-  maxContributeValue: 2000
+  maxContributeValue: 400000
   currContributeValue: 0
+  basicCapability: 1
   currEventIndex: 0
+  upgradeRequest: 6000
+  upgradeRequest1: 10000

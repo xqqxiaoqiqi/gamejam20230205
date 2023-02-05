@@ -74,6 +74,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public bool isGameStarted = false;
     public void FixedUpdate()
     {
+        selectPos = UIManager.instance.showSelection();
         if (!isGameStarted)
         {
             return;
@@ -108,7 +109,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             }
             gameTickTimer.Reset();
         }
-        selectPos= UIManager.instance.showSelection();
         var destroyList = new List<Vector3Int>();
         foreach(var building in buildings)
         {

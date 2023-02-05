@@ -1970,9 +1970,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2123036812797068953}
-        m_TargetAssemblyTypeName: GameStartPanel, Assembly-CSharp
-        m_MethodName: Test
+      - m_Target: {fileID: 2123036813159678747}
+        m_TargetAssemblyTypeName: CurrentDetailPanel, Assembly-CSharp
+        m_MethodName: OnConfirmClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3400,7 +3400,6 @@ MonoBehaviour:
   - {fileID: 2123036812787357300}
   - {fileID: 4168196484867782582}
   - {fileID: 759912533563598259}
-  currentPlayerSide: 1
   totalCount: {fileID: 4957163435045637105}
   remainCount: {fileID: 3549385543367455962}
 --- !u!1 &2123036813179253386
@@ -5322,6 +5321,7 @@ MonoBehaviour:
   PlayerContributeValuePanel: {fileID: 606486344316204854}
   playerSideDataRootPanel: {fileID: 2123036812339075253}
   selecting: 1
+  selectStatus: 0
   selectSize: {x: 2, y: 2}
 --- !u!1 &2123036814355350092
 GameObject:

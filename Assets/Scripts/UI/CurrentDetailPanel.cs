@@ -9,7 +9,7 @@ public class CurrentDetailPanel : MonoBehaviour
     public Dictionary<GameManager.PlayerSide, int> currentPlayerSideMaxResourceValue = new Dictionary<GameManager.PlayerSide, int>();
     public Dictionary<GameManager.PlayerSide, int[]> currentPlayerSideResourcesValue = new Dictionary<GameManager.PlayerSide, int[]>();
     public ModifyStartResourcesPanel[] modifyStartResourcesPanel;
-    public static GameManager.PlayerSide currentPlayerSide;
+    public static GameManager.PlayerSide currentPlayerSide = GameManager.PlayerSide.SIDE_A;
     public Text totalCount;
     public Text remainCount;
     public void OnInit()
@@ -28,7 +28,8 @@ public class CurrentDetailPanel : MonoBehaviour
 
     public void OnConfirmClicked()
     {
-        //switch to build base state
+        UIManager.instance.BeginSelection(UIManager.SelectStatus.BASE);
+        gameObject.SetActive(false);
     }
 
     public void SwitchCurrentPlayerSide(GameManager.PlayerSide newSide)

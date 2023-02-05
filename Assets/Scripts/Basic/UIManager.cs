@@ -6,7 +6,8 @@ using UnityEngine.Tilemaps;
 
 public class UIManager : SingletonMonoBehaviour<UIManager>
 {
-    public enum SelectStatus{
+    public enum SelectStatus
+    {
         BASE,
         FOODCHEST,
         METALCHEST,
@@ -16,10 +17,11 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public PlayerContributeValuePanel PlayerContributeValuePanel;
     public PlayerSideDataRootPanel playerSideDataRootPanel;
     public CoolDownTimer uiRefreshTimer = new CoolDownTimer(0);
-    public bool selecting = true;
+    private bool preselect;
+    private bool selecting = false;
     public SelectStatus selectStatus = SelectStatus.BASE;
     public Vector2Int selectSize = new Vector2Int(3, 3);
-    private List<Vector3Int> selectPos=new List<Vector3Int>();
+    private List<Vector3Int> selectPos = new List<Vector3Int>();
 
 
     public void InitUIRoot()
@@ -31,7 +33,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     {
         PlayerContributeValuePanel.UpdateValue();
     }
-    
+
     public Vector3Int GetMousePos()
     {
         var target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -49,15 +51,29 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public void OnTick()
     {
         playerSideDataRootPanel.UpdatePlayerSideResourceData();
+    }
+
+    private void Update()
+    {
+        if (preselect)
+        {
+            if (Input.GetMouseButtonUp(0))
+            {
+                selecting = true;
+                preselect = false;
+            }
+        }
+
         if (selecting && Input.GetMouseButton(0))
         {
             if (selectStatus == SelectStatus.BASE)
             {
                 var pos = GameManager.instance.selectPos;
-                if (GameManager.instance.PosValid(pos)) {
+                if (GameManager.instance.PosValid(pos))
+                {
                     GameManager.instance.buildings.Add(pos, new BasicBuilding(CurrentDetailPanel.currentPlayerSide, BasicBuilding.BuildingType.BUILDING_BASE, pos));
                     TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BasicBuilding.BuildingType.BUILDING_BASE]);
-                    selecting = false;
+                    EndSelection();
                 }
             }
         }
@@ -65,15 +81,21 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
 
     public void BeginSelection(SelectStatus status)
     {
-        selecting = true;
+        preselect = true;
         selectStatus = status;
         selectSize = new Vector2Int(1, 1);
         if (selectStatus == SelectStatus.BASE)
             selectSize = new Vector2Int(3, 3);
     }
 
+
     public void EndSelection()
     {
+        foreach (var pos in selectPos)
+        {
+            TileManager.Instance.selectionMap.SetTile(pos, null);
+        }
+        selectPos.Clear();
         selecting = false;
     }
 
@@ -81,29 +103,36 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     {
         if (selecting)
         {
+            bool success = true;
             var curPos = GetMousePos();
-            foreach(var pos in selectPos)
+            foreach (var pos in selectPos)
             {
                 TileManager.Instance.selectionMap.SetTile(pos, null);
             }
             selectPos.Clear();
 
-            for(int i = 0; i < selectSize.x; i++)
+            for (int i = 0; i < selectSize.x; i++)
             {
-                for(int j = 0; j < selectSize.y; j++)
+                for (int j = 0; j < selectSize.y; j++)
                 {
                     var pos = curPos + new Vector3Int(i, j, 0);
                     if (GameManager.instance.PosValid(pos))
                     {
-                        if(TileManager.Instance.Reachable(pos))
+                        if (TileManager.Instance.Reachable(pos))
+                        {
                             TileManager.Instance.selectionMap.SetTile(pos, GameManager.instance.selectTile);
+                        }
                         else
+                        {
+                            success = false;
                             TileManager.Instance.selectionMap.SetTile(pos, GameManager.instance.selectFailTile);
+                        }
                         selectPos.Add(pos);
                     }
                 }
             }
-
+            if (success)
+                return curPos;
         }
         return new Vector3Int(-1, -1, -1);
     }

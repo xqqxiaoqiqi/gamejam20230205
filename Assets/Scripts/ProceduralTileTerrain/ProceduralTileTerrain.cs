@@ -211,7 +211,7 @@ namespace PCGTerrain
                     }
                 }
                 m_rscTileMap.SetTile(gateP,m_rscMapAsset.m_gateTile);
-                m_tileMap.SetTile(gateP,m_rscMapAsset.m_gateTile);
+                //m_tileMap.SetTile(gateP,m_rscMapAsset.m_gateTile);
 
                 for (int i = 0; i < m_normalRscCount; i++)
                 {
@@ -232,7 +232,7 @@ namespace PCGTerrain
 
                     rscCache.Add(farmP);
                     m_rscTileMap.SetTile(farmP,m_rscMapAsset.m_farmTile);
-                    m_tileMap.SetTile(farmP,m_rscMapAsset.m_farmTile);
+                    //m_tileMap.SetTile(farmP,m_rscMapAsset.m_farmTile);
 
                     //mine
                     while (m_tileMap.GetTile(mineP) != m_mapAsset.m_hillTile || rscCache.Contains(mineP))
@@ -248,7 +248,7 @@ namespace PCGTerrain
 
                     rscCache.Add(mineP);
                     m_rscTileMap.SetTile(mineP,m_rscMapAsset.m_mineTile);
-                    m_tileMap.SetTile(mineP,m_rscMapAsset.m_mineTile);
+                    //m_tileMap.SetTile(mineP,m_rscMapAsset.m_mineTile);
 
                     //hot
                     while ((m_tileMap.GetTile(hotP) != m_mapAsset.m_normalTile &&
@@ -265,7 +265,7 @@ namespace PCGTerrain
                     
                     rscCache.Add(hotP);
                     m_rscTileMap.SetTile(hotP,m_rscMapAsset.m_hotTile);
-                    m_tileMap.SetTile(hotP,m_rscMapAsset.m_hotTile);
+                    //m_tileMap.SetTile(hotP,m_rscMapAsset.m_hotTile);
                 }
                 //CHests
                 for (int i = 0; i < m_chestRscCount; i++)
@@ -344,7 +344,7 @@ namespace PCGTerrain
 
                     rscCache.Add(enemyP);
                     m_rscTileMap.SetTile(enemyP,m_rscMapAsset.m_campTile);
-                    m_tileMap.SetTile(enemyP,m_rscMapAsset.m_campTile);
+                    //m_tileMap.SetTile(enemyP,m_rscMapAsset.m_campTile);
                 }
                 
                 //relics
@@ -366,7 +366,7 @@ namespace PCGTerrain
 
                     rscCache.Add(relicP);
                     m_rscTileMap.SetTile(relicP,m_rscMapAsset.m_relicTile);
-                    m_tileMap.SetTile(relicP,m_rscMapAsset.m_relicTile);
+                    //m_tileMap.SetTile(relicP,m_rscMapAsset.m_relicTile);
                 }
             }
         }

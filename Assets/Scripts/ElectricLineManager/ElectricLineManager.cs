@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class ElectircLineManager
+public class ElectircLineManager : IDisposable
 {
     public static ElectircLineManager m_Instance = new Lazy<ElectircLineManager>(()=> new ElectircLineManager()).Value;
 
@@ -147,6 +147,16 @@ public class ElectircLineManager
         }
         m_lines.Clear();
         m_lineSides.Clear();
+    }
+
+    public void Dispose()
+    {
+        ClearALLLines();
+        //让GC去做吧 我懒了= =
+        mat_B = null;
+        mat_A = null;
+        mat_C = null;
+        lineMat = null;
     }
 
     int GetNearestPlayerSideBuilding(BasicBuilding building, GameManager.PlayerSide side)

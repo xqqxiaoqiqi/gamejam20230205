@@ -19,9 +19,9 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public PlayerSideDataRootPanel playerSideDataRootPanel;
     public CoolDownTimer uiRefreshTimer = new CoolDownTimer(0);
     private bool preselect;
-    private bool selecting = false;
-    public SelectStatus selectStatus = SelectStatus.BASE;
-    public Vector2Int selectSize = new Vector2Int(3, 3);
+    private bool selecting = true;
+    private SelectStatus selectStatus = SelectStatus.FLAG;
+    private Vector2Int selectSize = new Vector2Int(1, 1);
     private List<Vector3Int> selectPos = new List<Vector3Int>();
 
 
@@ -108,8 +108,30 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
                 var pos = GameManager.instance.selectPos;
                 if (GameManager.instance.PosValid(pos))
                 {
-                    GameManager.instance.buildings.Add(pos, new BasicBuilding(GameManager.PlayerSide.NATURE, BasicBuilding.BuildingType.BUILDING_ENTITYCHEST, pos));
-                    TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BasicBuilding.BuildingType.BUILDING_ENTITYCHEST]);
+                    GameManager.instance.buildings.TryGetValue(pos, out var building);
+                    if (!building.targeted)
+                    {
+                        Entity nearestEntity = null;
+                        float neardis = 0;
+                        foreach(var entity in GameManager.instance.Entities)
+                        {
+                            var entitypos = TileManager.Instance.terrainMap.WorldToCell(entity.transform.position);
+                            entitypos[2] = 0;
+                            if (nearestEntity == null || Vector3Int.Distance(entitypos, pos) < neardis)
+                            {
+                                nearestEntity = entity;
+                                neardis = Vector3Int.Distance(entitypos, pos);
+                            }
+                        }
+                        if (nearestEntity != null)
+                        {
+                            nearestEntity.targetBuilding.targeted = false;
+                            building.targeted = true;
+                            nearestEntity.targetBuilding = building;
+                            nearestEntity.MoveTo(pos);
+                        }
+                    }
+
                 }
             }
             EndSelection();
@@ -155,7 +177,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
                     GameManager.instance.buildings.TryGetValue(curPos, out var building);
                     if (building!=null)
                     {
-                        if(!building.targeted&&building.playerSide==GameManager.PlayerSide.NATURE)
+                        if(building.playerSide==GameManager.PlayerSide.NATURE)
                             TileManager.Instance.selectionMap.SetTile(curPos, GameManager.instance.selectTile);
                         selectPos.Add(curPos);
                         return curPos;

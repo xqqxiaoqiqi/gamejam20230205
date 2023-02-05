@@ -50,6 +50,9 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
                 break;
             case PlayerEvent.INIT_BUILDING:
                 //todo: init building
+                var buildingType =(BasicBuilding.BuildingType) args;
+                GameManager.instance.buildings.Add(position, new BasicBuilding(playerSide, buildingType, position));
+                TileManager.Instance.buildingMap.SetTile(position, GameManager.instance.buildingSource[(int)buildingType]);
                 break;
             default:
                 break;
@@ -63,6 +66,12 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
         {
             case GameEvent.DESTROYENTITYBYCAPABILITY:
                 //TODO:GET ALL ENTITIES AND CHECK THEM
+                foreach(var entity in GameManager.instance.Entities)
+                {
+                    if (entity.capability >= 20)
+                        entity.MarkFinish();
+                }
+
                 break;
             case GameEvent.CHECKHOMELEVEL:
             //todo: CHECK HOME LEVEL
@@ -90,5 +99,4 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
         return true;
         //todo:
     }
-    
 }

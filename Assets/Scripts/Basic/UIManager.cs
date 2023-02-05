@@ -74,6 +74,8 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
                 {
                     GameManager.instance.buildings.Add(pos, new BasicBuilding(CurrentDetailPanel.currentPlayerSide, BasicBuilding.BuildingType.BUILDING_BASE, pos));
                     TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BasicBuilding.BuildingType.BUILDING_BASE]);
+                    EndSelection();
+                    OnInitBase(CurrentDetailPanel.currentPlayerSide);
                 }
             }
             if (selectStatus == SelectStatus.FOODCHEST)
@@ -136,6 +138,11 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
             }
             EndSelection();
         }
+    }
+
+    public void OnInitBase(GameManager.PlayerSide playerSide)
+    {
+        gameStartPanel.OnPlayerSideInitBase(playerSide);
     }
 
     public void BeginSelection(SelectStatus status)

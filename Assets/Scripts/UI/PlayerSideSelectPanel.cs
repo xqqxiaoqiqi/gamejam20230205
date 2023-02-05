@@ -12,14 +12,23 @@ public class PlayerSideSelectPanel : MonoBehaviour
 
     public void OnPlayerSideAClicked()
     {
-        CurrentDetailPanel.SwitchCurrentPlayerSide(GameManager.PlayerSide.SIDE_A);
+        if(!CurrentDetailPanel.GameStartPanel.playerSideInited[(int)GameManager.PlayerSide.SIDE_A])
+        {
+            CurrentDetailPanel.SwitchCurrentPlayerSide(GameManager.PlayerSide.SIDE_A);
+        }
     }
     public void OnPlayerSideBClicked()
     {
-        CurrentDetailPanel.SwitchCurrentPlayerSide(GameManager.PlayerSide.SIDE_B);
+        if (!CurrentDetailPanel.GameStartPanel.playerSideInited[(int) GameManager.PlayerSide.SIDE_B])
+        {
+            CurrentDetailPanel.SwitchCurrentPlayerSide(GameManager.PlayerSide.SIDE_B);
+        }
     }    public void OnPlayerSideCClicked()
     {
-        CurrentDetailPanel.SwitchCurrentPlayerSide(GameManager.PlayerSide.SIDE_C);
+        if (!CurrentDetailPanel.GameStartPanel.playerSideInited[(int) GameManager.PlayerSide.SIDE_C])
+        {
+            CurrentDetailPanel.SwitchCurrentPlayerSide(GameManager.PlayerSide.SIDE_C);
+        }
     }
     
 }

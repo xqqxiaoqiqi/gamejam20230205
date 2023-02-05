@@ -38,14 +38,16 @@ public class InitNewEntity : BasicBuilding.Behaviour
         {
             if (owner.playerSide != GameManager.PlayerSide.NATURE)
             {
-                if (requestFood &&
-                    GameManager.instance.allPlayerSideDatas[owner.playerSide].resourcesData[(int) GameManager.ResourceType.FOOD] >= requestFoodCount)
+                if (requestFood)
                 {
-                    GameManager.instance.allPlayerSideDatas[owner.playerSide].resourcesData[(int) GameManager.ResourceType.FOOD] -= requestFoodCount;
-                }
-                else
-                {
-                    return;
+                    if (GameManager.instance.allPlayerSideDatas[owner.playerSide].resourcesData[(int) GameManager.ResourceType.FOOD] >= requestFoodCount)
+                    {
+                        GameManager.instance.allPlayerSideDatas[owner.playerSide].resourcesData[(int) GameManager.ResourceType.FOOD] -= requestFoodCount;
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
                 GameManager.instance.InitEntity(owner.playerSide, owner.pos);
             }

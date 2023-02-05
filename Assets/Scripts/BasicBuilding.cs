@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 /// <summary>
 /// 任何浮在地块上层的静态物体（包括宝箱，资源点，统称为building，一个地块上只 能 有 一 个 building）
@@ -28,7 +29,14 @@ public class BasicBuilding
         BUILDING_ENTITYCHEST,
         BUILDING_ENEMY,
         BUILDING_BASE,
-        BUILDING_WONDER
+        BUILDING_WONDER,
+        FOOD1,
+        FOOD2,
+        METAL1,
+        METAL2,
+        POWER1,
+        FACTORY1,
+        FACTORY2,
     }
     [Serializable]
     public enum BuildingEvent
@@ -87,6 +95,30 @@ public class BasicBuilding
         playerSide = newside;
     }
 
+    public void SetWorkingStatus(bool value)
+    {
+        if (value)
+        {
+            if(buildType==BuildingType.BUILDING_FOOD|| buildType == BuildingType.FOOD1|| buildType == BuildingType.FOOD2)
+                TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.FOOD1]);
+            else if (buildType == BuildingType.BUILDING_METAL || buildType == BuildingType.METAL1 || buildType == BuildingType.METAL2)
+                TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.METAL1]);
+            else if (buildType == BuildingType.BUILDING_POWER || buildType == BuildingType.POWER1)
+                TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.POWER1]);
+            else if (buildType == BuildingType.BUILDING_FACTORY || buildType == BuildingType.FACTORY1 || buildType == BuildingType.FACTORY2)
+                TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.FACTORY1]);
+        }
+        else
+        {
+            if (buildType == BuildingType.BUILDING_FOOD || buildType == BuildingType.FOOD1 || buildType == BuildingType.FOOD2)
+                TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.FOOD2]);
+            else if (buildType == BuildingType.BUILDING_METAL || buildType == BuildingType.METAL1 || buildType == BuildingType.METAL2)
+                TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.METAL2]);
+            else if (buildType == BuildingType.BUILDING_FACTORY || buildType == BuildingType.FACTORY1 || buildType == BuildingType.FACTORY2)
+                TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.FACTORY2]);
+        }
+    }
+
     public void OnBuildDestroy()
     {
         //todo: 每次tick结束destroy
@@ -134,4 +166,5 @@ public class BasicBuilding
         pos = position;
     }
     
+
 }

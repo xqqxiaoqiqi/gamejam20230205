@@ -19,7 +19,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public PlayerSideDataRootPanel playerSideDataRootPanel;
     public CoolDownTimer uiRefreshTimer = new CoolDownTimer(0);
     private bool preselect;
-    private bool selecting = true;
+    private bool selecting = false;
     private SelectStatus selectStatus = SelectStatus.FLAG;
     private Vector2Int selectSize = new Vector2Int(1, 1);
     private List<Vector3Int> selectPos = new List<Vector3Int>();

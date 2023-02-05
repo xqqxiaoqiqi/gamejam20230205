@@ -15,12 +15,12 @@ namespace PCGTerrain
         public TileBase m_metalChestTile;
         public TileBase m_peopleChestTile;
         //
-        public TileBase m_campTile;
+        public List<TileBase> m_campTiles;
         public TileBase m_relicTile;
         public TileBase m_gateTile;
         //
         public bool m_isAssetValid() => m_farmTile && m_mineTile && m_hotTile && m_foodChestTile && m_metalChestTile &&
-                                 m_peopleChestTile && m_campTile
+                                 m_peopleChestTile && m_campTiles!=null && m_campTiles.Count>0
                                  && m_relicTile && m_gateTile;
     }
 }

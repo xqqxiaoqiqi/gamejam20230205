@@ -343,7 +343,9 @@ namespace PCGTerrain
                     }
 
                     rscCache.Add(enemyP);
-                    m_rscTileMap.SetTile(enemyP,m_rscMapAsset.m_campTile);
+                    int enemyTypeCount = m_rscMapAsset.m_campTiles.Count;
+                    int randId = Random.Range(0, enemyTypeCount);
+                    m_rscTileMap.SetTile(enemyP,m_rscMapAsset.m_campTiles[randId]);
                     //m_tileMap.SetTile(enemyP,m_rscMapAsset.m_campTile);
                 }
                 

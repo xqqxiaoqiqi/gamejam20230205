@@ -126,11 +126,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         PlayerManager.instance.OnTick();
         UIManager.instance.UpdateContributeValue();
     }
-
-    public void InitMap()
-    {
-        
-    }
+    
 
     public void InitEntity(PlayerSide playerSide, Vector3Int position)
     {
@@ -187,6 +183,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
         return false;
     }
+    
 }
 
 public class CoolDownTimer

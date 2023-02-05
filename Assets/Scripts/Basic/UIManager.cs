@@ -35,6 +35,10 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public Sprite sideImage1;
     public Sprite sideImage2;
     public string[] sideTexts=new string[]{"联盟","联邦","安娜其" };
+    public Sprite farmPanelSprite;
+    public Sprite powerPanelSprite;
+    public Sprite metalPanelSprite;
+    public Sprite enemyPanelSprite;
 
 
     public void InitUIRoot()

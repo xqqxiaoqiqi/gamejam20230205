@@ -108,6 +108,7 @@ public class BasicBuilding
             var obj=GameObject.Instantiate(UIManager.instance.resourcePanelSource);
             obj.transform.parent = UIManager.instance.panels.transform;
             panel = obj.GetComponent<ResourcePanel>();
+            panel.OnInit(this);
             if (playerSide == GameManager.PlayerSide.SIDE_A)
             {
                 panel.image.sprite = UIManager.instance.sideImage0;
@@ -182,6 +183,18 @@ public class BasicBuilding
         {
             behaviours[i].OnTick();
         }
+
+        if (buildingLevel < PlayerManager.instance.maxBuildingLevel)
+        {
+            if (buildType == BuildingType.BUILDING_BASE&& GameManager.instance.allPlayerSideDatas[playerSide].resourcesData[(int) GameManager.ResourceType.METAL]>=PlayerManager.instance.upgradeRequest)
+            {
+                GameManager.instance.allPlayerSideDatas[playerSide].resourcesData[(int) GameManager.ResourceType.METAL] -=
+                    PlayerManager.instance.upgradeRequest;
+            
+                OnBuildUpgrade();
+            }
+        }
+
     }
 
     public void OnBuildUpgrade()
@@ -194,6 +207,7 @@ public class BasicBuilding
                 behaviours[i].OnEvent(BuildingEvent.ON_BUILD_UPGRADE);
             }
         }
+        UpgradeBase(buildingLevel-1);
     }
     public BasicBuilding(GameManager.PlayerSide playerSide,BuildingType type,Vector3Int position)
     {

@@ -18,6 +18,7 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
     public List<BasicBuilding> allBases = new List<BasicBuilding>();
     public CoolDownTimer gameEventTimer = new CoolDownTimer(0);
     public int currEventIndex;
+    public int upgradeRequest = 300;
 
     protected override void OnInit()
     {

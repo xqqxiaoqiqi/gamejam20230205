@@ -36,8 +36,18 @@ public class AddResourceModifierFromBuilding : BasicBuilding.Behaviour
                 if (myModifier == null)
                 {
                     myModifier = new Modifier(entity.playerSide, sourceType, sourceValue, targetType, targetValue);
+                    owner.SetWorkingStatus(myModifier.isEnabled);
                 }
             }
+        }
+    }
+
+    public override void OnTick()
+    {
+        base.OnTick();
+        if (myModifier != null)
+        {
+            owner.SetWorkingStatus(myModifier.isEnabled);
         }
     }
 }

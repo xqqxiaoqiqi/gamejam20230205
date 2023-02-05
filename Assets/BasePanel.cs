@@ -10,13 +10,7 @@ public class BuildingPanel : MonoBehaviour
     public Text side;
     public Image image;
     public BasicBuilding building;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
         if (building != null)
@@ -26,6 +20,11 @@ public class BuildingPanel : MonoBehaviour
             else
                 transform.position = Camera.main.WorldToScreenPoint(TileManager.Instance.terrainMap.CellToWorld(building.pos + new Vector3Int(1, 1, 0))) + new Vector3(0, 50, 0);
         }
+    }
+    
+    public virtual void OnInit(object args)
+    {
+        
     }
 }
 

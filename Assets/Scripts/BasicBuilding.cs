@@ -31,6 +31,7 @@ public class BasicBuilding
         BUILDING_FOODCHEST,
         BUILDING_METALCHEST,
         BUILDING_ENTITYCHEST,
+        BUILDING_ENEMY,
         BUILDING_BASE,
         BUILDING_WONDER,
         FOOD1,
@@ -42,12 +43,8 @@ public class BasicBuilding
         FACTORY2,
         BASE1,
         BASE2,
-        BUILDING_ENEMY,
         BOSS1,
         BOSS2,
-        BUILDING_ENEMY_1,
-        BOSS1_1,
-        BOSS2_1,
     }
     [Serializable]
     public enum BuildingEvent

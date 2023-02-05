@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 457549521}
   - component: {fileID: 457549520}
   - component: {fileID: 457549519}
-  - component: {fileID: 457549518}
   m_Layer: 5
   m_Name: EndImage
   m_TagString: Untagged
@@ -208,18 +207,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &457549518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 457549516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68261500b9c67784fa10d404d778bc13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &663400342
 GameObject:
   m_ObjectHideFlags: 0

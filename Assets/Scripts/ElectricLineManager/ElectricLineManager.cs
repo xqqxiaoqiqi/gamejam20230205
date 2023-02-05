@@ -52,7 +52,7 @@ public class ElectircLineManager : IDisposable
         }
         //
         #if UNITY_EDITOR
-        lineMat = AssetDatabase.LoadAssetAtPath<Material>($"Assets/Materials/LineMat.mat");
+        lineMat = AssetDatabase.LoadAssetAtPath<Material>($"Assets/Resources/Materials/LineMat.mat");
         #else
         lineMat = Resources.Load<Material>($"{Application.dataPath}/Materials/LineMat.mat");
         #endif

@@ -4433,7 +4433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2123036813723378337
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5140,7 +5140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae3eb9922ab9ae42a3e977dda069127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 3
   Panel: {fileID: 2941765980198467541}
   highlightImage: {fileID: 1258508166}
 --- !u!114 &4612652450556383882
@@ -5646,7 +5646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2310ffb7850bcfc4db76a6cfb0e436d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myText: {fileID: 0}
+  myText: {fileID: 4241931298148182637}
 --- !u!1 &2436509470289065001
 GameObject:
   m_ObjectHideFlags: 0
@@ -6567,7 +6567,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6581821543904390040}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2557420261721506865}
+        m_TargetAssemblyTypeName: PlayerEventButton, Assembly-CSharp
+        m_MethodName: OnPlayerEventClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2557420261721506865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6580,7 +6592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae3eb9922ab9ae42a3e977dda069127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 2
   Panel: {fileID: 2407682172410394291}
   highlightImage: {fileID: 8773841997908006826}
 --- !u!114 &1544919078640699797
@@ -7178,7 +7190,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3660904211455158217}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4162276518811185902}
+        m_TargetAssemblyTypeName: PlayerEventButton, Assembly-CSharp
+        m_MethodName: OnPlayerEventClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4162276518811185902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12124,7 +12148,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5048981159857567752}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7281693556972552804}
+        m_TargetAssemblyTypeName: PlayerEventButton, Assembly-CSharp
+        m_MethodName: OnPlayerEventClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7281693556972552804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12137,7 +12173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae3eb9922ab9ae42a3e977dda069127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   Panel: {fileID: 8888493452135309589}
   highlightImage: {fileID: 8649310709994893777}
 --- !u!114 &4684871096108099242

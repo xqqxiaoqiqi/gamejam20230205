@@ -25,7 +25,10 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
         initReSourcesData.Add(GameManager.PlayerSide.SIDE_A,new int[(int)GameManager.ResourceType.ENUM]);
         initReSourcesData.Add(GameManager.PlayerSide.SIDE_B,new int[(int)GameManager.ResourceType.ENUM]);
         initReSourcesData.Add(GameManager.PlayerSide.SIDE_C,new int[(int)GameManager.ResourceType.ENUM]);
-        playerEventDatas.Add(PlayerEvent.INIT_BUILDING, new PlayerEventData(20,PlayerEvent.INIT_BUILDING,"创建一个新的什么玩意"));
+        playerEventDatas.Add(PlayerEvent.INIT_FLAG, new PlayerEventData(10, PlayerEvent.INIT_FLAG, "指引最近的居民前往该点，仅可选择中立非空白地块"));
+        playerEventDatas.Add(PlayerEvent.INIT_FOOD, new PlayerEventData(20,PlayerEvent.INIT_FOOD,"创建一个食物箱子"));
+        playerEventDatas.Add(PlayerEvent.INIT_METAL, new PlayerEventData(20, PlayerEvent.INIT_METAL, "创建一个金属箱子"));
+        playerEventDatas.Add(PlayerEvent.INIT_NEW_ENTITY, new PlayerEventData(50, PlayerEvent.INIT_NEW_ENTITY, "创建一个中立居民"));
         gameEventDatas.Add(new GameEventData(GameEvent.DESTROYENTITYBYCAPABILITY,1200,"严酷环境下弱者难以生还,摧毁所有战斗力低于20的单位","军备竞赛"));
         gameEventDatas.Add(new GameEventData(GameEvent.CHECKRESOURCES,1200,"巨大的寒潮将席卷世界,需要食物超过100","极度深寒"));
         gameEventDatas.Add(new GameEventData(GameEvent.CHECKHOMELEVEL,1200,"文明的进步不容停滞,需要基地等级到达lv.2","发展迟滞"));
@@ -35,9 +38,10 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 
     public enum PlayerEvent
     {
+        INIT_FOOD,
+        INIT_METAL,
         INIT_NEW_ENTITY,
-        INIT_BUILDING,
-        //todo:信号旗！
+        INIT_FLAG,
         ENUM
     }
 
@@ -60,7 +64,7 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
             case PlayerEvent.INIT_NEW_ENTITY:
                 GameManager.instance.InitEntity(playerSide, position);
                 break;
-            case PlayerEvent.INIT_BUILDING:
+            case PlayerEvent.INIT_FOOD:
                 //todo: init building
                 var buildingType =(BasicBuilding.BuildingType) args;
                 GameManager.instance.buildings.Add(position, new BasicBuilding(playerSide, buildingType, position));
@@ -181,7 +185,24 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 
     public void OnSelectingTile(PlayerEvent playerEvent)
     {
-        
+        switch (playerEvent)
+        {
+            case PlayerEvent.INIT_FOOD:
+                UIManager.instance.BeginSelection(UIManager.SelectStatus.FOODCHEST);
+                break;
+            case PlayerEvent.INIT_METAL:
+                UIManager.instance.BeginSelection(UIManager.SelectStatus.METALCHEST);
+                break;
+            case PlayerEvent.INIT_NEW_ENTITY:
+                UIManager.instance.BeginSelection(UIManager.SelectStatus.ENTITYCHEST);
+                break;
+            case PlayerEvent.INIT_FLAG:
+                UIManager.instance.BeginSelection(UIManager.SelectStatus.FLAG);
+                break;
+        }
+
+
+
     }
 
     public class PlayerEventData

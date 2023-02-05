@@ -23,7 +23,7 @@ public class Entity : MonoBehaviour
 
 
     Vector3Int targetPos;
-    BasicBuilding targetBuilding;
+    public BasicBuilding targetBuilding;
 
     Vector3Int[] directions = new Vector3Int[4] { Vector3Int.left, Vector3Int.right, Vector3Int.up, Vector3Int.down };
 

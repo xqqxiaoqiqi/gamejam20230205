@@ -174,9 +174,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 for (int k = 0; k < buildingSource.Count; k++)
                     if (TileManager.Instance.buildingMap.GetTile(pos) == buildingSource[k])
                     {
-                        if(k== (int)BasicBuilding.BuildingType.BUILDING_BASE)
-                            buildings.Add(pos, new BasicBuilding(PlayerSide.SIDE_A, (BasicBuilding.BuildingType)k, pos));
-                        else 
                         buildings.Add(pos, new BasicBuilding(PlayerSide.NATURE, (BasicBuilding.BuildingType)k, pos));
                     }
             }

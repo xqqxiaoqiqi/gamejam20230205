@@ -10,6 +10,7 @@ public class CurrentDetailPanel : MonoBehaviour
     public Dictionary<GameManager.PlayerSide, int[]> currentPlayerSideResourcesValue = new Dictionary<GameManager.PlayerSide, int[]>();
     public ModifyStartResourcesPanel[] modifyStartResourcesPanel;
     public static GameManager.PlayerSide currentPlayerSide = GameManager.PlayerSide.SIDE_A;
+    public GameStartPanel GameStartPanel;
     public Text totalCount;
     public Text remainCount;
     public void OnInit()
@@ -34,6 +35,7 @@ public class CurrentDetailPanel : MonoBehaviour
 
     public void SwitchCurrentPlayerSide(GameManager.PlayerSide newSide)
     {
+        Debug.Log("PLAYRSIDE:" +newSide);
         currentPlayerSide = newSide;
         for (int i = 0; i < modifyStartResourcesPanel.Length; i++)
         {

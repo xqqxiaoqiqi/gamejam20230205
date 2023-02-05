@@ -11,16 +11,17 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
         BASE,
         FOODCHEST,
         METALCHEST,
-        ENTITYCHEST
+        ENTITYCHEST,
+        FLAG,
     }
     public GameStartPanel gameStartPanel;
     public PlayerContributeValuePanel PlayerContributeValuePanel;
     public PlayerSideDataRootPanel playerSideDataRootPanel;
     public CoolDownTimer uiRefreshTimer = new CoolDownTimer(0);
     private bool preselect;
-    private bool selecting = false;
-    public SelectStatus selectStatus = SelectStatus.BASE;
-    public Vector2Int selectSize = new Vector2Int(3, 3);
+    private bool selecting = true;
+    private SelectStatus selectStatus = SelectStatus.FLAG;
+    private Vector2Int selectSize = new Vector2Int(1, 1);
     private List<Vector3Int> selectPos = new List<Vector3Int>();
 
 
@@ -74,9 +75,74 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
                     GameManager.instance.buildings.Add(pos, new BasicBuilding(CurrentDetailPanel.currentPlayerSide, BasicBuilding.BuildingType.BUILDING_BASE, pos));
                     TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BasicBuilding.BuildingType.BUILDING_BASE]);
                     EndSelection();
+                    OnInitBase(CurrentDetailPanel.currentPlayerSide);
                 }
             }
+            if (selectStatus == SelectStatus.FOODCHEST)
+            {
+                var pos = GameManager.instance.selectPos;
+                if (GameManager.instance.PosValid(pos))
+                {
+                    GameManager.instance.buildings.Add(pos, new BasicBuilding(GameManager.PlayerSide.NATURE, BasicBuilding.BuildingType.BUILDING_FOODCHEST, pos));
+                    TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BasicBuilding.BuildingType.BUILDING_FOODCHEST]);
+                }
+            }
+            if (selectStatus == SelectStatus.METALCHEST)
+            {
+                var pos = GameManager.instance.selectPos;
+                if (GameManager.instance.PosValid(pos))
+                {
+                    GameManager.instance.buildings.Add(pos, new BasicBuilding(GameManager.PlayerSide.NATURE, BasicBuilding.BuildingType.BUILDING_METALCHEST, pos));
+                    TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BasicBuilding.BuildingType.BUILDING_METALCHEST]);
+                }
+            }
+            if (selectStatus == SelectStatus.ENTITYCHEST)
+            {
+                var pos = GameManager.instance.selectPos;
+                if (GameManager.instance.PosValid(pos))
+                {
+                    GameManager.instance.buildings.Add(pos, new BasicBuilding(GameManager.PlayerSide.NATURE, BasicBuilding.BuildingType.BUILDING_ENTITYCHEST, pos));
+                    TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BasicBuilding.BuildingType.BUILDING_ENTITYCHEST]);
+                }
+            }
+            if (selectStatus == SelectStatus.FLAG)
+            {
+                var pos = GameManager.instance.selectPos;
+                if (GameManager.instance.PosValid(pos))
+                {
+                    GameManager.instance.buildings.TryGetValue(pos, out var building);
+                    if (!building.targeted)
+                    {
+                        Entity nearestEntity = null;
+                        float neardis = 0;
+                        foreach(var entity in GameManager.instance.Entities)
+                        {
+                            var entitypos = TileManager.Instance.terrainMap.WorldToCell(entity.transform.position);
+                            entitypos[2] = 0;
+                            if (nearestEntity == null || Vector3Int.Distance(entitypos, pos) < neardis)
+                            {
+                                nearestEntity = entity;
+                                neardis = Vector3Int.Distance(entitypos, pos);
+                            }
+                        }
+                        if (nearestEntity != null)
+                        {
+                            nearestEntity.targetBuilding.targeted = false;
+                            building.targeted = true;
+                            nearestEntity.targetBuilding = building;
+                            nearestEntity.MoveTo(pos);
+                        }
+                    }
+
+                }
+            }
+            EndSelection();
         }
+    }
+
+    public void OnInitBase(GameManager.PlayerSide playerSide)
+    {
+        gameStartPanel.OnPlayerSideInitBase(playerSide);
     }
 
     public void BeginSelection(SelectStatus status)
@@ -104,35 +170,64 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
         if (selecting)
         {
             bool success = true;
-            var curPos = GetMousePos();
-            foreach (var pos in selectPos)
+            if (selectStatus == SelectStatus.FLAG)
             {
-                TileManager.Instance.selectionMap.SetTile(pos, null);
-            }
-            selectPos.Clear();
-
-            for (int i = 0; i < selectSize.x; i++)
-            {
-                for (int j = 0; j < selectSize.y; j++)
+                var curPos = GetMousePos();
+                foreach (var pos in selectPos)
                 {
-                    var pos = curPos + new Vector3Int(i, j, 0);
-                    if (GameManager.instance.PosValid(pos))
+                    TileManager.Instance.selectionMap.SetTile(pos, null);
+                }
+                selectPos.Clear();
+
+                if (GameManager.instance.PosValid(curPos))
+                {
+                    GameManager.instance.buildings.TryGetValue(curPos, out var building);
+                    if (building!=null)
                     {
-                        if (TileManager.Instance.Reachable(pos))
-                        {
-                            TileManager.Instance.selectionMap.SetTile(pos, GameManager.instance.selectTile);
-                        }
-                        else
-                        {
-                            success = false;
-                            TileManager.Instance.selectionMap.SetTile(pos, GameManager.instance.selectFailTile);
-                        }
-                        selectPos.Add(pos);
+                        if(building.playerSide==GameManager.PlayerSide.NATURE)
+                            TileManager.Instance.selectionMap.SetTile(curPos, GameManager.instance.selectTile);
+                        selectPos.Add(curPos);
+                        return curPos;
+                    }
+                    else
+                    {
+                        TileManager.Instance.selectionMap.SetTile(curPos, GameManager.instance.selectFailTile);
+                        selectPos.Add(curPos);
                     }
                 }
             }
-            if (success)
-                return curPos;
+            else
+            {
+                var curPos = GetMousePos();
+                foreach (var pos in selectPos)
+                {
+                    TileManager.Instance.selectionMap.SetTile(pos, null);
+                }
+                selectPos.Clear();
+
+                for (int i = 0; i < selectSize.x; i++)
+                {
+                    for (int j = 0; j < selectSize.y; j++)
+                    {
+                        var pos = curPos + new Vector3Int(i, j, 0);
+                        if (GameManager.instance.PosValid(pos))
+                        {
+                            if (TileManager.Instance.Reachable(pos))
+                            {
+                                TileManager.Instance.selectionMap.SetTile(pos, GameManager.instance.selectTile);
+                            }
+                            else
+                            {
+                                success = false;
+                                TileManager.Instance.selectionMap.SetTile(pos, GameManager.instance.selectFailTile);
+                            }
+                            selectPos.Add(pos);
+                        }
+                    }
+                }
+                if (success)
+                    return curPos;
+            }
         }
         return new Vector3Int(-1, -1, -1);
     }

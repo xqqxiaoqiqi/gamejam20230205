@@ -22,15 +22,22 @@ public class GameStartPanel : MonoBehaviour
         playerSideInited[(int) playerSide] = true;
         if (IsAllPlayerSideReady)
         {
-            currentDetailPanel.InitAllModifiers();
+            currentDetailPanel.InitAllModifiers(); 
+            gameObject.SetActive(false);
+            GameManager.instance.isGameStarted = true;
         }
-        GameManager.instance.isGameStarted = true;
-        //todo: hide me and GAME ON!
+        else
+        {
+            currentDetailPanel.gameObject.SetActive(true);
+            for (int i = 1; i < 4; i++)
+            {
+                if (!playerSideInited[i])
+                {
+                    currentDetailPanel.SwitchCurrentPlayerSide((GameManager.PlayerSide)i);
+                    return;
+                }
+            }
+        }
     }
-
-    public void Test()
-    {
-        currentDetailPanel.InitAllModifiers();
-        GameManager.instance.isGameStarted = true;
-    }
+    
 }

@@ -58,6 +58,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public Tile selectFailTile;
 
     public GameObject entitySource;
+    public GameObject entitySource1;
+    public GameObject entitySource2;
     public Transform tileRoot;
     public int mapHeight;
     public int mapWidth;
@@ -143,7 +145,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void InitEntity(PlayerSide playerSide, Vector3Int position)
     {
-        var obj=GameObject.Instantiate(entitySource);
+        GameObject source=null;
+        if (playerSide == PlayerSide.SIDE_A)
+            source = entitySource;
+        else if (playerSide == PlayerSide.SIDE_B)
+            source = entitySource1;
+        else if (playerSide == PlayerSide.SIDE_C)
+            source = entitySource2;
+        var obj=GameObject.Instantiate(source);
         var newEntity = obj.GetComponent<Entity>();
         newEntity.playerSide = playerSide;
         obj.transform.position = TileManager.Instance.terrainMap.CellToWorld(position);

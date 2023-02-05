@@ -18,6 +18,9 @@ MonoBehaviour:
   m_foodChestTile: {fileID: 11400000, guid: 5b25ac76f12e07e429d53ae36f66fe5e, type: 2}
   m_metalChestTile: {fileID: 11400000, guid: bc85ddfccafbd9a4688c72c53fe6b15e, type: 2}
   m_peopleChestTile: {fileID: 11400000, guid: 303b3c2f9dff66d469343bb6ed90473d, type: 2}
-  m_campTile: {fileID: 11400000, guid: f505cc94803625342a3d2c0636a19e9f, type: 2}
+  m_campTiles:
+  - {fileID: 11400000, guid: 76c3fbabbe541f54196a4354239a9b59, type: 2}
+  - {fileID: 11400000, guid: 7f4bb9eee1707674d9b8064c24618d50, type: 2}
+  - {fileID: 11400000, guid: 2a699ec8608b1cd4dab315f36530afef, type: 2}
   m_relicTile: {fileID: 11400000, guid: f700c67647ea93c45b2cab13ec9ed1e0, type: 2}
   m_gateTile: {fileID: 11400000, guid: 0caccf8c8af349f42b12ae23f395f755, type: 2}

@@ -84,5 +84,11 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
     {
         //todo:计算公式
     }
+
+    public bool CheckPlayerEventValid(PlayerEvent playerEvent)
+    {
+        return true;
+        //todo:
+    }
     
 }

@@ -17,18 +17,48 @@ MonoBehaviour:
   - onEvent: 0
     buildType: 4
     resourceType: 0
-    Count: 50
+    Count: 200
     needCompareCapability: 0
     capabilityCount: 0
   - onEvent: 0
     buildType: 5
     resourceType: 1
-    Count: 20
+    Count: 200
     needCompareCapability: 0
     capabilityCount: 0
-  - onEvent: 0
+  - onEvent: 2
+    buildType: 7
+    resourceType: 0
+    Count: 100
+    needCompareCapability: 0
+    capabilityCount: 0
+  - onEvent: 2
     buildType: 7
     resourceType: 1
     Count: 100
-    needCompareCapability: 1
-    capabilityCount: 10
+    needCompareCapability: 0
+    capabilityCount: 0
+  - onEvent: 2
+    buildType: 19
+    resourceType: 0
+    Count: 200
+    needCompareCapability: 0
+    capabilityCount: 0
+  - onEvent: 2
+    buildType: 19
+    resourceType: 0
+    Count: 200
+    needCompareCapability: 0
+    capabilityCount: 0
+  - onEvent: 2
+    buildType: 20
+    resourceType: 0
+    Count: 300
+    needCompareCapability: 0
+    capabilityCount: 0
+  - onEvent: 2
+    buildType: 20
+    resourceType: 0
+    Count: 300
+    needCompareCapability: 0
+    capabilityCount: 0

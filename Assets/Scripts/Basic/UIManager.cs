@@ -30,6 +30,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public GameObject panels;
     public GameObject basePanelSource;
     public GameObject resourcePanelSource;
+    public GameObject enemyPanelSource;
     public LeanPinchCamera cam;
     public Sprite sideImage0;
     public Sprite sideImage1;

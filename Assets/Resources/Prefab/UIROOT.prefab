@@ -5685,6 +5685,7 @@ MonoBehaviour:
   panels: {fileID: 663400342}
   basePanelSource: {fileID: 6194519335798026010, guid: 224bfc40107d8804e9982bcbf3d56ae1, type: 3}
   resourcePanelSource: {fileID: 6411400377851481844, guid: b87d161f4751db94cbe85f2878848b85, type: 3}
+  enemyPanelSource: {fileID: 6194519335798026010, guid: 1a4e73628c20ef8429888209b65fb744, type: 3}
   cam: {fileID: 0}
   sideImage0: {fileID: 21300000, guid: 3bd3f06d1e6fc9d49a2f243840ef80a7, type: 3}
   sideImage1: {fileID: 21300000, guid: 5e2294a2183d6b04995b9308ad77e873, type: 3}

@@ -164,18 +164,13 @@ public class BasicBuilding
         }
     }
 
-    public void OnBuildDestroy()
+    public void MarkDestroyed()
     {
-        //todo: 每次tick结束destroy
+        isDestroyed = true;
         for (int i = 0; i < behaviours.Count; i++)
         {
             behaviours[i].OnEvent(BuildingEvent.ON_BUILD_DESTROY);
         }
-    }
-
-    public void MarkDestroyed()
-    {
-        isDestroyed = true;
     }
     public void OnTick()
     {
@@ -240,6 +235,15 @@ public class BasicBuilding
         if (buildType == BuildingType.BUILDING_BASE)
         {
             PlayerManager.instance.allBases.Add(this);
+        }
+        if (buildType == BuildingType.BUILDING_ENEMY ||buildType == BuildingType.BOSS1 || buildType == BuildingType.BOSS2)
+        {
+            var obj=GameObject.Instantiate(UIManager.instance.enemyPanelSource);
+            obj.transform.parent = UIManager.instance.panels.transform;
+            panel = obj.GetComponent<EnemyPanel>();
+            panel.OnInit(this);
+            
+            panel.building = this;
         }
     }
     

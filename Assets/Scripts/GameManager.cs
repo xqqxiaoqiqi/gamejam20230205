@@ -70,7 +70,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public TileBehaviourDB TileBehaviourDB;
     public BuildingBehaviourDB BuildingBehaviourDB;
     public CoolDownTimer gameTickTimer = new CoolDownTimer(30);
-    private Vector3Int selectPos;
+    public Vector3Int selectPos;
     public bool isGameStarted = false;
     public void FixedUpdate()
     {
@@ -108,7 +108,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             }
             gameTickTimer.Reset();
         }
-        //selectPos= UIManager.instance.showSelection();
+        selectPos= UIManager.instance.showSelection();
         var destroyList = new List<Vector3Int>();
         foreach(var building in buildings)
         {

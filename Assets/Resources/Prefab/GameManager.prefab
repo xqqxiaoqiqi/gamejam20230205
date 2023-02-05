@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2537992560854603476}
   - component: {fileID: 107881304159165695}
+  - component: {fileID: 1271221952}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -55,9 +56,30 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9d2e0d9f247f1e14c8cadd1562f7cef4, type: 2}
   - {fileID: 11400000, guid: f07a277f0573177409c7f7fa61a99057, type: 2}
   - {fileID: 11400000, guid: 13ae525668a385f44bcdbdda508da091, type: 2}
+  selectTile: {fileID: 11400000, guid: f56cc0aab9b6bab43bb1455234d69b28, type: 2}
+  selectFailTile: {fileID: 11400000, guid: 4e8a145047d14ea4db38f519c6eab784, type: 2}
+  entitySource: {fileID: 1718367676153831404, guid: 032c210ed4104c34e895ae430662cb49, type: 3}
   tileRoot: {fileID: 0}
-  mapHeight: 0
-  mapWidth: 0
+  mapHeight: 51
+  mapWidth: 51
   Entities: []
-  TileBehaviourDB: {fileID: 0}
-  BuildingBehaviourDB: {fileID: 0}
+  TileBehaviourDB: {fileID: 11400000, guid: 45b480f0f6e5a3f49b8ad21f212dbc1d, type: 2}
+  BuildingBehaviourDB: {fileID: 11400000, guid: 830aebc5a4dc8744caaecb4270111800, type: 2}
+  selectPos: {x: 0, y: 0, z: 0}
+  isGameStarted: 0
+--- !u!114 &1271221952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4492039644066286386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471a755bf91bf5e4785b1f4b33581a2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initModifierTotalCount: 10
+  maxBuildingLevel: 3
+  maxContributeValue: 2000
+  currContributeValue: 0

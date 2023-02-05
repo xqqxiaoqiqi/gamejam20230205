@@ -9,7 +9,7 @@ public class CurrentDetailPanel : MonoBehaviour
     public Dictionary<GameManager.PlayerSide, int> currentPlayerSideMaxResourceValue = new Dictionary<GameManager.PlayerSide, int>();
     public Dictionary<GameManager.PlayerSide, int[]> currentPlayerSideResourcesValue = new Dictionary<GameManager.PlayerSide, int[]>();
     public ModifyStartResourcesPanel[] modifyStartResourcesPanel;
-    public GameManager.PlayerSide currentPlayerSide;
+    public static GameManager.PlayerSide currentPlayerSide;
     public Text totalCount;
     public Text remainCount;
     public void OnInit()

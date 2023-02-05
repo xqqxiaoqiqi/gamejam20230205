@@ -37,10 +37,10 @@ public class ModifyStartResourcesPanel : MonoBehaviour
 
     public void OnAddButtonClicked()
     {
-        if (currentDetailPanel.currentPlayerSideMaxResourceValue[currentDetailPanel.currentPlayerSide] > 0)
+        if (currentDetailPanel.currentPlayerSideMaxResourceValue[CurrentDetailPanel.currentPlayerSide] > 0)
         {
-            currentDetailPanel.currentPlayerSideResourcesValue[currentDetailPanel.currentPlayerSide][(int)resourceType]++;
-            currentDetailPanel.currentPlayerSideMaxResourceValue[currentDetailPanel.currentPlayerSide]--;
+            currentDetailPanel.currentPlayerSideResourcesValue[CurrentDetailPanel.currentPlayerSide][(int)resourceType]++;
+            currentDetailPanel.currentPlayerSideMaxResourceValue[CurrentDetailPanel.currentPlayerSide]--;
             currValue++;
         }
     }
@@ -49,8 +49,8 @@ public class ModifyStartResourcesPanel : MonoBehaviour
     {
         if (currValue > 0)
         {
-            currentDetailPanel.currentPlayerSideResourcesValue[currentDetailPanel.currentPlayerSide][(int)resourceType]--;
-            currentDetailPanel.currentPlayerSideMaxResourceValue[currentDetailPanel.currentPlayerSide]++;
+            currentDetailPanel.currentPlayerSideResourcesValue[CurrentDetailPanel.currentPlayerSide][(int)resourceType]--;
+            currentDetailPanel.currentPlayerSideMaxResourceValue[CurrentDetailPanel.currentPlayerSide]++;
             currValue--;
         }
     }

@@ -6,12 +6,19 @@ using UnityEngine.Tilemaps;
 
 public class UIManager : SingletonMonoBehaviour<UIManager>
 {
+    public enum SelectStatus{
+        BASE,
+        FOODCHEST,
+        METALCHEST,
+        ENTITYCHEST
+    }
     public GameStartPanel gameStartPanel;
     public PlayerContributeValuePanel PlayerContributeValuePanel;
     public PlayerSideDataRootPanel playerSideDataRootPanel;
     public CoolDownTimer uiRefreshTimer = new CoolDownTimer(0);
     public bool selecting = true;
-    public Vector2Int selectSize = new Vector2Int(2, 2);
+    public SelectStatus selectStatus = SelectStatus.BASE;
+    public Vector2Int selectSize = new Vector2Int(3, 3);
     private List<Vector3Int> selectPos=new List<Vector3Int>();
 
 
@@ -42,8 +49,32 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public void OnTick()
     {
         playerSideDataRootPanel.UpdatePlayerSideResourceData();
-        if (Input.GetMouseButton(1))
-            Debug.Log("saosoa");
+        if (selecting && Input.GetMouseButton(0))
+        {
+            if (selectStatus == SelectStatus.BASE)
+            {
+                var pos = GameManager.instance.selectPos;
+                if (GameManager.instance.PosValid(pos)) {
+                    GameManager.instance.buildings.Add(pos, new BasicBuilding(CurrentDetailPanel.currentPlayerSide, BasicBuilding.BuildingType.BUILDING_BASE, pos));
+                    TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BasicBuilding.BuildingType.BUILDING_BASE]);
+                    selecting = false;
+                }
+            }
+        }
+    }
+
+    public void BeginSelection(SelectStatus status)
+    {
+        selecting = true;
+        selectStatus = status;
+        selectSize = new Vector2Int(1, 1);
+        if (selectStatus == SelectStatus.BASE)
+            selectSize = new Vector2Int(3, 3);
+    }
+
+    public void EndSelection()
+    {
+        selecting = false;
     }
 
     public Vector3Int showSelection()

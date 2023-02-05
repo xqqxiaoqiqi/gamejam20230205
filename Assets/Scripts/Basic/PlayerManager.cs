@@ -6,6 +6,7 @@ using Object = System.Object;
 public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 {
     public int initModifierTotalCount = 10;
+    public int maxBuildingLevel = 3;
 
     public Dictionary<GameManager.PlayerSide, int[]> initReSourcesData = new Dictionary<GameManager.PlayerSide, int[]>();
 

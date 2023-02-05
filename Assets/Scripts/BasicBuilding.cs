@@ -15,6 +15,7 @@ public class BasicBuilding
     public Vector3Int pos;
     //标记已经被一个士兵选中，不会再被下一个士兵当做目标。
     public bool targeted = false;
+    public int buildingLevel = 1;
     [Serializable]
     public enum BuildingType
     {
@@ -35,7 +36,8 @@ public class BasicBuilding
         ON_ENTITY_ENTER,
         ON_SWITCH_PLAYER_SIDE,
         ON_BUILD_DESTROY,
-        ON_CAPABILITY_ZERO
+        ON_CAPABILITY_ZERO,
+        ON_BUILD_UPGRADE
     }
     public class Behaviour
     {
@@ -106,7 +108,17 @@ public class BasicBuilding
         }
     }
 
-   
+    public void OnBuildUpgrade()
+    {
+        if (buildingLevel < PlayerManager.instance.maxBuildingLevel)
+        {
+            buildingLevel++;
+            for (int i = 0; i < behaviours.Count; i++)
+            {
+                behaviours[i].OnEvent(BuildingEvent.ON_BUILD_UPGRADE);
+            }
+        }
+    }
     public BasicBuilding(GameManager.PlayerSide playerSide,BuildingType type,Vector3Int position)
     {
         buildType = type;

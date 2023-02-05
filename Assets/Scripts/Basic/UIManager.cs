@@ -78,7 +78,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
             }
         }
 
-        if (cam.Zoom > 40)
+        if (cam.Zoom > 20)
             panels.SetActive(false);
         else
             panels.SetActive(true);
@@ -115,7 +115,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
                         panel.image.sprite = UIManager.instance.sideImage2;
                         panel.side.text = UIManager.instance.sideTexts[2];
                     }
-                    panel.capability.text = 10.ToString();
+                    panel.capability.text = 
                     panel.level.text = 1.ToString();
                     OnInitBase(CurrentDetailPanel.currentPlayerSide);
                 }

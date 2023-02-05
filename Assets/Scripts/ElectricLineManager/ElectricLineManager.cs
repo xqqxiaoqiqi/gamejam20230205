@@ -51,11 +51,8 @@ public class ElectircLineManager : IDisposable
             m_enable = true;
         }
         //
-        #if UNITY_EDITOR
-        lineMat = AssetDatabase.LoadAssetAtPath<Material>($"Assets/Resources/Materials/LineMat.mat");
-        #else
-        lineMat = Resources.Load<Material>($"{Application.dataPath}/Materials/LineMat.mat");
-        #endif
+        lineMat = Resources.Load<Material>("Materials/LineMat");
+
         mat_A = Material.Instantiate(lineMat);
         mat_B = Material.Instantiate(lineMat);
         mat_C= Material.Instantiate(lineMat);

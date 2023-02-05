@@ -50,9 +50,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7d99e9cc8fe63734e982c847cbfd30fb, type: 2}
   - {fileID: 11400000, guid: 284ae180e41c10e43ae2ed4660d91306, type: 2}
   - {fileID: 11400000, guid: f700c67647ea93c45b2cab13ec9ed1e0, type: 2}
-  - {fileID: 11400000, guid: 37500b98fec3f414b992c857edd9ad80, type: 2}
-  - {fileID: 11400000, guid: e86cbdfaa4c244f4eaa7e4572701fbfd, type: 2}
-  - {fileID: 11400000, guid: 72e5dbd4ef644a54b994c7bb6c93e1bf, type: 2}
+  - {fileID: 11400000, guid: 5b25ac76f12e07e429d53ae36f66fe5e, type: 2}
+  - {fileID: 11400000, guid: bc85ddfccafbd9a4688c72c53fe6b15e, type: 2}
+  - {fileID: 11400000, guid: 303b3c2f9dff66d469343bb6ed90473d, type: 2}
   - {fileID: 11400000, guid: f505cc94803625342a3d2c0636a19e9f, type: 2}
   - {fileID: 11400000, guid: 1c7074cc72c11ff46905f7af5f3eb22f, type: 2}
   - {fileID: 11400000, guid: 0caccf8c8af349f42b12ae23f395f755, type: 2}
@@ -65,7 +65,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da5e88777be7d9e4da474bd26ba1e377, type: 2}
   selectTile: {fileID: 11400000, guid: f56cc0aab9b6bab43bb1455234d69b28, type: 2}
   selectFailTile: {fileID: 11400000, guid: 4e8a145047d14ea4db38f519c6eab784, type: 2}
-  entitySource: {fileID: 1718367676153831404, guid: 032c210ed4104c34e895ae430662cb49, type: 3}
+  entitySource: {fileID: 2555216422636078589, guid: 21db9c65d6106d94ea84a89b6242d3c8, type: 3}
+  entitySource1: {fileID: 3744578280553886841, guid: e133bd96f6fb13f449cf87fe7d12e70b, type: 3}
+  entitySource2: {fileID: 2077351455029464292, guid: e4e3134eb13f5b14d8a47169b9ec9e6e, type: 3}
   tileRoot: {fileID: 0}
   mapHeight: 100
   mapWidth: 100
@@ -90,3 +92,4 @@ MonoBehaviour:
   maxBuildingLevel: 3
   maxContributeValue: 2000
   currContributeValue: 0
+  currEventIndex: 0

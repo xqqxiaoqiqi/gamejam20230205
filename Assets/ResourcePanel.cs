@@ -25,8 +25,7 @@ public class ResourcePanel : BuildingPanel
             }
             else
             {
-                var index = (int) building.playerSide;
-                type.text =  UIManager.instance.sideTexts[index-1];
+                type.text =  UIManager.instance.GetName(building.buildType);
                 switch (building.buildType)
                 {
                     case BasicBuilding.BuildingType.BUILDING_METAL:
@@ -45,7 +44,7 @@ public class ResourcePanel : BuildingPanel
                         value.color = new Color(255,80,78);
                         Power.text = myModifier.sourceValue.ToString();
                         value.text = myModifier.targetValue.ToString();
-                        background.sprite = UIManager.instance.metalPanelSprite;
+                        background.sprite = UIManager.instance.factoryPanelSprite;
                         break;
                     default:
                         break;

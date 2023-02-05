@@ -12,7 +12,7 @@ public class Modifier
     public GameManager.ResourceType targetType;
     public int sourceValue;
     public int targetValue;
-    public bool isEnabled = true;
+    public bool isEnabled = false;
 
 
     public Modifier(GameManager.PlayerSide playerSide, GameManager.ResourceType sourceType,int sourceValue,GameManager.ResourceType targetType,int targetValue)

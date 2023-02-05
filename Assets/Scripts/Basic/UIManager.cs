@@ -39,6 +39,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public Sprite powerPanelSprite;
     public Sprite metalPanelSprite;
     public Sprite enemyPanelSprite;
+    public Sprite factoryPanelSprite;
 
     public Button endImage;
 
@@ -111,6 +112,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
                     var panel = obj.GetComponent<BasePanel>();
                     obj.transform.parent = UIManager.instance.panels.transform;
                     building.panel = obj.GetComponent<BuildingPanel>();
+                    building.panel.OnInit(building);
                     building.panel.building = building;
                     if (CurrentDetailPanel.currentPlayerSide == GameManager.PlayerSide.SIDE_A)
                     {
@@ -127,8 +129,6 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
                         panel.image.sprite = UIManager.instance.sideImage2;
                         panel.side.text = UIManager.instance.sideTexts[2];
                     }
-                    panel.capability.text = 
-                    panel.level.text = 1.ToString();
                     OnInitBase(CurrentDetailPanel.currentPlayerSide);
                 }
             }
@@ -228,6 +228,23 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
         }
         selectPos.Clear();
         selecting = false;
+    }
+
+    public string GetName(BasicBuilding.BuildingType buildingType)
+    {
+        switch (buildingType)
+        {
+            case BasicBuilding.BuildingType.BUILDING_FACTORY:
+                return "遗迹";
+            case BasicBuilding.BuildingType.BUILDING_FOOD:
+                return "农场";
+            case BasicBuilding.BuildingType.BUILDING_METAL:
+                return "矿厂";
+            case BasicBuilding.BuildingType.BUILDING_POWER:
+                return "电厂";
+            default:
+                return "NULL";
+        }
     }
 
     public Vector3Int showSelection()

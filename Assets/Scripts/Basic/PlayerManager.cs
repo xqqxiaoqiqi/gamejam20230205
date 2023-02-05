@@ -11,6 +11,7 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
     public int maxBuildingLevel = 3;
     public int maxContributeValue = 2000;
     public int currContributeValue = 0;
+    public int basicCapability = 1;
 
     public Dictionary<GameManager.PlayerSide, int[]> initReSourcesData = new Dictionary<GameManager.PlayerSide, int[]>();
     public Dictionary<PlayerEvent, PlayerEventData> playerEventDatas = new Dictionary<PlayerEvent, PlayerEventData>();

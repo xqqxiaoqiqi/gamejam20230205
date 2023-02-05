@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class BuildingPanel : MonoBehaviour
     public Image image;
     public BasicBuilding building;
     
-    void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         if (building != null)
         {
@@ -32,4 +33,29 @@ public class BuildingPanel : MonoBehaviour
 {
     public Text capability;
     public Text level;
+    public BasicBuilding myBuilding;
+
+
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        if (myBuilding != null&&myBuilding.buildType == BasicBuilding.BuildingType.BUILDING_BASE)
+        {
+            level.text = "LV." + myBuilding.buildingLevel;
+            capability.text = (PlayerManager.instance.basicCapability+GameManager.instance.allPlayerSideDatas[myBuilding.playerSide].resourcesData[(int) GameManager.ResourceType.ENTITY_CAPABILITY]).ToString();
+        }
+    }
+
+    public override void OnInit(object args)
+    {
+        base.OnInit(args);
+        var building = args as BasicBuilding;
+        myBuilding = building;
+        if (myBuilding != null&&myBuilding.buildType == BasicBuilding.BuildingType.BUILDING_BASE)
+        {
+            level.text = "LV." + myBuilding.buildingLevel;
+            capability.text = (PlayerManager.instance.basicCapability+GameManager.instance.allPlayerSideDatas[myBuilding.playerSide].resourcesData[(int) GameManager.ResourceType.ENTITY_CAPABILITY]).ToString();
+        }
+
+    }
 }

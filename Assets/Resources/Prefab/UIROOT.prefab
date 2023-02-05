@@ -3051,7 +3051,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4e3da605bd9618348839bed23fc8f7f9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3bd3f06d1e6fc9d49a2f243840ef80a7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3456,6 +3456,11 @@ MonoBehaviour:
   GameStartPanel: {fileID: 2123036812797068953}
   totalCount: {fileID: 4957163435045637105}
   remainCount: {fileID: 3549385543367455962}
+  currImage: {fileID: 2123036813054930772}
+  sideA: {fileID: 21300000, guid: 3bd3f06d1e6fc9d49a2f243840ef80a7, type: 3}
+  sideB: {fileID: 21300000, guid: 5e2294a2183d6b04995b9308ad77e873, type: 3}
+  sideC: {fileID: 21300000, guid: 7da8123353009a041a312a51724f1cc0, type: 3}
+  currText: {fileID: 1853235463241079897}
 --- !u!1 &2123036813179253386
 GameObject:
   m_ObjectHideFlags: 0
@@ -4433,7 +4438,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2123036813723378337
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5404,6 +5409,7 @@ MonoBehaviour:
   powerPanelSprite: {fileID: 21300000, guid: fab8094c3fdbd97409d19a1da76032e8, type: 3}
   metalPanelSprite: {fileID: 21300000, guid: ba3d9f90d9308e343ba024c3280d867e, type: 3}
   enemyPanelSprite: {fileID: 21300000, guid: 8c7cb293f4e44974f991f148344a6174, type: 3}
+  factoryPanelSprite: {fileID: 21300000, guid: b8fcb1e566e2fe94eaf4c90d83f099c9, type: 3}
 --- !u!1 &2123036814355350092
 GameObject:
   m_ObjectHideFlags: 0
@@ -8558,7 +8564,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4e3da605bd9618348839bed23fc8f7f9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e2294a2183d6b04995b9308ad77e873, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8794,7 +8800,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4e3da605bd9618348839bed23fc8f7f9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7da8123353009a041a312a51724f1cc0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10395,7 +10401,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4e3da605bd9618348839bed23fc8f7f9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3bd3f06d1e6fc9d49a2f243840ef80a7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11643,8 +11649,8 @@ RectTransform:
   m_Father: {fileID: 2948553450927442549}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12339,7 +12345,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

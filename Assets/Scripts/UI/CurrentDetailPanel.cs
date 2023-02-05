@@ -13,6 +13,11 @@ public class CurrentDetailPanel : MonoBehaviour
     public GameStartPanel GameStartPanel;
     public Text totalCount;
     public Text remainCount;
+    public Image currImage;
+    public Sprite sideA;
+    public Sprite sideB;
+    public Sprite sideC;
+    public Text currText;
     public void OnInit()
     {
         currentPlayerSideMaxResourceValue.Add(GameManager.PlayerSide.SIDE_A,PlayerManager.instance.initModifierTotalCount);
@@ -37,6 +42,24 @@ public class CurrentDetailPanel : MonoBehaviour
     {
         Debug.Log("PLAYRSIDE:" +newSide);
         currentPlayerSide = newSide;
+        switch (newSide)
+        {
+            case GameManager.PlayerSide.SIDE_A:
+                currImage.sprite = sideA;
+                currText.text = "当前选择：" + UIManager.instance.sideTexts[0];
+                break;
+            case GameManager.PlayerSide.SIDE_B:
+                currImage.sprite = sideB;
+                currText.text = "当前选择：" + UIManager.instance.sideTexts[1];
+                break;
+            case GameManager.PlayerSide.SIDE_C:
+                currImage.sprite = sideC;
+                currText.text = "当前选择：" + UIManager.instance.sideTexts[2];
+                break;
+            default:
+                break;
+            
+        }
         for (int i = 0; i < modifyStartResourcesPanel.Length; i++)
         {
             modifyStartResourcesPanel[i].UpdateCurrentPlayerSideData(currentPlayerSideResourcesValue[currentPlayerSide]);

@@ -85,6 +85,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
                 {
                     GameManager.instance.buildings.Add(pos, new BasicBuilding(GameManager.PlayerSide.NATURE, BasicBuilding.BuildingType.BUILDING_FOODCHEST, pos));
                     TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BasicBuilding.BuildingType.BUILDING_FOODCHEST]);
+                    EndSelection();
                 }
             }
             if (selectStatus == SelectStatus.METALCHEST)
@@ -94,6 +95,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
                 {
                     GameManager.instance.buildings.Add(pos, new BasicBuilding(GameManager.PlayerSide.NATURE, BasicBuilding.BuildingType.BUILDING_METALCHEST, pos));
                     TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BasicBuilding.BuildingType.BUILDING_METALCHEST]);
+                    EndSelection();
                 }
             }
             if (selectStatus == SelectStatus.ENTITYCHEST)
@@ -103,6 +105,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
                 {
                     GameManager.instance.buildings.Add(pos, new BasicBuilding(GameManager.PlayerSide.NATURE, BasicBuilding.BuildingType.BUILDING_ENTITYCHEST, pos));
                     TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BasicBuilding.BuildingType.BUILDING_ENTITYCHEST]);
+                    EndSelection();
                 }
             }
             if (selectStatus == SelectStatus.FLAG)
@@ -133,9 +136,12 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
                             nearestEntity.MoveTo(pos);
                         }
                     }
-
+                    EndSelection();
                 }
             }
+        }
+        else if(Input.GetMouseButtonDown(1))
+        {
             EndSelection();
         }
     }

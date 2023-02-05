@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 939121b3f629bfc4091ca81313217548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capability: 0
-  movespeed: 0.5
+  basicCapability: 1
+  movespeed: 0.1
   playerSide: 1
   behaviours: []
   path: []

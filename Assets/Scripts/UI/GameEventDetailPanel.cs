@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameEventDetailPanel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Text myText;
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateDescription(string content)
     {
-        
+        myText.text = content;
     }
 }

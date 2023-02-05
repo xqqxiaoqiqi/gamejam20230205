@@ -226,4 +226,10 @@ public class CoolDownTimer
         current = 0;
     }
 
+    public void Reset(int maxvalue)
+    {
+        coolDown = maxvalue;
+        current = 0;
+    }
+
 }

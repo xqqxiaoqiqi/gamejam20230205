@@ -124,7 +124,7 @@ public class Entity : MonoBehaviour
     private void SearchTargetBuilding()
     {
         var currentPos = TileManager.Instance.terrainMap.WorldToCell(transform.position);
-        for (int circle = 1; circle < 50; circle++)
+        for (int circle = 1; circle < 25; circle++)
         {
             for (int i = -circle; i < circle; i++)
             {
@@ -169,6 +169,17 @@ public class Entity : MonoBehaviour
                     MoveTo(pos);
                     return;
                 }
+            }
+        }
+        foreach(var building in GameManager.instance.buildings)
+        {
+            var pos = building.Value.pos;
+            if (CheckBuildingCennect(currentPos, pos))
+            {
+                targetBuilding = GameManager.instance.buildings[pos];
+                targetBuilding.targeted = true;
+                MoveTo(pos);
+                return;
             }
         }
     }

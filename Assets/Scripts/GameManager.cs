@@ -74,6 +74,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public CoolDownTimer gameTickTimer = new CoolDownTimer(30);
     public Vector3Int selectPos;
     public bool isGameStarted = false;
+
+    private int resourceCount = 0;
+
+    private int enemyCount = 0;
+
     public void FixedUpdate()
     {
         selectPos = UIManager.instance.showSelection();
@@ -101,20 +106,20 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             gameTickTimer.Reset();
         }
         var destroyList = new List<Vector3Int>();
-        foreach(var building in buildings)
+        foreach (var building in buildings)
         {
             if (building.Value.isDestroyed)
             {
                 destroyList.Add(building.Key);
             }
         }
-        foreach(var key in destroyList)
+        foreach (var key in destroyList)
         {
             TileManager.Instance.buildingMap.SetTile(key, null);
             buildings.Remove(key);
         }
 
-        for(int i=Entities.Count-1;i>=0;i--)
+        for (int i = Entities.Count - 1; i >= 0; i--)
         {
             if (Entities[i].isFinished)
             {
@@ -125,8 +130,20 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         UIManager.instance.OnTick();
         PlayerManager.instance.OnTick();
         UIManager.instance.UpdateContributeValue();
+
+        if (PlayerManager.instance.currContributeValue > PlayerManager.instance.maxContributeValue)
+        {
+            PlayerManager.instance.WinGame(PlayerManager.WinReason.CONTRIBUTE);
+        }
+        if (enemyCount <= 0)
+        {
+            PlayerManager.instance.WinGame(PlayerManager.WinReason.WAR);
+        }
+        if (resourceCount <= 0)
+        {
+            PlayerManager.instance.WinGame(PlayerManager.WinReason.OCCUPY);
+        }
     }
-    
 
     public void InitEntity(PlayerSide playerSide, Vector3Int position)
     {
@@ -169,6 +186,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     if (TileManager.Instance.buildingMap.GetTile(pos) == buildingSource[k])
                     {
                         buildings.Add(pos, new BasicBuilding(PlayerSide.NATURE, (BasicBuilding.BuildingType)k, pos));
+                        if (k <= 3)
+                            resourceCount++;
+                        else if (k == 0 || k == 19 || k == 20)
+                            enemyCount++;
                     }
             }
         }

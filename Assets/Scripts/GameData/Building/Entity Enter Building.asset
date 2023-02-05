@@ -30,3 +30,15 @@ MonoBehaviour:
     buildType: 3
     checkCapability: 0
     maxCapabilityCount: 1
+  - onEvent: 0
+    buildType: 7
+    checkCapability: 1
+    maxCapabilityCount: 10
+  - onEvent: 0
+    buildType: 19
+    checkCapability: 1
+    maxCapabilityCount: 20
+  - onEvent: 0
+    buildType: 20
+    checkCapability: 1
+    maxCapabilityCount: 30

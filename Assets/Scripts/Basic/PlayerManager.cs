@@ -55,7 +55,9 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
     
     public enum WinReason
     {
-        
+        CONTRIBUTE,
+        OCCUPY,
+        WAR
     }
 
     public void DoPlayerEvent(PlayerEvent playerEvent, GameManager.PlayerSide playerSide, Vector3Int position, Object args)
@@ -132,7 +134,20 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 
     public void WinGame(WinReason winReason)
     {
-        
+        UIManager.instance.endImage.gameObject.SetActive(true);
+        if (winReason == WinReason.CONTRIBUTE)
+        {
+            UIManager.instance.endImage.image.sprite = UIManager.instance.EndSpriteContri;
+        }
+        else if (winReason == WinReason.WAR)
+        {
+            UIManager.instance.endImage.image.sprite = UIManager.instance.EndSpriteWar;
+        }
+        else if (winReason == WinReason.OCCUPY)
+        {
+            UIManager.instance.endImage.image.sprite = UIManager.instance.EndSpriteOccupy;
+        }
+
     }
 
     public void OnTick()
@@ -166,10 +181,7 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
         foreach (var playerSideData in GameManager.instance.allPlayerSideDatas)
         {
             var resValue = playerSideData.Value.resourcesData;
-            for (int i = 0; i < resValue.Length; i++)
-            {
-                value += resValue[i];
-            }
+            value +=resValue[1];
         }
         currContributeValue = value;
     }

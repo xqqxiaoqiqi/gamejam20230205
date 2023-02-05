@@ -34,11 +34,19 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public Sprite sideImage0;
     public Sprite sideImage1;
     public Sprite sideImage2;
-    public string[] sideTexts=new string[]{"联盟","联邦","安娜其" };
+    public string[] sideTexts=new string[]{"联盟", "安那其", "联邦" };
     public Sprite farmPanelSprite;
     public Sprite powerPanelSprite;
     public Sprite metalPanelSprite;
     public Sprite enemyPanelSprite;
+
+    public Button endImage;
+
+    public Sprite EndSpriteCold;
+    public Sprite EndSpritePoor;
+    public Sprite EndSpriteOccupy;
+    public Sprite EndSpriteContri;
+    public Sprite EndSpriteWar;
 
 
     public void InitUIRoot()
@@ -82,7 +90,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
             }
         }
 
-        if (cam.Zoom > 20)
+        if (cam.Zoom > 15)
             panels.SetActive(false);
         else
             panels.SetActive(true);
@@ -185,10 +193,6 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
                     EndSelection();
                 }
             }
-        }
-        else if(Input.GetMouseButtonDown(1))
-        {
-            EndSelection();
         }
     }
 

@@ -95,7 +95,7 @@ public class ElectircLineManager : IDisposable
                 var LineRenderer = newLine.AddComponent<LineRenderer>();
                 var posOld = GetbuildingPosWS(nearestBuilding.pos);
                 if(nearestBuilding.buildType==BasicBuilding.BuildingType.BUILDING_BASE|| nearestBuilding.buildType == BasicBuilding.BuildingType.BASE1|| nearestBuilding.buildType == BasicBuilding.BuildingType.BASE2)
-                    posOld= GetbuildingPosWS(nearestBuilding.pos+new Vector3Int(1,1,0));
+                    posOld= GetbuildingPosWS(nearestBuilding.pos+new Vector3Int(3,3,0));
                 var posNew = GetbuildingPosWS(building.pos);
                 Vector3[] posList = new Vector3[]
                 {
@@ -195,7 +195,7 @@ public class ElectircLineManager : IDisposable
     
     Vector3 GetbuildingPosWS(Vector3Int p)
     {
-        var result = m_terrainMap.CellToWorld(p);
+        var result = 0.5f * (m_terrainMap.CellToWorld(p + new Vector3Int(2, 2, 0)) + m_terrainMap.CellToWorld(p + new Vector3Int(1, 1, 0)));
         result.z = -1;
         return result;
     }

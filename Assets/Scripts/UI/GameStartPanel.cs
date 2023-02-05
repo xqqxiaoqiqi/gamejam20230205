@@ -20,6 +20,9 @@ public class GameStartPanel : MonoBehaviour
     public void OnPlayerSideInitBase(GameManager.PlayerSide playerSide)
     {
         playerSideInited[(int) playerSide] = true;
+        currentDetailPanel.InitAllModifiers();
+        UIManager.instance.GameStart();
+        return;
         if (IsAllPlayerSideReady)
         {
             currentDetailPanel.InitAllModifiers();

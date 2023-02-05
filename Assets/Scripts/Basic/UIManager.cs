@@ -39,6 +39,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public Sprite powerPanelSprite;
     public Sprite metalPanelSprite;
     public Sprite enemyPanelSprite;
+    public Sprite factoryPanelSprite;
 
 
     public void InitUIRoot()
@@ -224,6 +225,23 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
         }
         selectPos.Clear();
         selecting = false;
+    }
+
+    public string GetName(BasicBuilding.BuildingType buildingType)
+    {
+        switch (buildingType)
+        {
+            case BasicBuilding.BuildingType.BUILDING_FACTORY:
+                return "遗迹";
+            case BasicBuilding.BuildingType.BUILDING_FOOD:
+                return "农场";
+            case BasicBuilding.BuildingType.BUILDING_METAL:
+                return "矿厂";
+            case BasicBuilding.BuildingType.BUILDING_POWER:
+                return "电厂";
+            default:
+                return "NULL";
+        }
     }
 
     public Vector3Int showSelection()

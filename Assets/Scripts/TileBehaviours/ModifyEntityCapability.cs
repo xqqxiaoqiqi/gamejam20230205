@@ -25,7 +25,7 @@ public class ModifyEntityCapability :  BasicTile.Behaviour
             var entity = args as Entity;
             if (entity != null)
             {
-                entity.capability += value;
+                //entity.capability += value;
             }
 
         }

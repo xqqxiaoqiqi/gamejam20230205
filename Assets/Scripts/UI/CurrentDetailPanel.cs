@@ -45,4 +45,21 @@ public class CurrentDetailPanel : MonoBehaviour
         remainCount.text = currentPlayerSideMaxResourceValue[currentPlayerSide].ToString();
         totalCount.text = PlayerManager.instance.initModifierTotalCount.ToString();
     }
+
+    public void InitAllModifiers()
+    {
+        foreach (var playersideModifier in currentPlayerSideResourcesValue)
+        {
+            var playerside = playersideModifier.Key;
+            var modifiers = playersideModifier.Value;
+            for (int i = 0; i < modifiers.Length; i++)
+            {
+                if (modifiers[i] != 0)
+                {
+                    new Modifier(playerside, GameManager.ResourceType.POWER, 0, (GameManager.ResourceType) i,
+                        modifiers[i]);
+                }
+            }
+        }
+    }
 }

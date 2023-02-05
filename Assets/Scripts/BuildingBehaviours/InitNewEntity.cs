@@ -7,7 +7,8 @@ public class InitNewEntity : BasicBuilding.Behaviour
     public int count;
     public CoolDownTimer triggerTimer;
     public bool immediately;
-
+    public bool requestFood;
+    public int requestFoodCount;
 
     public override void DoSetData(BuildingBehaviourOptions.BehaviourData data)
     {
@@ -18,6 +19,8 @@ public class InitNewEntity : BasicBuilding.Behaviour
             onEvent = mydata.onEvent;
             count = mydata.count;
             immediately = mydata.immediately;
+            requestFood = mydata.requestFood;
+            requestFoodCount = mydata.requestFoodCount;
             if (!immediately)
             {
                 triggerTimer = new CoolDownTimer(mydata.coolDown);
@@ -35,6 +38,15 @@ public class InitNewEntity : BasicBuilding.Behaviour
         {
             if (owner.playerSide != GameManager.PlayerSide.NATURE)
             {
+                if (requestFood &&
+                    GameManager.instance.allPlayerSideDatas[owner.playerSide].resourcesData[(int) GameManager.ResourceType.FOOD] >= requestFoodCount)
+                {
+                    GameManager.instance.allPlayerSideDatas[owner.playerSide].resourcesData[(int) GameManager.ResourceType.FOOD] -= requestFoodCount;
+                }
+                else
+                {
+                    return;
+                }
                 GameManager.instance.InitEntity(owner.playerSide, owner.pos);
             }
             triggerTimer.Reset();

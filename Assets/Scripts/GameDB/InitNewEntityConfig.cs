@@ -13,6 +13,8 @@ public class InitNewEntityConfig : BuildingBehaviourOptions
         public int count;
         public int coolDown;
         public bool immediately;
+        public bool requestFood;
+        public int requestFoodCount;
 
     }
 

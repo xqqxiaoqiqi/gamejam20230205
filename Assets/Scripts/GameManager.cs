@@ -71,8 +71,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public BuildingBehaviourDB BuildingBehaviourDB;
     public CoolDownTimer gameTickTimer = new CoolDownTimer(30);
     private Vector3Int selectPos;
+    public bool isGameStarted = false;
     public void FixedUpdate()
     {
+        if (!isGameStarted)
+        {
+            return;
+        }
         gameTickTimer.OnTick();
         for (int i = 0; i < Entities.Count; i++)
         {
@@ -103,7 +108,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             }
             gameTickTimer.Reset();
         }
-        selectPos= UIManager.instance.showSelection();
+        //selectPos= UIManager.instance.showSelection();
         var destroyList = new List<Vector3Int>();
         foreach(var building in buildings)
         {
@@ -144,17 +149,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private void Start()
     {
-        allPlayerSideDatas.Add(PlayerSide.SIDE_A,new PlayerSideData());
-        allPlayerSideDatas.Add(PlayerSide.SIDE_B,new PlayerSideData());
-        allPlayerSideDatas.Add(PlayerSide.SIDE_C, new PlayerSideData());
-        testBuilding.Add(new BasicBuilding(PlayerSide.ENUM,BasicBuilding.BuildingType.BUILDING_POWER,new Vector3Int(0,0,0)));
-        var test_1=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, 0, ResourceType.POWER, 20);
-        var test_2=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, -20, ResourceType.FOOD, 7);
-        var test_3=new Modifier(PlayerSide.SIDE_A, ResourceType.POWER, -20, ResourceType.METAL, 7);
-        
+        InitGame();
         TileManager.Instance.Init();
         InitBuildings();
         UIManager.instance.InitUIRoot();
+    }
+
+    public void InitGame()
+    {
+        allPlayerSideDatas.Add(PlayerSide.SIDE_A,new PlayerSideData());
+        allPlayerSideDatas.Add(PlayerSide.SIDE_B,new PlayerSideData());
+        allPlayerSideDatas.Add(PlayerSide.SIDE_C, new PlayerSideData());
     }
 
     private void InitBuildings()

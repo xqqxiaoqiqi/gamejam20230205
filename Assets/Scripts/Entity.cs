@@ -7,7 +7,16 @@ using UnityEngine.Tilemaps;
 using Aoiti.Pathfinding;
 public class Entity : MonoBehaviour
 {
-    public int capability;
+    public int basicCapability = 1;
+
+    public int capability
+    {
+        get
+        {
+            return basicCapability + GameManager.instance.allPlayerSideDatas[playerSide]
+                .resourcesData[(int) GameManager.ResourceType.ENTITY_CAPABILITY];
+        }
+    }
     public float movespeed;
     public GameManager.PlayerSide playerSide;
     public Behaviour[] behaviours;

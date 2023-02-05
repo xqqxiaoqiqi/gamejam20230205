@@ -17,6 +17,8 @@ public class BasicBuilding
     //标记已经被一个士兵选中，不会再被下一个士兵当做目标。
     public bool targeted = false;
     public int buildingLevel = 1;
+    public  BuildingPanel panel;
+
     [Serializable]
     public enum BuildingType
     {
@@ -95,6 +97,30 @@ public class BasicBuilding
             behaviours[i].OnEvent(BuildingEvent.ON_SWITCH_PLAYER_SIDE);
         }
         playerSide = newside;
+        ElectircLineManager.m_Instance.ExtentBuildingLines(this, newside);
+
+        if(buildType==BuildingType.BUILDING_FOOD|| buildType == BuildingType.BUILDING_METAL|| buildType == BuildingType.BUILDING_POWER|| buildType == BuildingType.BUILDING_FACTORY)
+        {
+            var obj=GameObject.Instantiate(UIManager.instance.resourcePanelSource);
+            obj.transform.parent = UIManager.instance.panels.transform;
+            panel = obj.GetComponent<ResourcePanel>();
+            if (playerSide == GameManager.PlayerSide.SIDE_A)
+            {
+                panel.image.sprite = UIManager.instance.sideImage0;
+                panel.side.text = UIManager.instance.sideTexts[0];
+            }
+            else if(playerSide==GameManager.PlayerSide.SIDE_B)
+            {
+                panel.image.sprite = UIManager.instance.sideImage1;
+                panel.side.text = UIManager.instance.sideTexts[1];
+            }
+            else if (playerSide == GameManager.PlayerSide.SIDE_C)
+            {
+                panel.image.sprite = UIManager.instance.sideImage2;
+                panel.side.text = UIManager.instance.sideTexts[2];
+            }
+            panel.building = this;
+        }
     }
 
     public void SetWorkingStatus(bool value)

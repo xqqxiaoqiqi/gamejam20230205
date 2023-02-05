@@ -59,9 +59,9 @@ public class ElectircLineManager : IDisposable
         mat_A = Material.Instantiate(lineMat);
         mat_B = Material.Instantiate(lineMat);
         mat_C= Material.Instantiate(lineMat);
-        mat_A.SetColor("_Color",new Color(3.0f/255,51.0f/255,96.0f/255));
-        mat_B.SetColor("_Color",new Color(201.0f/255,121.0f/255,6.0f/255));
-        mat_C.SetColor("_Color",new Color(136.0f/255,22.0f/255,22.0f/255));
+        mat_A.SetColor("_Color", new Color(200.0f / 255, 22.0f / 255, 22.0f / 255));
+        mat_B.SetColor("_Color", new Color(201.0f / 255, 200.0f / 255, 6.0f / 255));
+        mat_C.SetColor("_Color",new Color(3.0f/255,51.0f/255,150.0f/255));
         maxLayer_A = 0;
         maxLayer_B = 0;
         maxLayer_C = 0;
@@ -94,6 +94,8 @@ public class ElectircLineManager : IDisposable
                         $"{nearestBuilding.playerSide}_{nearestBuilding.buildType} ----- new {building.buildType}");
                 var LineRenderer = newLine.AddComponent<LineRenderer>();
                 var posOld = GetbuildingPosWS(nearestBuilding.pos);
+                if(nearestBuilding.buildType==BasicBuilding.BuildingType.BUILDING_BASE|| nearestBuilding.buildType == BasicBuilding.BuildingType.BASE1|| nearestBuilding.buildType == BasicBuilding.BuildingType.BASE2)
+                    posOld= GetbuildingPosWS(nearestBuilding.pos+new Vector3Int(1,1,0));
                 var posNew = GetbuildingPosWS(building.pos);
                 Vector3[] posList = new Vector3[]
                 {

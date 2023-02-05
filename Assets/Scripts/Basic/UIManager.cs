@@ -1,8 +1,10 @@
+using Lean.Touch;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class UIManager : SingletonMonoBehaviour<UIManager>
 {
@@ -25,6 +27,14 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     private SelectStatus selectStatus = SelectStatus.FLAG;
     private Vector2Int selectSize = new Vector2Int(1, 1);
     private List<Vector3Int> selectPos = new List<Vector3Int>();
+    public GameObject panels;
+    public GameObject basePanelSource;
+    public GameObject resourcePanelSource;
+    public LeanPinchCamera cam;
+    public Sprite sideImage0;
+    public Sprite sideImage1;
+    public Sprite sideImage2;
+    public string[] sideTexts=new string[]{"联盟","联邦","安娜其" };
 
 
     public void InitUIRoot()
@@ -68,6 +78,11 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
             }
         }
 
+        if (cam.Zoom > 40)
+            panels.SetActive(false);
+        else
+            panels.SetActive(true);
+
         if (selecting && Input.GetMouseButton(0))
         {
             if (selectStatus == SelectStatus.BASE)
@@ -75,9 +90,33 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
                 var pos = GameManager.instance.selectPos;
                 if (GameManager.instance.PosValid(pos))
                 {
-                    GameManager.instance.buildings.Add(pos, new BasicBuilding(CurrentDetailPanel.currentPlayerSide, BasicBuilding.BuildingType.BUILDING_BASE, pos));
+                    var building = new BasicBuilding(CurrentDetailPanel.currentPlayerSide, BasicBuilding.BuildingType.BUILDING_BASE, pos);
+                    GameManager.instance.buildings.Add(pos, building);
                     TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BasicBuilding.BuildingType.BUILDING_BASE]);
+                    ElectircLineManager.m_Instance.ExtentBuildingLines(building, building.playerSide);
                     EndSelection();
+                    var obj = GameObject.Instantiate(UIManager.instance.basePanelSource);
+                    var panel = obj.GetComponent<BasePanel>();
+                    obj.transform.parent = UIManager.instance.panels.transform;
+                    building.panel = obj.GetComponent<BuildingPanel>();
+                    building.panel.building = building;
+                    if (CurrentDetailPanel.currentPlayerSide == GameManager.PlayerSide.SIDE_A)
+                    {
+                        panel.image.sprite = UIManager.instance.sideImage0;
+                        panel.side.text = UIManager.instance.sideTexts[0];
+                    }
+                    else if (CurrentDetailPanel.currentPlayerSide == GameManager.PlayerSide.SIDE_B)
+                    {
+                        panel.image.sprite = UIManager.instance.sideImage1;
+                        panel.side.text = UIManager.instance.sideTexts[1];
+                    }
+                    else if (CurrentDetailPanel.currentPlayerSide == GameManager.PlayerSide.SIDE_C)
+                    {
+                        panel.image.sprite = UIManager.instance.sideImage2;
+                        panel.side.text = UIManager.instance.sideTexts[2];
+                    }
+                    panel.capability.text = 10.ToString();
+                    panel.level.text = 1.ToString();
                     OnInitBase(CurrentDetailPanel.currentPlayerSide);
                 }
             }

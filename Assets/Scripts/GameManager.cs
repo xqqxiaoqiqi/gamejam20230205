@@ -154,6 +154,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         
         TileManager.Instance.Init();
         InitBuildings();
+        UIManager.instance.InitUIRoot();
     }
 
     private void InitBuildings()

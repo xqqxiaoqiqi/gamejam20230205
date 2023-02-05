@@ -8,11 +8,16 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
 {
     public GameStartPanel gameStartPanel;
     public PlayerSideDataRootPanel playerSideDataRootPanel;
-    public CoolDownTimer uiRefreshTimer = new CoolDownTimer(30);
+    public CoolDownTimer uiRefreshTimer = new CoolDownTimer(0);
     public bool selecting = true;
     public Vector2Int selectSize = new Vector2Int(2, 2);
     private List<Vector3Int> selectPos=new List<Vector3Int>();
 
+
+    public void InitUIRoot()
+    {
+        gameStartPanel.OnInit();
+    }
 
     public Vector3Int GetMousePos()
     {
@@ -30,12 +35,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
 
     public void OnTick()
     {
-        //uiRefreshTimer.OnTick();
-        //if (uiRefreshTimer.isReady)
-        //{
-        //    playerSideDataRootPanel.UpdatePlayerSideResourceData();
-        //    uiRefreshTimer.Reset();
-        //}
+        playerSideDataRootPanel.UpdatePlayerSideResourceData();
         if (Input.GetMouseButton(1))
             Debug.Log("saosoa");
     }

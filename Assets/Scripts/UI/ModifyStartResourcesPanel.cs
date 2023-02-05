@@ -8,17 +8,19 @@ public class ModifyStartResourcesPanel : MonoBehaviour
 
     public GameManager.ResourceType resourceType;
     public CurrentDetailPanel currentDetailPanel;
-
+    public Slider Slider;
+    private int m_currValue;
     public int currValue
     {
         get
         {
-            return currValue;
+            return m_currValue;
         }
         set
         {
-            currValue = value;
-            //todo: modify slider
+            m_currValue = value;
+            Slider.value = (float)m_currValue / PlayerManager.instance.initModifierTotalCount;
+            currentDetailPanel.ModifyCurrentResourcecsUI();
         }
     }
     public Button addButton;
@@ -37,8 +39,9 @@ public class ModifyStartResourcesPanel : MonoBehaviour
     {
         if (currentDetailPanel.currentPlayerSideMaxResourceValue[currentDetailPanel.currentPlayerSide] > 0)
         {
+            currentDetailPanel.currentPlayerSideResourcesValue[currentDetailPanel.currentPlayerSide][(int)resourceType]++;
+            currentDetailPanel.currentPlayerSideMaxResourceValue[currentDetailPanel.currentPlayerSide]--;
             currValue++;
-            currentDetailPanel.currentPlayerSideResourcesValue[currentDetailPanel.currentPlayerSide][(int)resourceType]--;
         }
     }
 
@@ -46,8 +49,9 @@ public class ModifyStartResourcesPanel : MonoBehaviour
     {
         if (currValue > 0)
         {
+            currentDetailPanel.currentPlayerSideResourcesValue[currentDetailPanel.currentPlayerSide][(int)resourceType]--;
+            currentDetailPanel.currentPlayerSideMaxResourceValue[currentDetailPanel.currentPlayerSide]++;
             currValue--;
-            currentDetailPanel.currentPlayerSideResourcesValue[currentDetailPanel.currentPlayerSide][(int)resourceType]++;
         }
     }
     

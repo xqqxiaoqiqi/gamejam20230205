@@ -5,7 +5,7 @@ using Object = System.Object;
 
 public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 {
-    public int initResourcesTotalCount;
+    public int initModifierTotalCount = 10;
 
     public Dictionary<GameManager.PlayerSide, int[]> initReSourcesData = new Dictionary<GameManager.PlayerSide, int[]>();
 

@@ -5404,6 +5404,7 @@ MonoBehaviour:
   powerPanelSprite: {fileID: 21300000, guid: fab8094c3fdbd97409d19a1da76032e8, type: 3}
   metalPanelSprite: {fileID: 21300000, guid: ba3d9f90d9308e343ba024c3280d867e, type: 3}
   enemyPanelSprite: {fileID: 21300000, guid: 8c7cb293f4e44974f991f148344a6174, type: 3}
+  factoryPanelSprite: {fileID: 21300000, guid: b8fcb1e566e2fe94eaf4c90d83f099c9, type: 3}
 --- !u!1 &2123036814355350092
 GameObject:
   m_ObjectHideFlags: 0

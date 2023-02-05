@@ -140,6 +140,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         var obj=GameObject.Instantiate(source);
         var newEntity = obj.GetComponent<Entity>();
         newEntity.playerSide = playerSide;
+        newEntity.OnInit(playerSide);
         obj.transform.position = TileManager.Instance.terrainMap.CellToWorld(position);
     }
 

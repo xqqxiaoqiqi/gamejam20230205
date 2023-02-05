@@ -35,6 +35,7 @@ public class Entity : MonoBehaviour
     public void OnInit(GameManager.PlayerSide playerSide)
     {
         this.playerSide = playerSide;
+        basicCapability = PlayerManager.instance.basicCapability;
     }
 
     private void Start()

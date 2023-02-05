@@ -104,6 +104,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
                     var panel = obj.GetComponent<BasePanel>();
                     obj.transform.parent = UIManager.instance.panels.transform;
                     building.panel = obj.GetComponent<BuildingPanel>();
+                    building.panel.OnInit(building);
                     building.panel.building = building;
                     if (CurrentDetailPanel.currentPlayerSide == GameManager.PlayerSide.SIDE_A)
                     {
@@ -120,8 +121,6 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
                         panel.image.sprite = UIManager.instance.sideImage2;
                         panel.side.text = UIManager.instance.sideTexts[2];
                     }
-                    panel.capability.text = 
-                    panel.level.text = 1.ToString();
                     OnInitBase(CurrentDetailPanel.currentPlayerSide);
                 }
             }

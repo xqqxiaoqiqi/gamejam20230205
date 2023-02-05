@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 public class UIManager : SingletonMonoBehaviour<UIManager>
 {
     public GameStartPanel gameStartPanel;
+    public PlayerContributeValuePanel PlayerContributeValuePanel;
     public PlayerSideDataRootPanel playerSideDataRootPanel;
     public CoolDownTimer uiRefreshTimer = new CoolDownTimer(0);
     public bool selecting = true;
@@ -19,6 +20,11 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
         gameStartPanel.OnInit();
     }
 
+    public void UpdateContributeValue()
+    {
+        PlayerContributeValuePanel.UpdateValue();
+    }
+    
     public Vector3Int GetMousePos()
     {
         var target = Camera.main.ScreenToWorldPoint(Input.mousePosition);

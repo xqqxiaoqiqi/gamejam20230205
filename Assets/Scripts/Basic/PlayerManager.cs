@@ -7,6 +7,8 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 {
     public int initModifierTotalCount = 10;
     public int maxBuildingLevel = 3;
+    public int maxContributeValue = 2000;
+    public int currContributeValue = 0;
 
     public Dictionary<GameManager.PlayerSide, int[]> initReSourcesData = new Dictionary<GameManager.PlayerSide, int[]>();
 
@@ -76,6 +78,11 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
     public void WinGame(WinReason winReason)
     {
         
+    }
+
+    public void CalculateContributeValue()
+    {
+        //todo:计算公式
     }
     
 }

@@ -132,6 +132,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             }
         }
         UIManager.instance.OnTick();
+        PlayerManager.instance.CalculateContributeValue();
+        UIManager.instance.UpdateContributeValue();
     }
 
     public void InitMap()

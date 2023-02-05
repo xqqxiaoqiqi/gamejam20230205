@@ -37,6 +37,8 @@ public class BasicBuilding
         POWER1,
         FACTORY1,
         FACTORY2,
+        BASE1,
+        BASE2
     }
     [Serializable]
     public enum BuildingEvent
@@ -116,6 +118,18 @@ public class BasicBuilding
                 TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.METAL2]);
             else if (buildType == BuildingType.BUILDING_FACTORY || buildType == BuildingType.FACTORY1 || buildType == BuildingType.FACTORY2)
                 TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.FACTORY2]);
+        }
+    }
+
+    public void UpgradeBase(int i)
+    {
+        if (i == 1)
+        {
+            TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.BASE1]);
+        }
+        else if (i == 2)
+        {
+            TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.BASE2]);
         }
     }
 

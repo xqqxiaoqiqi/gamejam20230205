@@ -82,8 +82,26 @@ public class CurrentDetailPanel : MonoBehaviour
             {
                 if (modifiers[i] != 0)
                 {
-                    new Modifier(playerside, GameManager.ResourceType.POWER, 0, (GameManager.ResourceType) i,
-                        modifiers[i]);
+                    if (i == (int) GameManager.ResourceType.FOOD)
+                    {
+                        new Modifier(playerside, GameManager.ResourceType.POWER, 0, (GameManager.ResourceType) i,
+                            modifiers[i]*8);
+                    }
+                    else if(i == (int) GameManager.ResourceType.METAL)
+                    {
+                        new Modifier(playerside, GameManager.ResourceType.POWER, 0, (GameManager.ResourceType) i,
+                            modifiers[i]*4);
+                    }else if(i == (int) GameManager.ResourceType.POWER)
+                    {
+                        new Modifier(playerside, GameManager.ResourceType.POWER, 0, (GameManager.ResourceType) i,
+                            modifiers[i]*100);
+                    }
+                    else
+                    {
+                        new Modifier(playerside, GameManager.ResourceType.POWER, 0, (GameManager.ResourceType) i,
+                            modifiers[i]);
+                    }
+
                 }
             }
         }

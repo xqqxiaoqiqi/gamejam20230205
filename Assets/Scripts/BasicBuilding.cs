@@ -130,14 +130,14 @@ public class BasicBuilding
 
     public void SetWorkingStatus(bool value)
     {
+        if (buildType == BuildingType.BUILDING_POWER || buildType == BuildingType.POWER1)
+            TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.POWER1]);
         if (value)
         {
             if(buildType==BuildingType.BUILDING_FOOD|| buildType == BuildingType.FOOD1|| buildType == BuildingType.FOOD2)
                 TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.FOOD1]);
             else if (buildType == BuildingType.BUILDING_METAL || buildType == BuildingType.METAL1 || buildType == BuildingType.METAL2)
                 TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.METAL1]);
-            else if (buildType == BuildingType.BUILDING_POWER || buildType == BuildingType.POWER1)
-                TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.POWER1]);
             else if (buildType == BuildingType.BUILDING_FACTORY || buildType == BuildingType.FACTORY1 || buildType == BuildingType.FACTORY2)
                 TileManager.Instance.buildingMap.SetTile(pos, GameManager.instance.buildingSource[(int)BuildingType.FACTORY1]);
         }

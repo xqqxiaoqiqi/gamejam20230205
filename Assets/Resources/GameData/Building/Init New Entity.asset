@@ -19,8 +19,12 @@ MonoBehaviour:
     count: 1
     coolDown: 0
     immediately: 1
+    requestFood: 0
+    requestFoodCount: 0
   - onEvent: 0
     buildType: 8
     count: 1
     coolDown: 240
     immediately: 0
+    requestFood: 1
+    requestFoodCount: 600

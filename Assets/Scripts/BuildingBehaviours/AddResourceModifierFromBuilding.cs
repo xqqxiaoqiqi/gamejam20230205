@@ -39,6 +39,13 @@ public class AddResourceModifierFromBuilding : BasicBuilding.Behaviour
                     owner.SetWorkingStatus(myModifier.isEnabled);
                 }
             }
+            if (owner.buildType == BasicBuilding.BuildingType.BUILDING_BASE)
+            {
+                if (myModifier == null)
+                {
+                    myModifier = new Modifier(owner.playerSide, sourceType, sourceValue, targetType, targetValue);
+                }
+            }
         }
     }
 

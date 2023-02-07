@@ -45,6 +45,7 @@ public override void DoSetData(BuildingBehaviourOptions.BehaviourData data)
                 entity.MarkFinish();
             }
         }
+        
     }
 
 }

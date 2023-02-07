@@ -17,7 +17,7 @@ MonoBehaviour:
   - onEvent: 0
     buildType: 0
     sourceType: 2
-    sourceValue: 100
+    sourceValue: -100
     targetType: 0
     targetValue: 20
   - onEvent: 0
@@ -29,13 +29,13 @@ MonoBehaviour:
   - onEvent: 0
     buildType: 1
     sourceType: 2
-    sourceValue: 100
+    sourceValue: -100
     targetType: 1
     targetValue: 20
   - onEvent: 0
     buildType: 3
     sourceType: 2
-    sourceValue: 100
+    sourceValue: -100
     targetType: 3
     targetValue: 1
   - onEvent: 4

@@ -236,13 +236,13 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
         switch (buildingType)
         {
             case BasicBuilding.BuildingType.BUILDING_FACTORY:
-                return "???";
+                return "遗迹";
             case BasicBuilding.BuildingType.BUILDING_FOOD:
-                return "???";
+                return "农田";
             case BasicBuilding.BuildingType.BUILDING_METAL:
-                return "??";
+                return "矿厂";
             case BasicBuilding.BuildingType.BUILDING_POWER:
-                return "??";
+                return "电厂";
             default:
                 return "NULL";
         }

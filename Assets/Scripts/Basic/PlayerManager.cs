@@ -33,9 +33,9 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
         playerEventDatas.Add(PlayerEvent.INIT_FOOD, new PlayerEventData(20,PlayerEvent.INIT_FOOD,"创建一个食物箱子"));
         playerEventDatas.Add(PlayerEvent.INIT_METAL, new PlayerEventData(20, PlayerEvent.INIT_METAL, "创建一个金属箱子"));
         playerEventDatas.Add(PlayerEvent.INIT_NEW_ENTITY, new PlayerEventData(50, PlayerEvent.INIT_NEW_ENTITY, "创建一个中立居民"));
-        gameEventDatas.Add(new GameEventData(GameEvent.DESTROYENTITYBYCAPABILITY,3600,"严酷环境下弱者难以生还,摧毁所有战斗力低于20的单位","军备竞赛"));
-        gameEventDatas.Add(new GameEventData(GameEvent.CHECKRESOURCES,3600,"巨大的寒潮将席卷世界,需要食物超过100","极度深寒"));
-        gameEventDatas.Add(new GameEventData(GameEvent.CHECKHOMELEVEL,3600,"文明的进步不容停滞,需要基地等级到达lv.2","发展迟滞"));
+        gameEventDatas.Add(new GameEventData(GameEvent.DESTROYENTITYBYCAPABILITY,3600,"严酷环境下弱者难以生还,摧毁所有战斗力低于5的单位","军备竞赛"));
+        gameEventDatas.Add(new GameEventData(GameEvent.CHECKRESOURCES,3600,"巨大的寒潮将席卷世界,需要食物超过3000","极度深寒"));
+        gameEventDatas.Add(new GameEventData(GameEvent.CHECKHOMELEVEL,3600,"文明的进步不容停滞,需要基地等级到达lv.3","发展迟滞"));
         gameEventTimer.Reset(3600);
     }
 
@@ -91,7 +91,7 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
                 for (int i = 0; i < GameManager.instance.Entities.Count; i++)
                 {
                     var entity = GameManager.instance.Entities[i];
-                    if (entity.capability < 0)
+                    if (entity.capability < 5)
                     {
                         entity.MarkFinish();
                         value++;
@@ -107,7 +107,7 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
             case GameEvent.CHECKHOMELEVEL:
                 for (int i = 0; i < allBases.Count; i++)
                 {
-                    if (allBases[i].buildingLevel < 2)
+                    if (allBases[i].buildingLevel < 3)
                     {
                         return false;
                     }
@@ -121,7 +121,7 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
                     final += data;
                 }
 
-                if (final < 100)
+                if (final < 3000)
                 {
                     return false;
                 }
@@ -175,7 +175,7 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 
     public void LoseGame(GameEvent gameEvent)
     {
-        Debug.Log("LOSE!"+ gameEvent);
+        Application.Quit();
     }
     public void CalculateContributeValue()
     {

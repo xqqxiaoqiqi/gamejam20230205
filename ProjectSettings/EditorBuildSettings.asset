@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/GameLaunch.unity
     guid: 4926d343d9e518d4babe98b8a40998b0
   - enabled: 1
-    path: Assets/Scenes/zqqqq.unity
-    guid: a157b30fbdf03f048b04196d438bafed
+    path: Assets/Scenes/ForBuild.unity
+    guid: afde281ad9a70914f9cd30d12a9adab9
   m_configObjects: {}

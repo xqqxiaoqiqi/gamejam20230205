@@ -20,5 +20,3 @@ MonoBehaviour:
     buildType: 5
   - onEvent: 0
     buildType: 6
-  - onEvent: 0
-    buildType: 7

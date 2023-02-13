@@ -51,6 +51,16 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public Sprite EndSpriteWar;
 
 
+    private void Start()
+    {
+        endImage.onClick.AddListener(EndGame);
+    }
+
+    private void EndGame()
+    {
+        Application.Quit();
+    }
+
     public void InitUIRoot()
     {
         gameStartPanel.OnInit();

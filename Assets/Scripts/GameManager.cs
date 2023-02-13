@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     public enum PlayerSide
@@ -53,9 +52,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             resourcesData[(int)ResourceType.POWER] = 0;
         }
     }
+    public static bool s_ifRand = false;
     public List<Tile> buildingSource;
     public Tile selectTile;
     public Tile selectFailTile;
+
+    public PCGTerrain.ProceduralTileTerrain terrain;
 
     public GameObject entitySource;
     public GameObject entitySource1;
@@ -75,9 +77,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public Vector3Int selectPos;
     public bool isGameStarted = false;
 
-    private int resourceCount = 0;
+    public int resourceCount = 0;
 
-    private int enemyCount = 0;
+    public int enemyCount = 0;
 
     public void FixedUpdate()
     {
@@ -163,6 +165,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private void Start()
     {
+        if (s_ifRand)
+            RandomMap();
         InitGame();
         TileManager.Instance.Init();
         InitBuildings();
@@ -205,7 +209,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
         return false;
     }
-    
+
+
+    public void RandomMap()
+    {
+        UnityEngine.Random.InitState(DateTime.Now.Second * 1000 + DateTime.Now.Millisecond);
+        terrain.m_offset = new Vector2(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
+        terrain.ReadPCGTex();
+        terrain.SetTilleMap();
+        terrain.SetRscMap();
+    }
 }
 
 public class CoolDownTimer

@@ -46,6 +46,13 @@ public class ResourcePanel : BuildingPanel
                         value.text = myModifier.targetValue.ToString();
                         background.sprite = UIManager.instance.factoryPanelSprite;
                         break;
+                    case BasicBuilding.BuildingType.BUILDING_POWER:
+                        value.color = new Color(9, 80, 255);
+                        Power.text = "";
+                        value.text = myModifier.targetValue.ToString();
+                        background.sprite = UIManager.instance.powerPanelSprite;
+                        break;
+
                     default:
                         break;
                 }

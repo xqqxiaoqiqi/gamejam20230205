@@ -8,7 +8,7 @@ using Aoiti.Pathfinding;
 public class Entity : MonoBehaviour
 {
     public int basicCapability = 1;
-
+    private int stop = 0; 
     public int capability
     {
         get
@@ -48,7 +48,10 @@ public class Entity : MonoBehaviour
     {
         if (targetBuilding == null|| targetBuilding.isDestroyed==true)
         {
-            SearchTargetBuilding();
+            if (stop <= 0)
+                SearchTargetBuilding();
+            else
+                stop--;
         }
     }
 
@@ -183,6 +186,7 @@ public class Entity : MonoBehaviour
                 return;
             }
         }
+        stop = 180;
     }
 
     private bool CheckBuildingCennect(Vector3Int currentPos, Vector3Int pos)

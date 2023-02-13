@@ -80,45 +80,38 @@ namespace PCGTerrain
         [HideInInspector]
         public Texture2D m_PCGTex = null;
 
-#if UNITY_EDITOR
-        private void OnValidate()
-        {
-            ReadPCGTex();
-        }
-#endif
-
         void SetMat(Material material)
         {
             if (material)
             {
-                m_proceduralMat.SetVector("_NoiseOffset",m_offset);
-                m_proceduralMat.SetFloat("_NoiseFreq",m_noiseFreq);
-                m_proceduralMat.SetInt("_NoiseStep",m_noiseSteps);
-                m_proceduralMat.SetFloat("_NoisePersistence",m_noisePersist);
-                m_proceduralMat.SetFloat("_TerrainTiles_x",m_hundredTileCount_x);
-                m_proceduralMat.SetFloat("_TerrainTiles_y",m_hundredTileCount_y);
-                m_proceduralMat.SetFloat("_LargeScale",m_largeScale);
-                m_proceduralMat.SetFloat("_LargeFac",m_largeFac);
-                m_proceduralMat.SetFloat("_DetailFac",m_detailFac);
+                material.SetVector("_NoiseOffset",m_offset);
+                material.SetFloat("_NoiseFreq",m_noiseFreq);
+                material.SetInt("_NoiseStep",m_noiseSteps);
+                material.SetFloat("_NoisePersistence",m_noisePersist);
+                material.SetFloat("_TerrainTiles_x",m_hundredTileCount_x);
+                material.SetFloat("_TerrainTiles_y",m_hundredTileCount_y);
+                material.SetFloat("_LargeScale",m_largeScale);
+                material.SetFloat("_LargeFac",m_largeFac);
+                material.SetFloat("_DetailFac",m_detailFac);
                 //
-                m_proceduralMat.SetColor("_Color_Mount",m_color_Mount);
-                m_proceduralMat.SetFloat("_Mount",m_Mount);
-                m_proceduralMat.SetColor("_Color_Hill",m_color_Hill);
-                m_proceduralMat.SetFloat("_Hill",m_Hill);
-                m_proceduralMat.SetColor("_Color_NormalHeight",m_color_NormalHeight);
-                m_proceduralMat.SetFloat("_NormalHeight",m_NormalHeight);
-                m_proceduralMat.SetColor("_Color_Water",m_color_Water);
+                material.SetColor("_Color_Mount",m_color_Mount);
+                material.SetFloat("_Mount",m_Mount);
+                material.SetColor("_Color_Hill",m_color_Hill);
+                material.SetFloat("_Hill",m_Hill);
+                material.SetColor("_Color_NormalHeight",m_color_NormalHeight);
+                material.SetFloat("_NormalHeight",m_NormalHeight);
+                material.SetColor("_Color_Water",m_color_Water);
                 //
-                m_proceduralMat.SetColor("_Color_Sand",m_color_Sand);
-                m_proceduralMat.SetFloat("_Sand",m_Sand);
-                m_proceduralMat.SetColor("_Color_Ice",m_color_Ice);
-                m_proceduralMat.SetFloat("_Ice",m_Ice);
-                m_proceduralMat.SetColor("_Color_Marsh",m_color_Marsh);
-                m_proceduralMat.SetColor("_Color_Forest",m_color_Forest);
-                m_proceduralMat.SetVector("_MarshForestRange",m_marshForestRange);
+                material.SetColor("_Color_Sand",m_color_Sand);
+                material.SetFloat("_Sand",m_Sand);
+                material.SetColor("_Color_Ice",m_color_Ice);
+                material.SetFloat("_Ice",m_Ice);
+                material.SetColor("_Color_Marsh",m_color_Marsh);
+                material.SetColor("_Color_Forest",m_color_Forest);
+                material.SetVector("_MarshForestRange",m_marshForestRange);
                 //
-                m_proceduralMat.SetFloat("_SpecialNoiseFac",m_spNoiseFac);
-                m_proceduralMat.SetFloat("_SpecialNoiseScale",m_spNoiseScale);
+                material.SetFloat("_SpecialNoiseFac",m_spNoiseFac);
+                material.SetFloat("_SpecialNoiseScale",m_spNoiseScale);
             }
         }
 

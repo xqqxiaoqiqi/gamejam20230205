@@ -9,7 +9,7 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 {
     public int initModifierTotalCount = 10;
     public int maxBuildingLevel = 3;
-    public int maxContributeValue = 400000;
+    public int maxContributeValue = 200000;
     public int currContributeValue = 0;
     public int basicCapability = 1;
 
@@ -175,7 +175,13 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 
     public void LoseGame(GameEvent gameEvent)
     {
-        Application.Quit();
+
+        UIManager.instance.endImage.gameObject.SetActive(true);
+        if (gameEvent == GameEvent.CHECKHOMELEVEL || gameEvent == GameEvent.DESTROYENTITYBYCAPABILITY)
+            UIManager.instance.endImage.image.sprite = UIManager.instance.EndSpritePoor;
+        else if (gameEvent == GameEvent.CHECKRESOURCES)
+            UIManager.instance.endImage.image.sprite = UIManager.instance.EndSpriteCold;
+
     }
     public void CalculateContributeValue()
     {

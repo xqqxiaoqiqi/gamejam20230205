@@ -125,7 +125,11 @@ public class BasicBuilding
                 panel.side.text = UIManager.instance.sideTexts[2];
             }
             panel.building = this;
+            GameManager.instance.resourceCount -= 1;
         }
+
+        if (buildType == BuildingType.BUILDING_ENEMY || buildType == BuildingType.BOSS1 || buildType == BuildingType.BOSS2)
+            GameManager.instance.enemyCount -= 1;
     }
 
     public void SetWorkingStatus(bool value)
@@ -170,6 +174,10 @@ public class BasicBuilding
         for (int i = 0; i < behaviours.Count; i++)
         {
             behaviours[i].OnEvent(BuildingEvent.ON_BUILD_DESTROY);
+        }
+        if (buildType == BuildingType.BUILDING_ENEMY || buildType == BuildingType.BOSS1 || buildType == BuildingType.BOSS2)
+        {
+            GameObject.Destroy(panel.gameObject);
         }
     }
     public void OnTick()

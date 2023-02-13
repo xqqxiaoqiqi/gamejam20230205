@@ -25,7 +25,7 @@ public class BuildingPanel : MonoBehaviour
     
     public virtual void OnInit(object args)
     {
-        
+
     }
 }
 

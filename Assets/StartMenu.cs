@@ -29,7 +29,7 @@ public class StartMenu : MonoBehaviour
     private void StartRandomGame()
     {
         SceneManager.LoadScene(1);
-
+        GameManager.s_ifRand = true;
     }
     private void ExitGame()
     {
